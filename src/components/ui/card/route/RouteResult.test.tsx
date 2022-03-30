@@ -18,5 +18,5 @@ test('Renders empty div when no content', () => {
     <Provider store={store}><RouteResult /></Provider>,
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`<div />`);
 });
