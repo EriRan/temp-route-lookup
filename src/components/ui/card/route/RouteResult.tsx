@@ -49,7 +49,7 @@ const RouteResult = (props: Props) => {
   }
 
   function renderRouteDescription(stopRoute: CompressedRoute) {
-    return stopRoute.from + "→" + stopRoute.to + t("ROUTE_RESULT_WITH_LINE") + " " + stopRoute.line
+    return stopRoute.from + "→" + stopRoute.to + " " + t("ROUTE_RESULT_WITH_LINE") + " " + stopRoute.line
   }
 
   function renderTotalDuration(totalDuration: number | null) {
