@@ -29,8 +29,6 @@ This application uses the provided route data json to first render the bus stops
 - Lodash
   - General purpose conditions
 
-Developed on Windows 10 Home version 1909.
-
 ### How to run
 
 #### Requirements
