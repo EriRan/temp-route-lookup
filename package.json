@@ -1,7 +1,9 @@
 {
-  "name": "route-lookup",
-  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EriRan/route-lookup"
+  },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
