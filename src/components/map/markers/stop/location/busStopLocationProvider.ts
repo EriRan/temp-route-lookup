@@ -84,7 +84,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
           road,
           occupiedDirections
         );
-        if (nextLocation === null) {
+        if (!nextLocation) {
           console.log("No direction for ", road.to.name);
           return; //Return is equivalent of continue inside a forEach loop
         }
@@ -106,7 +106,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
       road.duration,
       occupiedDirections.get(road.from.name)
     );
-    if (nextLocation === null) {
+    if (!nextLocation) {
       return null;
     }
     addOccupiedDirection(
