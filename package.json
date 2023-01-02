@@ -1,5 +1,7 @@
 {
   "private": true,
+  "name": "route-lookup",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/EriRan/route-lookup"
