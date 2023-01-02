@@ -5,7 +5,7 @@ import {
 } from "../../actions/route/actions";
 
 import {
-  appendCalculatedRoute,
+  calculateNewRoute,
   changeStartOrDestination,
 } from "./change/stopsStateChangeDeducer";
 import { Action, RouteStore } from "./types";
@@ -19,12 +19,12 @@ const INITIAL_STATE: RouteStore = {
 export const REDUCERS = (state = INITIAL_STATE, action: Action): RouteStore => {
   switch (action.type) {
     case SET_START_STOP:
-      return appendCalculatedRoute({
+      return calculateNewRoute({
         ...state,
         startStop: action.payload,
       });
     case SET_DESTINATION_STOP:
-      return appendCalculatedRoute({
+      return calculateNewRoute({
         ...state,
         destinationStop: action.payload,
       });

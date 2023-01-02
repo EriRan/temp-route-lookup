@@ -37,8 +37,8 @@ class RouteCalculator {
     if (!hasUsableInput(startStop) || !hasUsableInput(destinationStop)) {
       return null;
     }
-    const startStopName = startStop.name!;
-    const destinationStopName = destinationStop.name!;
+    const startStopName = startStop.name!.toUpperCase();
+    const destinationStopName = destinationStop.name!.toUpperCase();
     const settledNodeNames: Array<string> = [];
     const unsettledNodeNames: Array<string> = [];
 

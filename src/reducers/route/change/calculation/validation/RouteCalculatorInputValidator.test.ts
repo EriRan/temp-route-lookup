@@ -108,6 +108,27 @@ test("Start and destination stops are the same", () => {
   expect(destinationStopState.hasErrors).toBe(false);
 });
 
+test("Start and destination stops are the same even if they have different casing", () => {
+  const allNodesMap: Map<string, RouteNode> = new Map();
+  allNodesMap.set("A", createRouteNode("A"));
+  const startStopState = createStopState("a");
+  const destinationStopState = createStopState("A");
+
+  const response = validator.validate(
+    startStopState,
+    destinationStopState,
+    allNodesMap
+  );
+  expect(response).toBeDefined();
+  expect(response!.errorMessages).toBeDefined();
+  expect(response!.errorMessages.length).toBe(1);
+  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
+
+  //They aren't strictly wrong so both are false...? Reconsider this
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+});
+
 test("Start and destination stops are the same and they do not exist", () => {
   const allNodesMap: Map<string, RouteNode> = new Map();
   const startStopState = createStopState("A");

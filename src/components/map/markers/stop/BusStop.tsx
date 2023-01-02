@@ -48,8 +48,8 @@ const deduceStrokeColor = (
   destinationStop: StopState | null
 ) => {
   if (
-    (startStop && currentStopName === startStop.name) ||
-    (destinationStop && currentStopName === destinationStop.name)
+    (startStop && currentStopName === startStop.name?.toUpperCase()) ||
+    (destinationStop && currentStopName === destinationStop.name?.toUpperCase())
   ) {
     return SELECTED_STOP_COLOR;
   }

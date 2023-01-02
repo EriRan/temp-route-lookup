@@ -6,12 +6,15 @@ export type Action = {
 };
 
 export type RouteStore = {
-  startStop: StopState | null;
-  destinationStop: StopState | null;
+  startStop: StopState;
+  destinationStop: StopState;
   calculatedRoute: CalculationResponse | null;
 };
 
-export type Payload = StopState;
+export type Payload = {
+  name: string;
+  hasErrors?: boolean;
+};
 
 export type StopState = {
   name: string | null;

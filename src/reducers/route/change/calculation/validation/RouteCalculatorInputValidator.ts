@@ -18,18 +18,21 @@ class RouteCalculatorInputValidator {
     allNodesMap: Map<string, RouteNode>
   ): CalculationResponse | null {
     let errorResponse: CalculationResponse | null = createErrorResponse();
-    if (startStop.name && !allNodesMap.get(startStop.name)) {
+    const startStopName = startStop.name?.toUpperCase();
+    const destinationStopName = destinationStop.name?.toUpperCase();
+    
+    if (startStopName && !allNodesMap.get(startStopName)) {
       startStop.hasErrors = true;
       errorResponse.errorMessages.push(UNKNOWN_START_STOP_INPUTED);
     }
-    if (destinationStop.name && !allNodesMap.get(destinationStop.name)) {
+    if (destinationStopName && !allNodesMap.get(destinationStopName)) {
       destinationStop.hasErrors = true;
       errorResponse.errorMessages.push(UNKNOWN_END_STOP_INPUTED);
     }
     if (
-      startStop.name &&
-      destinationStop.name &&
-      startStop.name === destinationStop.name
+      startStopName &&
+      destinationStopName &&
+      startStopName === destinationStopName
     ) {
       //Strictly speaking this is not an input error, so hasErrors remains at false
       errorResponse.errorMessages.push(ALREADY_AT_DESTINATION);

@@ -3,7 +3,7 @@ import TransportDataSingleton from "../../../data/TransportDataSingleton";
 import { RouteStore, Payload, StopState } from "../types";
 
 /**
- * Handles changes that happen to startStop, destinationStop and calculatedRoute states when it is not immediately known did the start or the destination stop change. This is used when user clicks one of the bus stops on the map
+ * Handles changes that happen to startStop, destinationStop and calculatedRoute states when it is not immediately known whether start or the destination stop changed. This is used when user clicks one of the bus stops on the map
  * @param {*} currentState
  * @param {*} payload
  */
@@ -14,19 +14,22 @@ export function changeStartOrDestination(
   if (payload.hasErrors) {
     return currentState;
   }
-  //If the payload is going to update the startStop state for the same stop as current state has, we will empty the startStop state.
-  const isStartStopUsable = hasUsableInput(currentState.startStop);
-  if (isStartStopUsable && currentState.startStop!.name === payload.name) {
+  // Clicked the same stop that is currently start, so let's remove it
+  if (
+    currentState.startStop.name &&
+    currentState.startStop.name.toUpperCase() === payload.name.toUpperCase()
+  ) {
     return {
       ...currentState,
       calculatedRoute: null,
       startStop: createEmptyStopData(),
     };
   }
-  //Same as for the start stop, but now for destination
-  if (
-    hasUsableInput(currentState.destinationStop) &&
-    currentState.destinationStop!.name === payload.name
+  // Clicked the same stop that is currently destination, so let's remove it
+  else if (
+    currentState.destinationStop.name &&
+    currentState.destinationStop.name.toUpperCase() ===
+      payload.name.toUpperCase()
   ) {
     return {
       ...currentState,
@@ -34,35 +37,42 @@ export function changeStartOrDestination(
       destinationStop: createEmptyStopData(),
     };
   }
-
-  //Update to state did not contain same stop names as in start and destination stops. We will then update either start or destination stop,
-  //whichever is found to contain unusable value first.
-  if (!isStartStopUsable) {
-    return appendCalculatedRoute({
-      ...currentState,
-      startStop: payload,
-    });
-  } else {
-    return appendCalculatedRoute({
+  // Click is destination stop because we have start and destination already set
+  if (currentState.startStop.name && currentState.destinationStop.name) {
+    // Clicked some other stop so let's change the calculation
+    const newState = {
       ...currentState,
       destinationStop: payload,
-    });
+    };
+    return calculateNewRoute(newState);
+  }
+  // Click is destination stop because there is currently no destination stop
+  else if (currentState.startStop.name && !currentState.destinationStop.name) {
+    const newState = {
+      ...currentState,
+      destinationStop: payload,
+    };
+    return calculateNewRoute(newState);
+  }
+  // Click is start stop because we do not have a start or destination yet
+  else {
+    const newState = {
+      ...currentState,
+      startStop: payload,
+    };
+    return calculateNewRoute(newState);
   }
 }
 
 /**
  * Calculate and set route for the provided state if possible
  */
-export function appendCalculatedRoute(currentState: RouteStore): RouteStore {
-  currentState.calculatedRoute = new RouteCalculator(
+export function calculateNewRoute(newState: RouteStore): RouteStore {
+  newState.calculatedRoute = new RouteCalculator(
     TransportDataSingleton.getInstance()
-  ).calculate(currentState.startStop!, currentState.destinationStop!); // TODO: get rid of these "trust me bro"s
+  ).calculate(newState.startStop, newState.destinationStop);
 
-  return currentState;
-}
-
-function hasUsableInput(targetStop: StopState | null): boolean {
-  return !!targetStop && !!targetStop.name;
+  return newState;
 }
 
 function createEmptyStopData(): StopState {
