@@ -17,20 +17,22 @@ export function changeStartOrDestination(
   //If the payload is going to update the startStop state for the same stop as current state has, we will empty the startStop state.
   const isStartStopUsable = hasUsableInput(currentState.startStop);
   if (isStartStopUsable && currentState.startStop!.name === payload.name) {
-    return appendCalculatedRoute({
+    return {
       ...currentState,
+      calculatedRoute: null,
       startStop: createEmptyStopData(),
-    });
+    };
   }
   //Same as for the start stop, but now for destination
   if (
     hasUsableInput(currentState.destinationStop) &&
     currentState.destinationStop!.name === payload.name
   ) {
-    return appendCalculatedRoute({
+    return {
       ...currentState,
+      calculatedRoute: null,
       destinationStop: createEmptyStopData(),
-    });
+    };
   }
 
   //Update to state did not contain same stop names as in start and destination stops. We will then update either start or destination stop,
@@ -54,7 +56,7 @@ export function changeStartOrDestination(
 export function appendCalculatedRoute(currentState: RouteStore): RouteStore {
   currentState.calculatedRoute = new RouteCalculator(
     TransportDataSingleton.getInstance()
-  ).calculate(currentState.startStop!, currentState.destinationStop!);
+  ).calculate(currentState.startStop!, currentState.destinationStop!); // TODO: get rid of these "trust me bro"s
 
   return currentState;
 }
