@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { convertCalculation, createErrorResponse } from "./responseConverter";
 import { ERROR_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
 
@@ -33,7 +31,7 @@ class RouteCalculator {
       destinationStop,
       allNodesMap
     );
-    if (!_.isNull(errorResponse)) {
+    if (errorResponse) {
       return errorResponse;
     }
     if (!hasUsableInput(startStop) || !hasUsableInput(destinationStop)) {
@@ -134,7 +132,6 @@ function calculateNodeVariables(
   adjacentNode: RouteNode
 ) {
   if (
-    _.isNull(adjacentNode.nodeDuration) ||
     currentNode.nodeDuration + road.duration < adjacentNode.nodeDuration
   ) {
     adjacentNode.nodeDuration = currentNode.nodeDuration + road.duration;
