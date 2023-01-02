@@ -9,6 +9,7 @@ import { CalculationResponse } from "../../../../reducers/route/change/calculati
 import _ from "lodash";
 import RouteResultErrors from "./RouteResultErrors";
 import { useTranslation } from "react-i18next";
+import { CompressedRoute } from "./types";
 
 const RouteResult = (props: Props) => {
   const { t } = useTranslation();
@@ -32,8 +33,7 @@ const RouteResult = (props: Props) => {
     ).map((stopRoute) => {
       return (
         <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            {stopRoute.from} → {stopRoute.to} {t("ROUTE_RESULT_WITH_LINE")}{" "}
-            {stopRoute.line}
+            {renderRouteDescription(stopRoute)}
         </Typography>
       );
     });
@@ -42,11 +42,18 @@ const RouteResult = (props: Props) => {
         {compressedRouteData}
         <Divider />
         <Typography>
-          {t("ROUTE_RESULT_TOTAL_DURATION")}:{" "}
-          {calculatedRoute.totalDuration}
+          {renderTotalDuration(calculatedRoute.totalDuration)}
         </Typography>
       </div>
     );
+  }
+
+  function renderRouteDescription(stopRoute: CompressedRoute) {
+    return stopRoute.from + "→" + stopRoute.to + t("ROUTE_RESULT_WITH_LINE") + " " + stopRoute.line
+  }
+
+  function renderTotalDuration(totalDuration: number | null) {
+    return t("ROUTE_RESULT_TOTAL_DURATION") + ":" + totalDuration
   }
 };
 
