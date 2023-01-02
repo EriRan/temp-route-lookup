@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 import { TextField } from "@material-ui/core";
 import { RouteInputEvent, RouteInputProps } from "./types";
@@ -47,6 +46,13 @@ const RouteInput = (props: RouteInputProps) => {
    */
   function handleChange(event: RouteInputEvent) {
     //Some input validation at first
+    if (!event.target) {
+      console.error("Missing target from event");
+      props.onChangeFunction(
+        "",
+        isInputInvalid("", props.stopMap)
+      );
+    }
     if (!event.target.value) {
       props.onChangeFunction(
         "",
@@ -59,8 +65,7 @@ const RouteInput = (props: RouteInputProps) => {
       return;
     }
   
-    // TODO: I don't think component needs to be responsible of what it sends on
-    const value = _.upperCase(event.target!.value as string);
+    const value = event.target.value;
     props.onChangeFunction(
       value,
       isInputInvalid(value, props.stopMap)
