@@ -1,8 +1,9 @@
+import _ from "lodash";
+
 import StopMapper from "./StopMapper";
 import LineMapper from "./LineMapper";
 
 import { Line, Road, TransportData, TransportDataUnmapped } from "./types";
-import _ from "lodash";
 
 /**
  * Map the data provided in JSON to a object that can be handled more easily
@@ -45,9 +46,9 @@ class TransportDataMapper {
         }
       }
       if (
-        !_.isNull(toIndex) &&
-        !_.isNull(fromIndex) &&
-        indexesAreNextToEachOther(toIndex, fromIndex)
+        (_.isFinite(toIndex)) &&
+        (_.isFinite(fromIndex)) &&
+        indexesAreNextToEachOther(toIndex!, fromIndex!)
       ) {
         road.includesLines.push(line.name);
       }
