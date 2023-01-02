@@ -51,7 +51,7 @@ export function changeStartOrDestination(
 /**
  * Calculate and set route for the provided state if possible
  */
-export function appendCalculatedRoute(currentState: RouteStore) {
+export function appendCalculatedRoute(currentState: RouteStore): RouteStore {
   currentState.calculatedRoute = new RouteCalculator(
     TransportDataSingleton.getInstance()
   ).calculate(currentState.startStop!, currentState.destinationStop!);
@@ -59,10 +59,10 @@ export function appendCalculatedRoute(currentState: RouteStore) {
   return currentState;
 }
 
-function hasUsableInput(targetStop: StopState | null) {
-  return targetStop && targetStop.name;
+function hasUsableInput(targetStop: StopState | null): boolean {
+  return !!targetStop && !!targetStop.name;
 }
 
-function createEmptyStopData() {
+function createEmptyStopData(): StopState {
   return { name: null, hasErrors: false };
 }
