@@ -1,9 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import _ from "lodash";
-
-import { isUndefinedOrNull } from "../../../../util/Utilities";
-
 import RoadLine from "./RoadLine";
 import { RootState } from "../../../../reducers/types";
 import { BusStopLocation } from "../../types";
@@ -37,7 +34,7 @@ class RoadContainer extends React.Component<Props, {}> {
   ) {
     const startPointLocation = busStopLocationMap.get(road.from.name);
     const endPointLocation = busStopLocationMap.get(road.to.name);
-    if (isUndefinedOrNull(startPointLocation)) {
+    if (!startPointLocation) {
       console.log(
         "Start point location was undefined or null. Unable to render a road from ",
         road.from.name,
@@ -46,7 +43,7 @@ class RoadContainer extends React.Component<Props, {}> {
       );
       return null;
     }
-    if (isUndefinedOrNull(endPointLocation)) {
+    if (!endPointLocation) {
       console.log(
         "End point location was undefined or null. Unable to render a road from ",
         road.from.name,

@@ -1,6 +1,5 @@
 import RouteCalculator from "./calculation/RouteCalculator";
 import TransportDataSingleton from "../../../data/TransportDataSingleton";
-import { isNullOrEmpty } from "../../../util/Utilities";
 import { RouteStore, Payload, StopState } from "../types";
 
 /**
@@ -61,7 +60,7 @@ export function appendCalculatedRoute(currentState: RouteStore) {
 }
 
 function hasUsableInput(targetStop: StopState | null) {
-  return targetStop && !isNullOrEmpty(targetStop.name);
+  return targetStop && targetStop.name;
 }
 
 function createEmptyStopData() {

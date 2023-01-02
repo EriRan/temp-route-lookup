@@ -1,5 +1,4 @@
 import { STOP_GAP } from "./BusStopLocationConstant";
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
 import { BusStopLocation } from "../../../types";
 import { RoadDirection, NextLocation } from "./types";
 
@@ -117,7 +116,7 @@ export function provideNextLocation(
     occupiedDirectionsForStop?: Array<RoadDirection>
   ) {
     return (
-      isUndefinedOrNull(occupiedDirectionsForStop) ||
+      !occupiedDirectionsForStop ||
       !occupiedDirectionsForStop!.includes(direction) //Negation and assurance that occupiedDirectionsForStop is not null
     );
   }

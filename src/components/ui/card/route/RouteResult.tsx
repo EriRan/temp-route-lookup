@@ -3,7 +3,6 @@ import { connect, ConnectedProps } from "react-redux";
 import { Divider, Typography } from "@material-ui/core";
 
 import { compressResponse } from "./routeResponseCompressor";
-import { isUndefinedOrNull } from "../../../../util/Utilities";
 import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import _ from "lodash";
@@ -13,7 +12,7 @@ import { CompressedRoute } from "./types";
 
 const RouteResult = (props: Props) => {
   const { t } = useTranslation();
-  if (!isUndefinedOrNull(props.calculatedRoute)) {
+  if (props.calculatedRoute) {
     return renderRoute(props.calculatedRoute!);
   }
   return <div />;
@@ -24,7 +23,7 @@ const RouteResult = (props: Props) => {
         <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
       );
     }
-    if (isUndefinedOrNull(calculatedRoute.route)) {
+    if (!calculatedRoute.route) {
       return <div />;
     }
 

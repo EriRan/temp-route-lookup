@@ -1,6 +1,5 @@
 import { FIRST_LOCATION } from "./BusStopLocationConstant";
 import { provideNextLocation } from "./nextLocationProvider";
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
 import { Road, Stop } from "../../../../../data/mapper/types";
 import { BusStopLocation, BusStopLocations } from "../../../types";
 import {
@@ -77,7 +76,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
           fromName: road.from.name,
           toName: road.to.name,
         });
-        if (!isUndefinedOrNull(alreadyDeducedStops.get(road.to.name))) {
+        if (alreadyDeducedStops.get(road.to.name)) {
           return;
         }
         const nextLocation = deduceNextLocation(

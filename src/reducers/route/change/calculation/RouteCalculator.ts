@@ -3,7 +3,6 @@ import _ from "lodash";
 import { convertCalculation, createErrorResponse } from "./responseConverter";
 import { ERROR_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
 
-import { isNullOrEmpty, isUndefinedOrNull } from "../../../../util/Utilities";
 import { Road, TransportData } from "../../../../data/mapper/types";
 import { CalculationResponse, RouteNode } from "./types";
 import { StopState } from "../../types";
@@ -148,7 +147,7 @@ function calculateNodeVariables(
 }
 
 function doAnyLinesRunOnRoad(road: Road) {
-  return !isUndefinedOrNull(road) && road.includesLines.length !== 0;
+  return road && road.includesLines.length !== 0;
 }
 
 /**
@@ -161,7 +160,7 @@ function removeNode(nodeNameToRemove: string, nodeNames: Array<string>) {
 }
 
 function hasUsableInput(targetStop: StopState) {
-  return !isNullOrEmpty(targetStop.name);
+  return targetStop.name;
 }
 
 export default RouteCalculator;

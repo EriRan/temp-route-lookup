@@ -1,4 +1,3 @@
-import { isUndefinedOrNull } from "../../util/Utilities";
 import { RoadUnmapped, Stop, Road } from "./types";
 
 /**
@@ -8,7 +7,7 @@ import { RoadUnmapped, Stop, Road } from "./types";
  */
 class RoadMapper {
   map(mappedStops: Map<string, Stop>, roadsJson: Array<RoadUnmapped>): void {
-    if (isUndefinedOrNull(roadsJson)) {
+    if (!roadsJson) {
       return;
     }
     roadsJson.forEach((road) => {

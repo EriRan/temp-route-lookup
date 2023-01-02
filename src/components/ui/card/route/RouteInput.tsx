@@ -2,10 +2,6 @@ import React from "react";
 import _ from "lodash";
 
 import { TextField } from "@material-ui/core";
-import {
-  isUndefinedOrNull,
-  isUndefinedOrNullOrEmptyString,
-} from "../../../../util/Utilities";
 import { RouteInputEvent, RouteInputProps } from "./types";
 import { Stop } from "../../../../data/mapper/types";
 import { useTranslation } from "react-i18next";
@@ -31,8 +27,8 @@ const RouteInput = (props: RouteInputProps) => {
 
   function getCurrentValue() {
     if (
-      !isUndefinedOrNull(props.inputStopData) &&
-      !isUndefinedOrNull(props.inputStopData!.name)
+      props.inputStopData &&
+      props.inputStopData!.name
     ) {
       return props.inputStopData!.name;
     }
@@ -62,8 +58,8 @@ const RouteInput = (props: RouteInputProps) => {
   
   function hasError(): boolean {
     if (
-      isUndefinedOrNull(props.inputStopData) ||
-      isUndefinedOrNull(props.inputStopData?.hasErrors)
+      !props.inputStopData ||
+      !props.inputStopData?.hasErrors
     ) {
       return false;
     }
@@ -71,7 +67,7 @@ const RouteInput = (props: RouteInputProps) => {
   }
   
   function isInputInvalid(input: string, stopMap: Map<string, Stop>) {
-    return !isUndefinedOrNullOrEmptyString(input) && !stopMap.has(input);
+    return input && !stopMap.has(input);
   }
 };
 
