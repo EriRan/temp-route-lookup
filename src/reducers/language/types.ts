@@ -12,6 +12,6 @@ export type LanguageStore = {
 };
 
 export type Payload = {
-  language: LanguageType;
+  language: string;
   languageDropdownAnchorElement: HTMLElement;
 };

@@ -12,16 +12,21 @@ const INITIAL_STATE: LanguageStore = {
   languageDropdownAnchorElement: null,
 };
 
+// TODO: test!
 export const LANGUAGE_REDUCERS = (
   state = INITIAL_STATE,
   action: Action
 ): LanguageStore => {
   switch (action.type) {
     case LANGUAGE_CHANGE:
-      i18next.changeLanguage(action.payload.language);
+      const newLanguage = action.payload.language.toLowerCase();
+      if (newLanguage !== "fi" && newLanguage !== "en") {
+        return state;
+      }
+      i18next.changeLanguage(newLanguage);
       return {
         ...state,
-        language: action.payload.language,
+        language: newLanguage,
       };
     case OPEN_LANGUAGE_DROPDOWN:
       return {
