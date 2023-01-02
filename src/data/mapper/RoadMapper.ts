@@ -13,11 +13,11 @@ class RoadMapper {
     roadsJson.forEach((road) => {
       const mappedPointOneStop = mappedStops.get(road.mista);
       const mappedPointTwoStop = mappedStops.get(road.mihin)!;
-      if (mappedPointOneStop === undefined) {
+      if (!mappedPointOneStop) {
         console.error("Road connecting to unrecognised stop: " + road.mista);
         return;
       }
-      if (mappedPointTwoStop === undefined) {
+      if (!mappedPointTwoStop) {
         console.error("Road connecting to unrecognised stop: " + road.mihin);
         return;
       }
