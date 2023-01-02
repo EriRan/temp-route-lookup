@@ -1,6 +1,11 @@
 import _ from "lodash";
 import { LinesUnmapped, Line } from "./types";
 
+/**
+ * Map json bus line data into objects that include
+ * - Busline name that is capitalized
+ * - Bus stops
+ */
 class LineMapper {
   public map(linesUnmapped: LinesUnmapped): Array<Line> {
     const mappedLines = new Array<Line>();

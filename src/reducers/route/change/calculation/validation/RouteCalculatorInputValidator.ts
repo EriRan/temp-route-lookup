@@ -6,7 +6,6 @@ import {
 } from "../ErrorMessageConstant";
 import { createErrorResponse } from "../responseConverter";
 import { CalculationResponse, RouteNode } from "../types";
-import _ from "lodash";
 
 /**
  * Validates start and end stop before calculation is ran.
@@ -36,7 +35,7 @@ class RouteCalculatorInputValidator {
       errorResponse.errorMessages.push(ALREADY_AT_DESTINATION);
     }
 
-    if (_.isEmpty(errorResponse.errorMessages)) {
+    if (!errorResponse.errorMessages.length) {
       startStop.hasErrors = false;
       destinationStop.hasErrors = false;
       return null;

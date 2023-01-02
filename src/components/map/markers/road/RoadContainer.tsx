@@ -1,6 +1,5 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import _ from "lodash";
 import RoadLine from "./RoadLine";
 import { RootState } from "../../../../reducers/types";
 import { BusStopLocation } from "../../types";
@@ -85,10 +84,10 @@ class RoadContainer extends React.Component<Props, {}> {
    */
   private hasRouteBeenCalculated(calculatedRoute: CalculationResponse | null) {
     return (
-      !_.isNull(calculatedRoute) &&
-      !_.isNull(calculatedRoute!.totalDuration) &&
-      calculatedRoute!.totalDuration > 0 &&
-      !_.isEmpty(calculatedRoute!.route)
+      calculatedRoute &&
+      calculatedRoute.totalDuration &&
+      calculatedRoute.totalDuration > 0 &&
+      calculatedRoute.route.size
     );
   }
 }

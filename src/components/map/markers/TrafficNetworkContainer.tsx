@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 import BusStop from "./stop/BusStop";
 import "./TrafficNetworkContainer.css";
@@ -15,19 +14,18 @@ class BusTrafficContainer extends React.Component<TrafficMapProps, {}> {
   }
 
   renderTrafficNetwork() {
-    if (_.isMap(this.props.busStopLocationMap)) {
-      return (
-        <g className="bus-traffic-container">
-          <RoadContainer
-            busStopLocationMap={this.props.busStopLocationMap}
-            stopMap={this.props.stopMap}
-          />
-          {this.renderBusStops(this.props.busStopLocationMap)}
-        </g>
-      );
-    } else {
+    if (!this.props.busStopLocationMap) {
       return "Loading bus stops...";
     }
+    return (
+      <g className="bus-traffic-container">
+        <RoadContainer
+          busStopLocationMap={this.props.busStopLocationMap}
+          stopMap={this.props.stopMap}
+        />
+        {this.renderBusStops(this.props.busStopLocationMap)}
+      </g>
+    );
   }
 
   private renderBusStops(busStopLocationMap: Map<string, BusStopLocation>) {

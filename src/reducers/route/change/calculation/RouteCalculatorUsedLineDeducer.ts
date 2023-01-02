@@ -1,7 +1,5 @@
 import { UsedLineRouteNode } from "./types";
 
-import _ from "lodash";
-
 /**
  * Select lines to use for the route nodes. Prefers the lines which are included the most during the route.
  */
@@ -40,7 +38,7 @@ class RouteCalculatorUsedLineDeducer {
     previousNode: UsedLineRouteNode | null,
     lineUsageCountMap: Map<string, number>
   ) {
-    if (_.isNull(previousNode)) {
+    if (!previousNode) {
       //If previous node is null, select the line with best availability
       currentRouteNode.selectedLine = this.deduceBestAvailableLine(
         currentRouteNode,
@@ -69,7 +67,7 @@ class RouteCalculatorUsedLineDeducer {
     currentRouteNode: UsedLineRouteNode,
     lineUsageCountMap: Map<string, number>
   ): string | null {
-    if (_.isEmpty(currentRouteNode.linesAvailable)) {
+    if (!currentRouteNode.linesAvailable) {
       return null;
     }
     if (currentRouteNode.linesAvailable.length === 1) {
@@ -84,7 +82,7 @@ class RouteCalculatorUsedLineDeducer {
         console.error("No usage count for line: " + currentLine);
         continue;
       }
-      if (_.isNull(currentBestCount) || currentBestCount < lineUsageCount) {
+      if (!currentBestCount || currentBestCount < lineUsageCount) {
         currentBestCount = lineUsageCount;
         currentBestLine = currentLine;
       }
@@ -97,7 +95,7 @@ class RouteCalculatorUsedLineDeducer {
     previousNode: UsedLineRouteNode
   ) {
     return (
-      !_.isEmpty(linesAvailable) &&
+      linesAvailable &&
       linesAvailable.some((line) => line === previousNode.selectedLine)
     );
   }

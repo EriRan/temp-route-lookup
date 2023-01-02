@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { Road } from "../../../../data/mapper/types";
 
 import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
@@ -75,7 +74,7 @@ export function convertCalculation(
    * two stop names around because reverse roads are not rendered
    */
   function createKeyString(roadBetween: Road | undefined): RouteKey | null {
-    if (_.isUndefined(roadBetween)) {
+    if (!roadBetween) {
       console.error("Unable to find route between two stops!");
       return null;
     } else {
@@ -93,7 +92,7 @@ export function convertCalculation(
     line: string | null, //Is not normally null except when the values provided are broken
     duration: number | null
   ): ResponseDirection {
-    if (_.isNull(line)) {
+    if (!line) {
       console.error(
         "Encountered null line when creating one direction for " +
           from +
@@ -112,7 +111,7 @@ export function convertCalculation(
 export function createErrorResponse(
   errorMessage?: string
 ): CalculationResponse {
-  if (_.isUndefined(errorMessage) || _.isEmpty(errorMessage)) {
+  if (!errorMessage) {
     return {
       totalDuration: null,
       route: new Map(),

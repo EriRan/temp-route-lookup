@@ -1,13 +1,17 @@
-import _ from "lodash";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Render a list of errors encountered during route calculation
+ * @param props
+ * @returns
+ */
 const RouteResultErrors = (props: Props) => {
   const { t } = useTranslation();
 
-  if (_.isEmpty(props.errorMessages)) {
+  if (!props.errorMessages.length) {
     return <div />;
   }
   return <List dense={true}>{createItems()}</List>;

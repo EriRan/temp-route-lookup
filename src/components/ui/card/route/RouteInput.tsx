@@ -6,6 +6,11 @@ import { RouteInputEvent, RouteInputProps } from "./types";
 import { Stop } from "../../../../data/mapper/types";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing
+ * @param props
+ * @returns 
+ */
 const RouteInput = (props: RouteInputProps) => {
   const { t } = useTranslation();
   return (
@@ -35,9 +40,14 @@ const RouteInput = (props: RouteInputProps) => {
     return "";
   }
   
+  /**
+   * Called when we type into a bus stop name text field
+   * @param event 
+   * @returns 
+   */
   function handleChange(event: RouteInputEvent) {
     //Some input validation at first
-    if (_.isEmpty(event.target.value)) {
+    if (!event.target.value) {
       props.onChangeFunction(
         "",
         isInputInvalid("", props.stopMap)
@@ -49,6 +59,7 @@ const RouteInput = (props: RouteInputProps) => {
       return;
     }
   
+    // TODO: I don't think component needs to be responsible of what it sends on
     const value = _.upperCase(event.target!.value as string);
     props.onChangeFunction(
       value,

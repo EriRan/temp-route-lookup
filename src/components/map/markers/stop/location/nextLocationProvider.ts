@@ -117,7 +117,8 @@ export function provideNextLocation(
   ) {
     return (
       !occupiedDirectionsForStop ||
-      !occupiedDirectionsForStop!.includes(direction) //Negation and assurance that occupiedDirectionsForStop is not null
+      !occupiedDirectionsForStop.length ||
+      !occupiedDirectionsForStop.includes(direction) //Negation and assurance that occupiedDirectionsForStop is not null
     );
   }
 

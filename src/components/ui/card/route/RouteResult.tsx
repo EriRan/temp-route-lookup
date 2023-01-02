@@ -5,11 +5,15 @@ import { Divider, Typography } from "@material-ui/core";
 import { compressResponse } from "./routeResponseCompressor";
 import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
-import _ from "lodash";
 import RouteResultErrors from "./RouteResultErrors";
 import { useTranslation } from "react-i18next";
 import { CompressedRoute } from "./types";
 
+/**
+ * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead
+ * @param props 
+ * @returns 
+ */
 const RouteResult = (props: Props) => {
   const { t } = useTranslation();
   if (props.calculatedRoute) {
@@ -18,7 +22,7 @@ const RouteResult = (props: Props) => {
   return <div />;
 
   function renderRoute(calculatedRoute: CalculationResponse) {
-    if (!_.isEmpty(calculatedRoute.errorMessages)) {
+    if (calculatedRoute.errorMessages.length) {
       return (
         <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
       );
