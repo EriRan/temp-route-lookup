@@ -27,7 +27,7 @@ const RouteResult = (props: Props) => {
         <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
       );
     }
-    if (!calculatedRoute.route) {
+    if (!calculatedRoute.route.size) {
       return <div />;
     }
 
