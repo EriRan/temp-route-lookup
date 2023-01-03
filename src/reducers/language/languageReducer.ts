@@ -1,9 +1,9 @@
-import i18next from "i18next";
 import {
   CLOSE_LANGUAGE_DROPDOWN,
   LANGUAGE_CHANGE,
   OPEN_LANGUAGE_DROPDOWN,
 } from "../../actions/language/actions";
+import i18n from "../../i18n";
 import { Action, LanguageStore } from "./types";
 
 const INITIAL_STATE: LanguageStore = {
@@ -12,7 +12,6 @@ const INITIAL_STATE: LanguageStore = {
   languageDropdownAnchorElement: null,
 };
 
-// TODO: test!
 export const LANGUAGE_REDUCERS = (
   state = INITIAL_STATE,
   action: Action
@@ -34,6 +33,7 @@ export const LANGUAGE_REDUCERS = (
       };
     case OPEN_LANGUAGE_DROPDOWN:
       if (!action.payload.languageDropdownAnchorElement) {
+        console.warn("No Anchor element provided");
         return state;
       }
       return {
@@ -54,5 +54,5 @@ export const LANGUAGE_REDUCERS = (
 };
 
 function changeLanguage(language: string) {
-  i18next.changeLanguage(language);
+  i18n.changeLanguage(language);
 }

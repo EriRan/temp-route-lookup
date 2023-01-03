@@ -5,10 +5,9 @@ import {
   closeLanguageDropdown,
   openLanguageDropdown,
 } from "../../../../actions/language";
-import { LanguageType } from "../../../../reducers/language/types";
+import i18n from "../../../../i18n";
 import { RootState } from "../../../../reducers/types";
 import LanguageSelectorItem from "./languageSelectorItem/LanguageSelectorItem";
-import i18next from "i18next";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
 
 export default function LanguageSelector() {
@@ -31,7 +30,7 @@ export default function LanguageSelector() {
 
   // Get all available languages and create selector items for each language
   const languageSelectorItems = Object.keys(
-    i18next.services.resourceStore.data
+    i18n.services.resourceStore.data
   ).map((availableLanguage) => (
     <LanguageSelectorItem
       key={`language-selector-${availableLanguage}`}
