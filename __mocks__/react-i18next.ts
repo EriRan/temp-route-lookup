@@ -1,3 +1,5 @@
+// This is a common mock that mocks all i18next usage through react-i18next
+// Copied from here https://github.com/i18next/react-i18next/blob/master/example/test-jest/src/__mocks__/react-i18next.js and then converted into Typescript
 const React = require("react");
 const reactI18next = require("react-i18next");
 
@@ -34,14 +36,13 @@ const renderNodes = (reactNodes) => {
   });
 };
 
-const useMock = [(k) => k, {}];
-useMock.t = (k) => k;
-useMock.i18n = {};
+const useMock = {
+  t: (k) => k,
+  i18n: {},
+};
 
 module.exports = {
-  // this mock makes sure any components using the translate HoC receive the t function as a prop
-  withTranslation: () => (Component) => (props) =>
-    <Component t={(k) => k} {...props} />,
+  // Removed withTranslation mock because it made no sense and its not being used
   Trans: ({ children }) =>
     Array.isArray(children) ? renderNodes(children) : renderNodes([children]),
   Translation: ({ children }) => children((k) => k, { i18n: {} }),
