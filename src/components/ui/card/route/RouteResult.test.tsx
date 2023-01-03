@@ -9,11 +9,22 @@ let store: Store<RootState, AnyAction>;
 
 beforeEach(() => {
   store = createRouteLookupStore();
+  // https://react.i18next.com/misc/testing
+  jest.mock('react-i18next', () => ({
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => {
+      return {
+        t: (str: string) => str,
+        i18n: {
+          changeLanguage: () => new Promise(() => {}),
+        },
+      };
+    },
+  }));
 });
 
 test('Renders empty div when no content', () => {
   store.getState().route.calculatedRoute = null;
-  // TODO: Do something about i18n translation warning here
   const component = renderer.create(
     <Provider store={store}><RouteResult /></Provider>,
   );
