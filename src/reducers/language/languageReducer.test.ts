@@ -7,10 +7,6 @@ import { LANGUAGE_REDUCERS } from "./languageReducer";
 import { LanguageStore } from "./types";
 
 beforeEach(() => {
-  // Module name in jst.mock is a path (the same one used in import)
-  jest.mock("../../i18n", () => ({
-    changeLanguage: jest.fn(),
-  }));
 });
 
 test("LANGUAGE_CHANGE language in lowercase", () => {

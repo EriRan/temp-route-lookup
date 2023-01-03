@@ -11,18 +11,6 @@ let store: Store<RootState, AnyAction>;
 
 beforeEach(() => {
   store = createRouteLookupStore();
-  // https://react.i18next.com/misc/testing
-  jest.mock("react-i18next", () => ({
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
-    useTranslation: () => {
-      return {
-        t: (str: string) => str,
-        i18n: {
-          changeLanguage: () => new Promise(() => {}),
-        },
-      };
-    },
-  }));
 });
 
 test("Renders empty div when no content", () => {
@@ -79,13 +67,12 @@ test("Renders route when calculatedRoute has content", () => {
     </Provider>
   );
 
-  // Todo: This is using Finnish translations while I thought it was supposed to have none. Let's figure this out and also consider moving rendering these blocks to separate classes
   expect(component).toMatchInlineSnapshot(`
 <div>
   <p
     className="MuiTypography-root MuiTypography-body1"
   >
-    A→B linjalla Yellow
+    A→B ROUTE_RESULT_WITH_LINE Yellow
   </p>
   <hr
     className="MuiDivider-root"
@@ -93,7 +80,7 @@ test("Renders route when calculatedRoute has content", () => {
   <p
     className="MuiTypography-root MuiTypography-body1"
   >
-    Kesto yhteensä:1
+    ROUTE_RESULT_TOTAL_DURATION:1
   </p>
 </div>
 `);
