@@ -1,5 +1,8 @@
-import { LanguageType } from "../../reducers/language/types";
-import { CLOSE_LANGUAGE_DROPDOWN, LANGUAGE_CHANGE, OPEN_LANGUAGE_DROPDOWN } from "./actions";
+import {
+  CLOSE_LANGUAGE_DROPDOWN,
+  LANGUAGE_CHANGE,
+  OPEN_LANGUAGE_DROPDOWN,
+} from "./actions";
 
 export const changeLanguage = (language: string) => {
   return {
@@ -10,7 +13,9 @@ export const changeLanguage = (language: string) => {
   };
 };
 
-export const openLanguageDropdown = (languageDropdownAnchorElement: HTMLElement) => {
+export const openLanguageDropdown = (
+  languageDropdownAnchorElement: HTMLElement
+) => {
   return {
     type: OPEN_LANGUAGE_DROPDOWN,
     payload: {
@@ -22,5 +27,6 @@ export const openLanguageDropdown = (languageDropdownAnchorElement: HTMLElement)
 export const closeLanguageDropdown = () => {
   return {
     type: CLOSE_LANGUAGE_DROPDOWN,
+    payload: {},
   };
 };

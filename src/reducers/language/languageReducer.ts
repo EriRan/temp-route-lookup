@@ -19,16 +19,23 @@ export const LANGUAGE_REDUCERS = (
 ): LanguageStore => {
   switch (action.type) {
     case LANGUAGE_CHANGE:
-      const newLanguage = action.payload.language.toLowerCase();
-      if (newLanguage !== "fi" && newLanguage !== "en") {
+      if (!action.payload.language) {
         return state;
       }
-      i18next.changeLanguage(newLanguage);
+      const newLanguage = action.payload.language.toLowerCase();
+      if (newLanguage !== "fi" && newLanguage !== "en") {
+        console.warn("Unsupported language: " + newLanguage);
+        return state;
+      }
+      changeLanguage(newLanguage);
       return {
         ...state,
         language: newLanguage,
       };
     case OPEN_LANGUAGE_DROPDOWN:
+      if (!action.payload.languageDropdownAnchorElement) {
+        return state;
+      }
       return {
         ...state,
         isLanguageDropdownOpen: true,
@@ -45,3 +52,7 @@ export const LANGUAGE_REDUCERS = (
       return state;
   }
 };
+
+function changeLanguage(language: string) {
+  i18next.changeLanguage(language);
+}
