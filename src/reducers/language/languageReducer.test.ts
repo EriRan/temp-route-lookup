@@ -6,9 +6,6 @@ import {
 import { LANGUAGE_REDUCERS } from "./languageReducer";
 import { LanguageStore } from "./types";
 
-beforeEach(() => {
-});
-
 test("LANGUAGE_CHANGE language in lowercase", () => {
   const INITIAL_STATE: LanguageStore = {
     language: "en",
