@@ -7,67 +7,69 @@ import RouteResult from "./RouteResult";
 import * as routeResponseCompressor from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 
-let store: Store<RootState, AnyAction>;
+describe("RouteResult", () => {
 
-beforeEach(() => {
-  store = createRouteLookupStore();
-});
+  let store: Store<RootState, AnyAction>;
 
-test("Renders empty div when no content", () => {
-  store.getState().route.calculatedRoute = null;
-  const component = renderer.create(
-    <Provider store={store}>
-      <RouteResult />
-    </Provider>
-  );
-
-  expect(component).toMatchInlineSnapshot(`<div />`);
-});
-
-test("Renders empty div when calculated route has no route", () => {
-  store.getState().route.calculatedRoute = {
-    totalDuration: 1,
-    route: new Map(),
-    errorMessages: [],
-  };
-  const component = renderer.create(
-    <Provider store={store}>
-      <RouteResult />
-    </Provider>
-  );
-
-  expect(component).toMatchInlineSnapshot(`<div />`);
-});
-
-test("Renders route when calculatedRoute has content", () => {
-  const route = new Map();
-  route.set("asd", "asd");
-  store.getState().route.calculatedRoute = {
-    totalDuration: 1,
-    route: route,
-    errorMessages: [],
-  };
-
-  // Compression
-  const compressResponseSpy = jest.spyOn(
-    routeResponseCompressor,
-    "compressResponse"
-  );
-  const compressedRoute: CompressedRoute[] = [];
-  compressedRoute.push({
-    from: "A",
-    to: "B",
-    line: "Yellow",
+  beforeEach(() => {
+    store = createRouteLookupStore();
   });
-  compressResponseSpy.mockReturnValue(compressedRoute);
 
-  const component = renderer.create(
-    <Provider store={store}>
-      <RouteResult />
-    </Provider>
-  );
+  test("Renders empty div when no content", () => {
+    store.getState().route.calculatedRoute = null;
+    const component = renderer.create(
+      <Provider store={store}>
+        <RouteResult />
+      </Provider>
+    );
 
-  expect(component).toMatchInlineSnapshot(`
+    expect(component).toMatchInlineSnapshot(`<div />`);
+  });
+
+  test("Renders empty div when calculated route has no route", () => {
+    store.getState().route.calculatedRoute = {
+      totalDuration: 1,
+      route: new Map(),
+      errorMessages: [],
+    };
+    const component = renderer.create(
+      <Provider store={store}>
+        <RouteResult />
+      </Provider>
+    );
+
+    expect(component).toMatchInlineSnapshot(`<div />`);
+  });
+
+  test("Renders route when calculatedRoute has content", () => {
+    const route = new Map();
+    route.set("asd", "asd");
+    store.getState().route.calculatedRoute = {
+      totalDuration: 1,
+      route: route,
+      errorMessages: [],
+    };
+
+    // Compression
+    const compressResponseSpy = jest.spyOn(
+      routeResponseCompressor,
+      "compressResponse"
+    );
+    const compressedRoute: CompressedRoute[] = [];
+    compressedRoute.push({
+      from: "A",
+      to: "B",
+      line: "Yellow",
+    });
+    compressResponseSpy.mockReturnValue(compressedRoute);
+
+    const component = renderer.create(
+      <Provider store={store}>
+        <RouteResult />
+      </Provider>
+    );
+
+    expect(component).toMatchInlineSnapshot(`
 <div>
   <p
     className="MuiTypography-root MuiTypography-body1"
@@ -84,4 +86,5 @@ test("Renders route when calculatedRoute has content", () => {
   </p>
 </div>
 `);
+  });
 });
