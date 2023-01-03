@@ -40,9 +40,9 @@ This application uses the provided route data json to first render the bus stops
 
 #### Running the application
 
-1. Download this repository and extract it
+1. Download or git clone this repository
 2. Open your preferred command line at the extracted folder
-3. Type `npm install`
+3. Type `npm ci`
 4. After installation is complete, type `npm start`
 5. Browser window should now open with the application
 
