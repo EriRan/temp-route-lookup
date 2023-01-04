@@ -1,10 +1,10 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import RoadLine from "./RoadLine";
-import { RootState } from "../../../../reducers/types";
 import { BusStopLocation } from "../../types";
 import { Road, Stop } from "../../../../data/mapper/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
+import { RootState } from "../../../../reducers";
 
 class RoadContainer extends React.Component<Props, {}> {
   render() {

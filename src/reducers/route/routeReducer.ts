@@ -1,36 +1,39 @@
-import {
-  SET_START_STOP,
-  SET_DESTINATION_STOP,
-  STOP_CLICKED,
-} from "../../actions/route/actions";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   calculateNewRoute,
   changeStartOrDestination,
 } from "./change/stopsStateChangeDeducer";
-import { Action, RouteStore } from "./types";
+import { Payload, RouteStore } from "./types";
 
-const INITIAL_STATE: RouteStore = {
+const initialState: RouteStore = {
   calculatedRoute: null,
   startStop: { name: null, hasErrors: false },
   destinationStop: { name: null, hasErrors: false },
 };
 
-export const REDUCERS = (state = INITIAL_STATE, action: Action): RouteStore => {
-  switch (action.type) {
-    case SET_START_STOP:
-      return calculateNewRoute({
-        ...state,
-        startStop: action.payload,
-      });
-    case SET_DESTINATION_STOP:
-      return calculateNewRoute({
-        ...state,
-        destinationStop: action.payload,
-      });
-    case STOP_CLICKED:
-      return changeStartOrDestination(state, action.payload);
-    default:
-      return state;
-  }
-};
+const routeSlice = createSlice({
+  name: "route",
+  initialState,
+  reducers: {
+    setStartStop(state, action: PayloadAction<Payload>) {
+      // TODO: Not 100% sure whether Immer works inside this function. Verify this
+      state.startStop = action.payload;
+      calculateNewRoute(state);
+    },
+    setDestinationStop(state, action: PayloadAction<Payload>) {
+      // TODO: Not 100% sure whether Immer works inside this function. Verify this
+      state.destinationStop = action.payload;
+      calculateNewRoute(state);
+    },
+    stopClicked(state, action: PayloadAction<Payload>) {
+      // TODO: Not 100% sure whether Immer works inside this function. Verify this
+      changeStartOrDestination(state, action.payload);
+    },
+  },
+});
+
+export const { setStartStop, setDestinationStop, stopClicked } =
+  routeSlice.actions;
+
+export default routeSlice.reducer;

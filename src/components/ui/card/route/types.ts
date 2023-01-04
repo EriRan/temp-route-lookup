@@ -1,9 +1,10 @@
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { Stop } from "../../../../data/mapper/types";
-import { StopState } from "../../../../reducers/route/types";
+import { Payload, StopState } from "../../../../reducers/route/types";
 
 export type RouteInputProps = {
   label: string;
-  onChangeFunction: any;
+  onChangeFunction: ActionCreatorWithPayload<Payload, string>;
   stopMap: Map<string, Stop>;
   inputStopData: StopState | null;
   autoFocus?: boolean;

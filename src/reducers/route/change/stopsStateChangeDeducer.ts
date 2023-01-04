@@ -10,20 +10,17 @@ import { RouteStore, Payload, StopState } from "../types";
 export function changeStartOrDestination(
   currentState: RouteStore,
   payload: Payload
-) {
+): void {
   if (payload.hasErrors) {
-    return currentState;
+    return;
   }
   // Clicked the same stop that is currently start, so let's remove it
   if (
     currentState.startStop.name &&
     currentState.startStop.name.toUpperCase() === payload.name.toUpperCase()
   ) {
-    return {
-      ...currentState,
-      calculatedRoute: null,
-      startStop: createEmptyStopData(),
-    };
+    currentState.calculatedRoute = null;
+    currentState.startStop = createEmptyStopData();
   }
   // Clicked the same stop that is currently destination, so let's remove it
   else if (
@@ -31,36 +28,24 @@ export function changeStartOrDestination(
     currentState.destinationStop.name.toUpperCase() ===
       payload.name.toUpperCase()
   ) {
-    return {
-      ...currentState,
-      calculatedRoute: null,
-      destinationStop: createEmptyStopData(),
-    };
+    currentState.calculatedRoute = null;
+    currentState.destinationStop = createEmptyStopData();
   }
   // Click is destination stop because we have start and destination already set
-  if (currentState.startStop.name && currentState.destinationStop.name) {
+  else if (currentState.startStop.name && currentState.destinationStop.name) {
     // Clicked some other stop so let's change the calculation
-    const newState = {
-      ...currentState,
-      destinationStop: payload,
-    };
-    return calculateNewRoute(newState);
+    currentState.destinationStop = payload;
+    calculateNewRoute(currentState);
   }
   // Click is destination stop because there is currently no destination stop
   else if (currentState.startStop.name && !currentState.destinationStop.name) {
-    const newState = {
-      ...currentState,
-      destinationStop: payload,
-    };
-    return calculateNewRoute(newState);
+    currentState.destinationStop = payload;
+    calculateNewRoute(currentState);
   }
   // Click is start stop because we do not have a start or destination yet
   else {
-    const newState = {
-      ...currentState,
-      startStop: payload,
-    };
-    return calculateNewRoute(newState);
+    currentState.startStop = payload;
+    calculateNewRoute(currentState);
   }
 }
 

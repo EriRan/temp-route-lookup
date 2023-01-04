@@ -1,11 +1,7 @@
-import {
-  SET_DESTINATION_STOP,
-  SET_START_STOP,
-  STOP_CLICKED,
-} from "../../actions/route/actions";
-import { REDUCERS } from "./routeReducer";
 import { Action, RouteStore } from "./types";
 import * as stopsStateChangeDeducer from "./change/stopsStateChangeDeducer";
+import routeReducer, { setDestinationStop, setStartStop, stopClicked } from "./routeReducer";
+import { AnyAction, PayloadAction } from "@reduxjs/toolkit";
 
 describe("routeReducer", () => {
 
@@ -15,8 +11,8 @@ describe("routeReducer", () => {
       startStop: { name: null, hasErrors: false },
       destinationStop: { name: null, hasErrors: false },
     };
-    const action: Action = {
-      type: SET_START_STOP,
+    const action: AnyAction = {
+      type: setStartStop.type,
       payload: {
         name: "a",
         hasErrors: false,
@@ -34,7 +30,7 @@ describe("routeReducer", () => {
     );
 
     // Validate that calls have been done to the expected functions
-    REDUCERS(INITIAL_STATE, action);
+    routeReducer(INITIAL_STATE, action);
     expect(calculateNewRouteSpy.mock.calls.length).toBe(1);
     expect(changeStartOrDestinationSpy.mock.calls.length).toBe(0);
   });
@@ -45,8 +41,8 @@ describe("routeReducer", () => {
       startStop: { name: null, hasErrors: false },
       destinationStop: { name: null, hasErrors: false },
     };
-    const action: Action = {
-      type: SET_DESTINATION_STOP,
+    const action: AnyAction = {
+      type: setDestinationStop.type,
       payload: {
         name: "a",
         hasErrors: false,
@@ -62,7 +58,7 @@ describe("routeReducer", () => {
       "changeStartOrDestination"
     );
 
-    REDUCERS(INITIAL_STATE, action);
+    routeReducer(INITIAL_STATE, action);
     expect(calculateNewRouteSpy.mock.calls.length).toBe(1);
     expect(changeStartOrDestinationSpy.mock.calls.length).toBe(0);
   });
@@ -73,8 +69,8 @@ describe("routeReducer", () => {
       startStop: { name: null, hasErrors: false },
       destinationStop: { name: null, hasErrors: false },
     };
-    const action: Action = {
-      type: STOP_CLICKED,
+    const action: AnyAction = {
+      type: stopClicked.type,
       payload: {
         name: "a",
         hasErrors: false,
@@ -90,7 +86,7 @@ describe("routeReducer", () => {
       "changeStartOrDestination"
     );
 
-    REDUCERS(INITIAL_STATE, action);
+    routeReducer(INITIAL_STATE, action);
     expect(calculateNewRouteSpy.mock.calls.length).toBe(0);
     expect(changeStartOrDestinationSpy.mock.calls.length).toBe(1);
   });

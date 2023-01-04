@@ -1,12 +1,9 @@
 import { Button, Menu } from "@material-ui/core";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeLanguageDropdown,
-  openLanguageDropdown,
-} from "../../../../actions/language";
 import i18n from "../../../../i18n";
-import { RootState } from "../../../../reducers/types";
+import { RootState } from "../../../../reducers";
+import { closeLanguageDropdown, openLanguageDropdown } from "../../../../reducers/language/languageReducer";
 import LanguageSelectorItem from "./languageSelectorItem/LanguageSelectorItem";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
 
@@ -21,7 +18,7 @@ export default function LanguageSelector() {
   });
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(openLanguageDropdown(event.currentTarget));
+    dispatch(openLanguageDropdown({languageDropdownAnchorElement: event.currentTarget}));
   };
 
   const handleClose = () => {

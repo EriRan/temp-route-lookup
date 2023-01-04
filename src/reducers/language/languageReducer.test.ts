@@ -1,9 +1,5 @@
-import {
-  CLOSE_LANGUAGE_DROPDOWN,
-  LANGUAGE_CHANGE,
-  OPEN_LANGUAGE_DROPDOWN,
-} from "../../actions/language/actions";
-import { LANGUAGE_REDUCERS } from "./languageReducer";
+import { AnyAction } from "@reduxjs/toolkit";
+import languageReducer, { closeLanguageDropdown, languageChange, openLanguageDropdown } from "./languageReducer";
 import { LanguageStore } from "./types";
 
 describe("languageReducer", () => {
@@ -13,13 +9,13 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: LANGUAGE_CHANGE,
+    const action: AnyAction = {
+      type: languageChange.type,
       payload: {
         language: "fi",
       },
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("fi");
     expect(newState.isLanguageDropdownOpen).toBe(
       INITIAL_STATE.isLanguageDropdownOpen
@@ -35,13 +31,13 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: LANGUAGE_CHANGE,
+    const action: AnyAction = {
+      type: languageChange.type,
       payload: {
         language: "FI",
       },
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("fi");
     expect(newState.isLanguageDropdownOpen).toBe(
       INITIAL_STATE.isLanguageDropdownOpen
@@ -57,13 +53,13 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: LANGUAGE_CHANGE,
+    const action: AnyAction = {
+      type: languageChange.type,
       payload: {
         language: "en",
       },
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("en");
     expect(newState.isLanguageDropdownOpen).toBe(
       INITIAL_STATE.isLanguageDropdownOpen
@@ -79,13 +75,13 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: OPEN_LANGUAGE_DROPDOWN,
+    const action: AnyAction = {
+      type: openLanguageDropdown.type,
       payload: {
         languageDropdownAnchorElement: {} as unknown as HTMLElement, // Mock HTML element for testing purpose
       },
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("en");
     expect(newState.isLanguageDropdownOpen).toBe(true);
     expect(newState.languageDropdownAnchorElement).toBeDefined();
@@ -97,13 +93,13 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: OPEN_LANGUAGE_DROPDOWN,
+    const action: AnyAction = {
+      type: openLanguageDropdown.type,
       payload: {
         languageDropdownAnchorElement: undefined,
       },
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("en");
     expect(newState.isLanguageDropdownOpen).toBe(false);
     expect(newState.languageDropdownAnchorElement).toBeNull();
@@ -115,11 +111,11 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: true,
       languageDropdownAnchorElement: {} as unknown as HTMLElement,
     };
-    const action = {
-      type: CLOSE_LANGUAGE_DROPDOWN,
+    const action: AnyAction = {
+      type: closeLanguageDropdown.type,
       payload: {},
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("en");
     expect(newState.isLanguageDropdownOpen).toBe(false);
     expect(newState.languageDropdownAnchorElement).toBeNull();
@@ -131,11 +127,11 @@ describe("languageReducer", () => {
       isLanguageDropdownOpen: false,
       languageDropdownAnchorElement: null,
     };
-    const action = {
-      type: CLOSE_LANGUAGE_DROPDOWN,
+    const action: AnyAction = {
+      type: closeLanguageDropdown.type,
       payload: {},
     };
-    const newState = LANGUAGE_REDUCERS(INITIAL_STATE, action);
+    const newState = languageReducer(INITIAL_STATE, action);
     expect(newState.language).toBe("en");
     expect(newState.isLanguageDropdownOpen).toBe(false);
     expect(newState.languageDropdownAnchorElement).toBeNull();

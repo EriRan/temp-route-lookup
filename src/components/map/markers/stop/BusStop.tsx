@@ -7,10 +7,11 @@ import {
   UNSELECTED_STOP_COLOR,
 } from "./BusStopConstant";
 import "./BusStop.css";
-import { RootState } from "../../../../reducers/types";
-import { StopState } from "../../../../reducers/route/types";
+import { Payload, StopState } from "../../../../reducers/route/types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import { stopClicked } from "../../../../actions/route";
+import { RootState } from "../../../../reducers";
+import { stopClicked } from "../../../../reducers/route/routeReducer";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 const BusStop: FunctionComponent<Props> = (props) => {
   //Create style class with font from Material UI. We want the default button text style from here
@@ -56,8 +57,11 @@ const deduceStrokeColor = (
   return UNSELECTED_STOP_COLOR;
 };
 
-const handleClick = (name: string, stopClicked: Function) => {
-  stopClicked(name);
+const handleClick = (
+  name: string,
+  stopClicked: ActionCreatorWithPayload<Payload, string>
+) => {
+  stopClicked({ name: name });
 };
 
 //Let's create a Typescript type from redux props and the props that are provided to this bus stop
@@ -71,7 +75,7 @@ type Props = PropsFromRedux & {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    startStop: state.route.startStop, //Reminder: get startStop variable from Route reducer
+    startStop: state.route.startStop,
     destinationStop: state.route.destinationStop,
   };
 };

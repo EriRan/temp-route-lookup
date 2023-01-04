@@ -1,17 +1,12 @@
-export type Action = {
-  type: string; // I would like this to have only values from actions.ts but I don't know how to do that.
-  payload: Payload;
-};
-
 export type LanguageType = "fi" | "en";
 
 export type LanguageStore = {
   language: LanguageType;
   isLanguageDropdownOpen: boolean;
-  languageDropdownAnchorElement: HTMLElement | null;
+  languageDropdownAnchorElement: any;
 };
 
 export type Payload = {
   language?: string;
-  languageDropdownAnchorElement?: HTMLElement;
+  languageDropdownAnchorElement?: any; // TODO: this is an HTML element which should not be in Redux
 };

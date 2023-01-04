@@ -1,23 +1,18 @@
-import {
-  CLOSE_LANGUAGE_DROPDOWN,
-  LANGUAGE_CHANGE,
-  OPEN_LANGUAGE_DROPDOWN,
-} from "../../actions/language/actions";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import i18n from "../../i18n";
-import { Action, LanguageStore } from "./types";
+import { LanguageStore, Payload } from "./types";
 
-const INITIAL_STATE: LanguageStore = {
+const initialState: LanguageStore = {
   language: "fi",
   isLanguageDropdownOpen: false,
   languageDropdownAnchorElement: null,
 };
 
-export const LANGUAGE_REDUCERS = (
-  state = INITIAL_STATE,
-  action: Action
-): LanguageStore => {
-  switch (action.type) {
-    case LANGUAGE_CHANGE:
+const languageSlice = createSlice({
+  name: "language",
+  initialState,
+  reducers: {
+    languageChange(state, action: PayloadAction<Payload>) {
       if (!action.payload.language) {
         return state;
       }
@@ -27,32 +22,31 @@ export const LANGUAGE_REDUCERS = (
         return state;
       }
       changeLanguage(newLanguage);
-      return {
-        ...state,
-        language: newLanguage,
-      };
-    case OPEN_LANGUAGE_DROPDOWN:
+      // Direct state modification is allowed here with Immer that is included in Redux toolkit
+      // This is only allowed inside createSlice
+      state.language = newLanguage;
+    },
+    openLanguageDropdown(state, action: PayloadAction<Payload>) {
       if (!action.payload.languageDropdownAnchorElement) {
         console.warn("No Anchor element provided");
         return state;
       }
-      return {
-        ...state,
-        isLanguageDropdownOpen: true,
-        languageDropdownAnchorElement:
-          action.payload.languageDropdownAnchorElement,
-      };
-    case CLOSE_LANGUAGE_DROPDOWN:
-      return {
-        ...state,
-        isLanguageDropdownOpen: false,
-        languageDropdownAnchorElement: null,
-      };
-    default:
-      return state;
-  }
-};
+      state.isLanguageDropdownOpen = true;
+      state.languageDropdownAnchorElement =
+        action.payload.languageDropdownAnchorElement;
+    },
+    closeLanguageDropdown(state) {
+      state.isLanguageDropdownOpen = false;
+      state.languageDropdownAnchorElement = null;
+    },
+  },
+});
 
 function changeLanguage(language: string) {
   i18n.changeLanguage(language);
 }
+
+export const { languageChange, openLanguageDropdown, closeLanguageDropdown } =
+  languageSlice.actions;
+
+export default languageSlice.reducer;
