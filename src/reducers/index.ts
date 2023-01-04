@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
 import { LANGUAGE_REDUCERS } from "./language/languageReducer";
 import { REDUCERS as ROUTE_REDUCERS } from "./route/routeReducer";
-import { applyMiddleware, compose, createStore } from "redux";
-import reduxThunk from "redux-thunk";
+import { compose, createStore } from "redux";
 
 export const createRouteLookupStore = () => {
   const composeEnhancers =
@@ -13,5 +12,5 @@ export const createRouteLookupStore = () => {
     language: LANGUAGE_REDUCERS,
   });
   // Apply reducers and middleware to the store
-  return createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
+  return createStore(reducers, composeEnhancers());
 }
