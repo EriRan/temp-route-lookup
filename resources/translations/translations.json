@@ -15,7 +15,8 @@
         "ROUTE_ERROR_ALREADY_AT_DESTINATION": "Olet jo määränpäässäsi",
         "ROUTE_ERROR_UNKNOWN_START_STOP_INPUTED": "Tuntematon lähtöpaikka",
         "ROUTE_ERROR_UNKNOWN_END_STOP_INPUTED": "Tuntematon määränpää",
-        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Reitinhaussa tapahtui virhe"
+        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Reitinhaussa tapahtui virhe",
+        "ERROR_DURING_ROUTE_RESPONSE_CONVERSION": "Reitin rakentamisessa tapahtui virhe"
       }
     },
     "en": {
@@ -33,7 +34,8 @@
         "ROUTE_ERROR_ALREADY_AT_DESTINATION": "You are already at your destination",
         "ROUTE_ERROR_UNKNOWN_START_STOP_INPUTED": "Unknown start point",
         "ROUTE_ERROR_UNKNOWN_END_STOP_INPUTED": "Unknown destination",
-        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Error encountered during route search"
+        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Error encountered during route search",
+        "ERROR_DURING_ROUTE_RESPONSE_CONVERSION": "Error encountered during route building"
       }
     }
   },
