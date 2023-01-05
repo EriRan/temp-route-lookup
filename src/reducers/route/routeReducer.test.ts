@@ -1,4 +1,4 @@
-import { Action, RouteStore } from "./types";
+import { RouteStore } from "./types";
 import * as stopsStateChangeDeducer from "./change/stopsStateChangeDeducer";
 import routeReducer, { setDestinationStop, setStartStop, stopClicked } from "./routeReducer";
 import { AnyAction, PayloadAction } from "@reduxjs/toolkit";
@@ -87,7 +87,7 @@ describe("routeReducer", () => {
     );
 
     routeReducer(INITIAL_STATE, action);
-    expect(calculateNewRouteSpy.mock.calls.length).toBe(0);
+    expect(calculateNewRouteSpy.mock.calls.length).toBe(1);
     expect(changeStartOrDestinationSpy.mock.calls.length).toBe(1);
   });
 });

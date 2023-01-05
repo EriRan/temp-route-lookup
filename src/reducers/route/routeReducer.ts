@@ -25,9 +25,8 @@ const routeSlice = createSlice({
       state.calculatedRoute = calculateNewRoute(state);
     },
     stopClicked(state, action: PayloadAction<Payload>) {
-      // TODO: Split start or destination set and calculation into their own flows
-      const calculationResult = changeStartOrDestination(state, action.payload);
-      state.calculatedRoute = calculationResult;
+      changeStartOrDestination(state, action.payload);
+      state.calculatedRoute = calculateNewRoute(state);
     },
   },
 });

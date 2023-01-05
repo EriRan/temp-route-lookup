@@ -1,98 +1,79 @@
 import { Payload, RouteStore, StopState } from "../types";
 import { changeStartOrDestination } from "./stopsStateChangeDeducer";
 
+// Todo: Wrap this in describe
 test("Payload equal to start stop sets start to null", () => {
   const state = createCurrentState("A", "B");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("A", false)
-  );
+  changeStartOrDestination(state, createPayload("A", false));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop.name).toBeNull();
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
-  expect(calculatedResult).toBeNull();
+  expect(state.calculatedRoute).toBeNull();
 });
 
 test("Payload equal to start stop considered equal even if casings arent the same", () => {
   const state = createCurrentState("A", "B");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("a", false)
-  );
+  changeStartOrDestination(state, createPayload("a", false));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop.name).toBeNull();
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
-  expect(calculatedResult).toBeNull();
+  expect(state.calculatedRoute).toBeNull();
 });
 
 test("Payload equal to destination stop sets destination to null", () => {
   const state = createCurrentState("A", "B");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("B", false)
-  );
+  changeStartOrDestination(state, createPayload("B", false));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBeNull();
-  expect(calculatedResult).toBeNull();
+  expect(state.calculatedRoute).toBeNull();
 });
 
 test("Payload equal to destination stop considered equal even if casings arent the same", () => {
   const state = createCurrentState("A", "b");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("B", false)
-  );
+  changeStartOrDestination(state, createPayload("B", false));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBeNull();
-  expect(calculatedResult).toBeNull();
+  expect(state.calculatedRoute).toBeNull();
 });
 
 test("Do nothing if payload has an error", () => {
   const state = createCurrentState("A", "B");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("B", true)
-  );
+  changeStartOrDestination(state, createPayload("B", true));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
-  expect(calculatedResult).toBeNull();
+  expect(state.calculatedRoute).toBeNull();
 });
 
 test("Set new destination if both start and destination in state and new destination is not equal to either", () => {
   //Would be nice to mock the calculation function somehow so that it doesn't get called for real.
   //We would then save a few milliseconds.
   const state = createCurrentState("A", "C");
-  const calculatedResult = changeStartOrDestination(
-    state,
-    createPayload("B", false)
-  );
+  changeStartOrDestination(state, createPayload("B", false));
 
   expect(state).toBeDefined();
   expect(state.startStop).toBeDefined();
   expect(state.startStop.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
-  expect(calculatedResult).toBeTruthy(); // Not null and not undefined
-  expect(calculatedResult!.route).toBeDefined();
-  expect(calculatedResult!.totalDuration).toBeDefined();
+  expect(state.calculatedRoute).toBeNull(); // Not null and not undefined
 });
 
 function createCurrentState(
