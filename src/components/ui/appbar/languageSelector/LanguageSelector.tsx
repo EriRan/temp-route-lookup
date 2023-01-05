@@ -1,5 +1,5 @@
 import { Button, Menu } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import i18n from "../../../../i18n";
 import { RootState } from "../../../../reducers";
@@ -9,19 +9,21 @@ import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
 
 export default function LanguageSelector() {
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   const languageState = useSelector((state: RootState) => {
     return {
       isLanguageDropdownOpen: state.language.isLanguageDropdownOpen,
-      anchorElement: state.language.languageDropdownAnchorElement,
       language: state.language.language,
     };
   });
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(openLanguageDropdown({languageDropdownAnchorElement: event.currentTarget}));
+    setAnchorEl(event.currentTarget);
+    dispatch(openLanguageDropdown());
   };
 
   const handleClose = () => {
+    setAnchorEl(null);
     dispatch(closeLanguageDropdown());
   };
 
@@ -50,7 +52,7 @@ export default function LanguageSelector() {
       </Button>
       <Menu
         id="basic-menu"
-        anchorEl={languageState.anchorElement}
+        anchorEl={anchorEl}
         open={languageState.isLanguageDropdownOpen}
         onClose={handleClose}
         MenuListProps={{

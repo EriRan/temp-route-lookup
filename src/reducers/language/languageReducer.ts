@@ -5,7 +5,6 @@ import { LanguageStore, Payload } from "./types";
 const initialState: LanguageStore = {
   language: "fi",
   isLanguageDropdownOpen: false,
-  languageDropdownAnchorElement: null,
 };
 
 const languageSlice = createSlice({
@@ -26,18 +25,11 @@ const languageSlice = createSlice({
       // This is only allowed inside createSlice
       state.language = newLanguage;
     },
-    openLanguageDropdown(state, action: PayloadAction<Payload>) {
-      if (!action.payload.languageDropdownAnchorElement) {
-        console.warn("No Anchor element provided");
-        return state;
-      }
+    openLanguageDropdown(state) {
       state.isLanguageDropdownOpen = true;
-      state.languageDropdownAnchorElement =
-        action.payload.languageDropdownAnchorElement;
     },
     closeLanguageDropdown(state) {
       state.isLanguageDropdownOpen = false;
-      state.languageDropdownAnchorElement = null;
     },
   },
 });
