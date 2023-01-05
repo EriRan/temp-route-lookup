@@ -80,7 +80,7 @@ class RouteCalculator {
     }
 
     const shortestPath = allNodesMap.get(destinationStopName)!.shortestPath;
-    //Phase2: Optimize lines used
+    // Phase2: Optimize lines used. Helps to use as few lines as possible
     new RouteCalculatorUsedLineDeducer().deduce(shortestPath);
 
     return convertCalculation(startStopName, shortestPath);
