@@ -74,17 +74,35 @@ export function convertCalculation(
   }
 
   function createStartStopKey(fromName: string, toNode: RouteNode) {
-    return createKeyString(
-      toNode.stopData.roads.find((road) => road.to.name === fromName)
+    const roadBetween = toNode.stopData.roads.find(
+      (road) => road.to.name === fromName
     );
+    if (!roadBetween) {
+      console.error(
+        "Unable to find road from stop name " +
+          fromName +
+          " to stop name " +
+          toNode.stopData.name
+      );
+      return null;
+    }
+    return createKeyString(roadBetween);
   }
 
   function createKey(fromNode: RouteNode, toNode: RouteNode): RouteKey | null {
-    return createKeyString(
-      toNode.stopData.roads.find(
-        (road) => road.to.name === fromNode.stopData.name
-      )
+    const roadBetween = toNode.stopData.roads.find(
+      (road) => road.to.name === fromNode.stopData.name
     );
+    if (!roadBetween) {
+      console.error(
+        "Unable to find road from stop name " +
+          fromNode.stopData.name +
+          " to stop name " +
+          toNode.stopData.name
+      );
+      return null;
+    }
+    return createKeyString(roadBetween);
   }
 
   /**
@@ -92,16 +110,11 @@ export function convertCalculation(
    * and a dash between the names. If the road that was found between has flag isReverse, we flip the
    * two stop names around because reverse roads are not rendered
    */
-  function createKeyString(roadBetween: Road | undefined): RouteKey | null {
-    if (!roadBetween) {
-      console.error("Unable to find route between two stops!");
-      return null;
+  function createKeyString(roadBetween: Road): RouteKey | null {
+    if (roadBetween.isReverse) {
+      return roadBetween.to.name + "-" + roadBetween.from.name;
     } else {
-      if (roadBetween.isReverse) {
-        return roadBetween.to.name + "-" + roadBetween.from.name;
-      } else {
-        return roadBetween.from.name + "-" + roadBetween.to.name;
-      }
+      return roadBetween.from.name + "-" + roadBetween.to.name;
     }
   }
 
