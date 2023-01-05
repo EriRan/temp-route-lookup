@@ -1,4 +1,4 @@
-import { Stop } from "../../../../data/mapper/types";
+import { Stop } from "../../../data/mapper/types";
 
 export type RouteNode = {
   stopData: Stop;

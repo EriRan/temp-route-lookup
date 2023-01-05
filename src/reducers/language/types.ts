@@ -3,7 +3,6 @@ export type LanguageType = "fi" | "en";
 export type LanguageStore = {
   language: LanguageType;
   isLanguageDropdownOpen: boolean;
-  languageDropdownAnchorElement: any;
 };
 
 export type Payload = {

@@ -6,7 +6,7 @@ import { LINE_GAP } from "./RoadConstant";
 import { RoadLineProps, RoadStyle } from "./types";
 import { BusStopLocation } from "../../types";
 import { Road } from "../../../../data/mapper/types";
-import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 
 /**
  * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops

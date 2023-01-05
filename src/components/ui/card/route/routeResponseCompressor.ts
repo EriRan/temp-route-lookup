@@ -1,4 +1,4 @@
-import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 import { UNKNOWN_LINE_TEXT } from "./CompressedRouteConstant";
 import { CompressedRoute } from "./types";
 

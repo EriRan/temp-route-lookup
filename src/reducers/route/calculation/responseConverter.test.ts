@@ -2,7 +2,7 @@ import { convertCalculation } from "./responseConverter";
 
 import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
 import { RouteNode } from "./types";
-import { Road } from "../../../../data/mapper/types";
+import { Road } from "../../../data/mapper/types";
 
 test("Route not found error", () => {
   const nodes: RouteNode[] = [];

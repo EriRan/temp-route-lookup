@@ -3,11 +3,11 @@ import { connect, ConnectedProps } from "react-redux";
 import { Divider, Typography } from "@material-ui/core";
 
 import { compressResponse } from "./routeResponseCompressor";
-import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import RouteResultErrors from "./RouteResultErrors";
 import { useTranslation } from "react-i18next";
 import { CompressedRoute } from "./types";
 import { RootState } from "../../../../reducers";
+import { CalculationResponse } from "../../../../reducers/route/calculation/types";
 
 /**
  * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead

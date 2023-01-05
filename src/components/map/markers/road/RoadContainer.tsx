@@ -3,8 +3,8 @@ import { connect, ConnectedProps } from "react-redux";
 import RoadLine from "./RoadLine";
 import { BusStopLocation } from "../../types";
 import { Road, Stop } from "../../../../data/mapper/types";
-import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import { RootState } from "../../../../reducers";
+import { CalculationResponse } from "../../../../reducers/route/calculation/types";
 
 class RoadContainer extends React.Component<Props, {}> {
   render() {

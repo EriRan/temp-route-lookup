@@ -1,11 +1,11 @@
 import { convertCalculation, createErrorResponse } from "./responseConverter";
 import { ERROR_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
 
-import { Road, TransportData } from "../../../../data/mapper/types";
 import { CalculationResponse, RouteNode } from "./types";
-import { StopState } from "../../types";
 import RouteCalculatorInputValidator from "./validation/RouteCalculatorInputValidator";
 import RouteCalculatorUsedLineDeducer from "./RouteCalculatorUsedLineDeducer";
+import { Road, TransportData } from "../../../data/mapper/types";
+import { StopState } from "../types";
 
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.

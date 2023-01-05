@@ -1,5 +1,4 @@
-import { Road } from "../../../../data/mapper/types";
-
+import { Road } from "../../../data/mapper/types";
 import {
   ERROR_DURING_ROUTE_RESPONSE_CONVERSION,
   ROUTE_NOT_FOUND,

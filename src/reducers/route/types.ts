@@ -1,4 +1,4 @@
-import { CalculationResponse } from "./change/calculation/types";
+import { CalculationResponse } from "./calculation/types";
 
 export type Action = {
   type: string; // I would like this to have only values from actions.ts but I don't know how to do that.

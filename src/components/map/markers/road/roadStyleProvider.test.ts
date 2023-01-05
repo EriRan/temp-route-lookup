@@ -7,7 +7,7 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { BLUE_LINE, RED_LINE, GREEN_LINE, YELLOW_LINE } from "./KnownLines";
-import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 
 describe("roadStyleProvider", () => {
   test("Road with no lines and no calculation done", () => {

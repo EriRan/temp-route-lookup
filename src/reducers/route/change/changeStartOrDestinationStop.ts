@@ -1,7 +1,4 @@
-import TransportDataSingleton from "../../../data/TransportDataSingleton";
 import { RouteStore, Payload, StopState } from "../types";
-import RouteCalculator from "./calculation/RouteCalculator";
-import { CalculationResponse } from "./calculation/types";
 
 /**
  * Set start or destination stop depending on what start and destination are currently set

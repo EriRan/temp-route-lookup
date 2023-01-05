@@ -6,8 +6,8 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { BLUE_LINE, GREEN_LINE, RED_LINE, YELLOW_LINE } from "./KnownLines";
-import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 import { RoadStyle } from "./types";
+import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
