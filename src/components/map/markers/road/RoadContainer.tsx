@@ -51,8 +51,8 @@ class RoadContainer extends React.Component<Props, {}> {
       );
       return null;
     }
-    if (this.hasRouteBeenCalculated(calculatedRoute)) {
-      const calculatedRouteNode = calculatedRoute!.route.find(
+    if (calculatedRoute && calculatedRoute.route.length > 0) {
+      const calculatedRouteNode = calculatedRoute.route.find(
         segment => segment.id === road.from.name + "-" + road.to.name
       );
       return (
@@ -76,18 +76,6 @@ class RoadContainer extends React.Component<Props, {}> {
         includesLines={road.includesLines}
         calculationDone={false}
       />
-    );
-  }
-
-  /**
-   * Validate that the calculatedRoute contains calculated route. This should include a total duration and a route map with content
-   */
-  private hasRouteBeenCalculated(calculatedRoute: CalculationResponse | null) {
-    return (
-      calculatedRoute &&
-      calculatedRoute.totalDuration &&
-      calculatedRoute.totalDuration > 0 &&
-      calculatedRoute.route.length
     );
   }
 }
