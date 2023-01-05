@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-import {
-  calculateNewRoute,
-  changeStartOrDestination,
-} from "./change/stopsStateChangeDeducer";
+import { calculateNewRoute } from "./change/calculation/calculateNewRoute";
+import { changeStartOrDestinationStop } from "./change/changeStartOrDestinationStop";
 import { Payload, RouteStore } from "./types";
 
 const initialState: RouteStore = {
@@ -25,7 +22,7 @@ const routeSlice = createSlice({
       state.calculatedRoute = calculateNewRoute(state);
     },
     stopClicked(state, action: PayloadAction<Payload>) {
-      changeStartOrDestination(state, action.payload);
+      changeStartOrDestinationStop(state, action.payload);
       state.calculatedRoute = calculateNewRoute(state);
     },
   },

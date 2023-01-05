@@ -10,7 +10,7 @@ import { CalculationResponse } from "./calculation/types";
  * @param {*} currentState
  * @param {*} payload
  */
-export function changeStartOrDestination(
+export function changeStartOrDestinationStop(
   currentState: RouteStore,
   payload: Payload
 ): void {
@@ -45,18 +45,6 @@ export function changeStartOrDestination(
   else {
     currentState.startStop = payload;
   }
-}
-
-/**
- * Calculate and set route for the provided state if possible
- */
-export function calculateNewRoute(
-  newState: RouteStore
-): CalculationResponse | null {
-  return new RouteCalculator(TransportDataSingleton.getInstance()).calculate(
-    newState.startStop,
-    newState.destinationStop
-  );
 }
 
 function createEmptyStopData(): StopState {

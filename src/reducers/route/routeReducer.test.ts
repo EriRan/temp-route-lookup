@@ -1,5 +1,6 @@
 import { RouteStore } from "./types";
-import * as stopsStateChangeDeducer from "./change/stopsStateChangeDeducer";
+import * as changeStartOrDestinationStop from "./change/changeStartOrDestinationStop";
+import * as calculateNewRoute from "./change//calculation/calculateNewRoute";
 import routeReducer, { setDestinationStop, setStartStop, stopClicked } from "./routeReducer";
 import { AnyAction, PayloadAction } from "@reduxjs/toolkit";
 
@@ -21,12 +22,12 @@ describe("routeReducer", () => {
 
     // Import mocked functions as an object, then spy on the functions of the object
     const calculateNewRouteSpy = jest.spyOn(
-      stopsStateChangeDeducer,
+      calculateNewRoute,
       "calculateNewRoute"
     );
     const changeStartOrDestinationSpy = jest.spyOn(
-      stopsStateChangeDeducer,
-      "changeStartOrDestination"
+      changeStartOrDestinationStop,
+      "changeStartOrDestinationStop"
     );
 
     // Validate that calls have been done to the expected functions
@@ -50,12 +51,12 @@ describe("routeReducer", () => {
     };
 
     const calculateNewRouteSpy = jest.spyOn(
-      stopsStateChangeDeducer,
+      calculateNewRoute,
       "calculateNewRoute"
     );
     const changeStartOrDestinationSpy = jest.spyOn(
-      stopsStateChangeDeducer,
-      "changeStartOrDestination"
+      changeStartOrDestinationStop,
+      "changeStartOrDestinationStop"
     );
 
     routeReducer(INITIAL_STATE, action);
@@ -78,12 +79,12 @@ describe("routeReducer", () => {
     };
 
     const calculateNewRouteSpy = jest.spyOn(
-      stopsStateChangeDeducer,
+      calculateNewRoute,
       "calculateNewRoute"
     );
     const changeStartOrDestinationSpy = jest.spyOn(
-      stopsStateChangeDeducer,
-      "changeStartOrDestination"
+      changeStartOrDestinationStop,
+      "changeStartOrDestinationStop"
     );
 
     routeReducer(INITIAL_STATE, action);
