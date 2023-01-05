@@ -20,7 +20,6 @@ const RouteResultErrors = (props: Props) => {
     let errorIndex = 1;
     return props.errorMessages.map((errorMessage) => {
       const message = t(errorMessage);
-      console.log(message);
       return (
         <ListItem key={`input-error-${errorIndex++}`}>
           <ListItemText primary={message} />
