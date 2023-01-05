@@ -10,7 +10,7 @@ import RouteCalculatorUsedLineDeducer from "./RouteCalculatorUsedLineDeducer";
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.
  *
- * Todo: Could use some time on the cutting board
+ * Todo: Consider splitting this into more classes
  */
 class RouteCalculator {
   private transportData: TransportData;

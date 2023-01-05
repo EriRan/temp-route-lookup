@@ -3,8 +3,8 @@
  */
 export type TransportDataUnmapped = {
   pysakit: Array<string>; //Unmapped stops
-  tiet: Array<RoadUnmapped>;
-  linjastot: LinesUnmapped;
+  tiet: Array<RoadUnmapped>; // Unmapped roads
+  linjastot: LinesUnmapped; // Unmapped lines
 };
 
 /**
@@ -19,12 +19,10 @@ export type LinesUnmapped = {
  * Unmapped roads from reittiopas.json that describe connections from one bus stop to another and how long do they take
  */
 export type RoadUnmapped = {
-  mista: string;
-  mihin: string;
-  kesto: number;
+  mista: string; // From where
+  mihin: string; // To where
+  kesto: number; // Duration
 };
-
-//Unmapped stops are stored in a array of strings
 
 /**
  * Full transport data from reittiopas.json mapped into a more convenient format
