@@ -1,4 +1,4 @@
-import { StopState } from "../../../types";
+import { StopState } from "../../types";
 import {
   ALREADY_AT_DESTINATION,
   UNKNOWN_END_STOP_INPUTED,

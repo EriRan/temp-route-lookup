@@ -1,12 +1,12 @@
 import RouteCalculator from "./RouteCalculator";
-import TransportDataSingleton from "../../../../data/TransportDataSingleton";
 import { CalculationResponse } from "./types";
 import {
   ALREADY_AT_DESTINATION,
   UNKNOWN_END_STOP_INPUTED,
   UNKNOWN_START_STOP_INPUTED,
 } from "./ErrorMessageConstant";
-import { StopState } from "../../types";
+import TransportDataSingleton from "../../../data/TransportDataSingleton";
+import { StopState } from "../types";
 
 const calculator = new RouteCalculator(TransportDataSingleton.getInstance());
 

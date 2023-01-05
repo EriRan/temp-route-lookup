@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { calculateNewRoute } from "./change/calculation/calculateNewRoute";
+import { calculateNewRoute } from "./calculation/calculateNewRoute";
 import { changeStartOrDestinationStop } from "./change/changeStartOrDestinationStop";
 import { Payload, RouteStore } from "./types";
 

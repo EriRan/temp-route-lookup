@@ -1,5 +1,5 @@
-import TransportDataSingleton from "../../../../data/TransportDataSingleton";
-import { RouteStore } from "../../types";
+import TransportDataSingleton from "../../../data/TransportDataSingleton";
+import { RouteStore } from "../types";
 import RouteCalculator from "./RouteCalculator";
 import { CalculationResponse } from "./types";
 

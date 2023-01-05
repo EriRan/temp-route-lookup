@@ -1,8 +1,8 @@
 import { RouteStore } from "./types";
 import * as changeStartOrDestinationStop from "./change/changeStartOrDestinationStop";
-import * as calculateNewRoute from "./change//calculation/calculateNewRoute";
+import * as calculateNewRoute from "./calculation/calculateNewRoute";
 import routeReducer, { setDestinationStop, setStartStop, stopClicked } from "./routeReducer";
-import { AnyAction, PayloadAction } from "@reduxjs/toolkit";
+import { AnyAction } from "@reduxjs/toolkit";
 
 describe("routeReducer", () => {
 

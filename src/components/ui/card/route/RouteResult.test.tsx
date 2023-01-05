@@ -5,7 +5,7 @@ import RouteResult from "./RouteResult";
 import * as routeResponseCompressor from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 import store, { RootState } from "../../../../reducers";
-import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 
 // TODO: ignored tests fail because we cannot modify read only state that getState() returns. Figure out another way to do this
 describe("RouteResult", () => {
