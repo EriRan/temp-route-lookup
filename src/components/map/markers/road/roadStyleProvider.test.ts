@@ -12,7 +12,7 @@ import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 describe("roadStyleProvider", () => {
   test("Road with no lines and no calculation done", () => {
     const calculationDone = false;
-    const styleObjects = provideStyles(calculationDone); //No parameters because both of them can be undefined
+    const styleObjects = provideStyles(calculationDone, []); //No parameters because both of them can be undefined
     expect(styleObjects).toBeInstanceOf(Array);
     expect(styleObjects).toHaveLength(1);
 
@@ -26,7 +26,7 @@ describe("roadStyleProvider", () => {
    */
   test("Road with no lines and calculation done", () => {
     const calculationDone = true;
-    const styleObjects = provideStyles(calculationDone); //No parameters because both of them can be undefined
+    const styleObjects = provideStyles(calculationDone, []); //No parameters because both of them can be undefined
     expect(styleObjects).toBeInstanceOf(Array);
     expect(styleObjects).toHaveLength(1);
 

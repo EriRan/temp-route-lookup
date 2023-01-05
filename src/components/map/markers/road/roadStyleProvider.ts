@@ -21,15 +21,9 @@ import { ResponseSegment } from "../../../../reducers/route/calculation/types";
  */
 export function provideStyles(
   calculationDone: boolean,
-  includesLines?: string[],
+  includesLines: string[],
   calculatedRouteNode?: ResponseSegment
 ): Array<RoadStyle> {
-  if (!Array.isArray(includesLines)) {
-    console.error(
-      "Received non array for included lines. Returning an unused road!"
-    );
-    return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
-  }
   if (includesLines.length === 0) {
     return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
