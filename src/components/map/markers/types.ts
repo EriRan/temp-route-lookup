@@ -1,5 +1,5 @@
 import { BusStopLocation, MapProps } from "../types";
 
-export interface TrafficMapProps extends MapProps {
+export interface BusTrafficContainerProps extends MapProps {
   busStopLocationMap: Map<string, BusStopLocation>;
 }

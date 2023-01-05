@@ -1,12 +1,11 @@
 import React from "react";
 
 import BusStop from "./stop/BusStop";
-import "./TrafficNetworkContainer.css";
 import RoadContainer from "./road/RoadContainer";
-import { TrafficMapProps } from "./types";
+import { BusTrafficContainerProps } from "./types";
 import { BusStopLocation } from "../types";
 
-class BusTrafficContainer extends React.Component<TrafficMapProps, {}> {
+class BusTrafficContainer extends React.Component<BusTrafficContainerProps, {}> {
   render() {
     return (
       <g className="bus-traffic-container">{this.renderTrafficNetwork()}</g>

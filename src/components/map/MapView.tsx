@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import TrafficNetworkContainer from "./markers/TrafficNetworkContainer";
+import BusTrafficContainer from "./markers/BusTrafficContainer";
 import { provideBusStopLocations } from "./markers/stop/location/busStopLocationProvider";
 import { MAP_PADDING } from "./MapViewConstant";
 import "./MapView.css";
@@ -18,7 +18,7 @@ class MapView extends React.Component<MapProps, {}> {
           width={busStopLocations.xMax + MAP_PADDING}
           height={busStopLocations.yMax + MAP_PADDING}
         >
-          <TrafficNetworkContainer
+          <BusTrafficContainer
             stopMap={this.props.stopMap}
             busStopLocationMap={busStopLocations.busStopLocationMap}
           />
