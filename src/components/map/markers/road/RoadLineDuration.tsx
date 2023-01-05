@@ -1,14 +1,10 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { BusStopLocation } from "../../types";
 import { RoadDurationProps } from "./types";
 
-class RoadLineDuration extends React.Component<RoadDurationProps, {}> {
-  /**
-   * Render a duration number in the middle of a road line.
-   */
-  render() {
-    const startPointLocation = this.props.startPointLocation;
-    const endPointLocation = this.props.endPointLocation;
+const RoadLineDuration: FunctionComponent<RoadDurationProps> = (props) => {
+  const startPointLocation = props.startPointLocation;
+    const endPointLocation = props.endPointLocation;
     if (!startPointLocation) {
       console.error(
         "Start point location missing! Unable to render road duration!"
@@ -22,74 +18,73 @@ class RoadLineDuration extends React.Component<RoadDurationProps, {}> {
       return null;
     }
     if (startPointLocation.x === endPointLocation.x) {
-      return this.renderTextInMiddleHorizontal(
+      return renderTextInMiddleHorizontal(
         startPointLocation,
         endPointLocation,
-        this.props.duration
+        props.duration
       );
     } else if (startPointLocation.y === endPointLocation.y) {
-      return this.renderTextInMiddleVertical(
+      return renderTextInMiddleVertical(
         startPointLocation,
         endPointLocation,
-        this.props.duration
+        props.duration
       );
     } else {
-      return this.renderTextInMiddleDiagonal(
+      return renderTextInMiddleDiagonal(
         startPointLocation,
         endPointLocation,
-        this.props.duration
+        props.duration
       );
     }
-  }
+}
 
-  renderTextInMiddleHorizontal(
-    startPointLocation: BusStopLocation,
-    endPointLocation: BusStopLocation,
-    duration: number
-  ) {
-    return (
-      <text
-        x={startPointLocation.x}
-        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
-      >
-        {duration}
-      </text>
-    );
-  }
+const renderTextInMiddleHorizontal = (
+  startPointLocation: BusStopLocation,
+  endPointLocation: BusStopLocation,
+  duration: number
+) => {
+  return (
+    <text
+      x={startPointLocation.x}
+      y={calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
+    >
+      {duration}
+    </text>
+  );
+}
 
-  renderTextInMiddleVertical(
-    startPointLocation: BusStopLocation,
-    endPointLocation: BusStopLocation,
-    duration: number
-  ) {
-    return (
-      <text
-        x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
-        y={startPointLocation.y + 5}
-      >
-        {duration}
-      </text>
-    );
-  }
+const renderTextInMiddleVertical = (
+  startPointLocation: BusStopLocation,
+  endPointLocation: BusStopLocation,
+  duration: number
+) => {
+  return (
+    <text
+      x={calculateMidpoint(startPointLocation.x, endPointLocation.x)}
+      y={startPointLocation.y + 5}
+    >
+      {duration}
+    </text>
+  );
+}
 
-  renderTextInMiddleDiagonal(
-    startPointLocation: BusStopLocation,
-    endPointLocation: BusStopLocation,
-    duration: number
-  ) {
-    return (
-      <text
-        x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
-        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
-      >
-        {duration}
-      </text>
-    );
-  }
+const renderTextInMiddleDiagonal = (
+  startPointLocation: BusStopLocation,
+  endPointLocation: BusStopLocation,
+  duration: number
+) => {
+  return (
+    <text
+      x={calculateMidpoint(startPointLocation.x, endPointLocation.x)}
+      y={calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
+    >
+      {duration}
+    </text>
+  );
+}
 
-  calculateMidpoint(startValue: number, endValue: number) {
-    return (startValue + endValue) / 2;
-  }
+const calculateMidpoint = (startValue: number, endValue: number) => {
+  return (startValue + endValue) / 2;
 }
 
 export default RoadLineDuration;
