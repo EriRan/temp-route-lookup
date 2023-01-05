@@ -148,7 +148,7 @@ function validateResponse(
   expect(response.totalDuration).toBeDefined();
   expect(response.totalDuration).toBe(totalDuration);
   expect(response.route).toBeDefined();
-  expect(response.route!.length).toBe(routeSize);
+  expect(response.route.length).toBe(routeSize);
 }
 
 function createStopState(name: string | null): StopState {
