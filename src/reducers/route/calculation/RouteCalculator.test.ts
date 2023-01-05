@@ -1,9 +1,9 @@
 import RouteCalculator from "./RouteCalculator";
 import { CalculationResponse } from "./types";
 import {
-  ALREADY_AT_DESTINATION,
-  UNKNOWN_END_STOP_INPUTED,
-  UNKNOWN_START_STOP_INPUTED,
+  ERROR_ALREADY_AT_DESTINATION,
+  ERROR_UNKNOWN_END_STOP_INPUTED,
+  ERROR_UNKNOWN_START_STOP_INPUTED,
 } from "./ErrorMessageConstant";
 import TransportDataSingleton from "../../../data/TransportDataSingleton";
 import { StopState } from "../types";
@@ -92,7 +92,7 @@ test("Unknown start stop", () => {
 
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_START_STOP_INPUTED);
 });
 
 test("Unknown end stop", () => {
@@ -106,7 +106,7 @@ test("Unknown end stop", () => {
 
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_END_STOP_INPUTED);
 });
 
 test("Already at the destination", () => {
@@ -120,7 +120,7 @@ test("Already at the destination", () => {
 
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
+  expect(response!.errorMessages).toContain(ERROR_ALREADY_AT_DESTINATION);
 });
 
 test("No start stop provided", () => {

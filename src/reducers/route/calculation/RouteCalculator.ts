@@ -1,5 +1,5 @@
 import { convertCalculation, createErrorResponse } from "./responseConverter";
-import { ERROR_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
+import { ERROR_SEVERE_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
 
 import { CalculationResponse, RouteNode } from "./types";
 import RouteCalculatorInputValidator from "./validation/RouteCalculatorInputValidator";
@@ -53,7 +53,7 @@ class RouteCalculator {
       if (!currentNode) {
         //Error scenario when lowest duration node is not found for some reason. findLowestDurationNode does a
         //console.error already so no need to do it again in here
-        return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
+        return createErrorResponse(ERROR_SEVERE_DURING_ROUTE_SEARCH);
       }
       //Remove a node from the unsettled ones
       removeNode(currentNode.stopData.name, unsettledNodeNames);
@@ -70,7 +70,7 @@ class RouteCalculator {
             console.error(
               "Adjacent node does not exist. Node was: " + road.to.name
             );
-            return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
+            return createErrorResponse(ERROR_SEVERE_DURING_ROUTE_SEARCH);
           }
           calculateNodeVariables(currentNode, road, adjacentNode);
           unsettledNodeNames.push(adjacentNode.stopData.name);

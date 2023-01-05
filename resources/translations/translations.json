@@ -11,12 +11,12 @@
         "ROUTE_RESULT_WITH_LINE": "linjalla",
         "ROUTE_RESULT_TOTAL_DURATION": "Kesto yhteensä",
         "LOCAL_DEVELOPMENT_VERSION": "Paikallinen kehitysversio",
-        "ROUTE_ERROR_ROUTE_NOT_FOUND": "Reittiä ei löytynyt",
-        "ROUTE_ERROR_ALREADY_AT_DESTINATION": "Olet jo määränpäässäsi",
-        "ROUTE_ERROR_UNKNOWN_START_STOP_INPUTED": "Tuntematon lähtöpaikka",
-        "ROUTE_ERROR_UNKNOWN_END_STOP_INPUTED": "Tuntematon määränpää",
-        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Reitinhaussa tapahtui virhe",
-        "ERROR_DURING_ROUTE_RESPONSE_CONVERSION": "Reitin rakentamisessa tapahtui virhe"
+        "ERROR_ROUTE_NOT_FOUND": "Reittiä ei löytynyt",
+        "ERROR_ALREADY_AT_DESTINATION": "Olet jo määränpäässäsi",
+        "ERROR_UNKNOWN_START_STOP_INPUTED": "Tuntematon lähtöpaikka",
+        "ERROR_UNKNOWN_END_STOP_INPUTED": "Tuntematon määränpää",
+        "ERROR_SEVERE_DURING_ROUTE_SEARCH": "Reitinhaussa tapahtui virhe",
+        "ERROR_SEVERE_DURING_ROUTE_RESPONSE_CONVERSION": "Reitin rakentamisessa tapahtui virhe"
       }
     },
     "en": {
@@ -30,12 +30,12 @@
         "ROUTE_RESULT_WITH_LINE": "with line",
         "ROUTE_RESULT_TOTAL_DURATION": "Total duration",
         "LOCAL_DEVELOPMENT_VERSION": "Local development version",
-        "ROUTE_ERROR_ROUTE_NOT_FOUND": "No route found",
-        "ROUTE_ERROR_ALREADY_AT_DESTINATION": "You are already at your destination",
-        "ROUTE_ERROR_UNKNOWN_START_STOP_INPUTED": "Unknown start point",
-        "ROUTE_ERROR_UNKNOWN_END_STOP_INPUTED": "Unknown destination",
-        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Error encountered during route search",
-        "ERROR_DURING_ROUTE_RESPONSE_CONVERSION": "Error encountered during route building"
+        "ERROR_ROUTE_NOT_FOUND": "No route found",
+        "ERROR_ALREADY_AT_DESTINATION": "You are already at your destination",
+        "ERROR_UNKNOWN_START_STOP_INPUTED": "Unknown start point",
+        "ERROR_UNKNOWN_END_STOP_INPUTED": "Unknown destination",
+        "ERROR_SEVERE_DURING_ROUTE_SEARCH": "Error encountered during route search",
+        "ERROR_SEVERE_DURING_ROUTE_RESPONSE_CONVERSION": "Error encountered during route building"
       }
     }
   },

@@ -1,8 +1,8 @@
 import { StopState } from "../../types";
 import {
-  ALREADY_AT_DESTINATION,
-  UNKNOWN_END_STOP_INPUTED,
-  UNKNOWN_START_STOP_INPUTED,
+  ERROR_ALREADY_AT_DESTINATION,
+  ERROR_UNKNOWN_END_STOP_INPUTED,
+  ERROR_UNKNOWN_START_STOP_INPUTED,
 } from "../ErrorMessageConstant";
 import { RouteNode } from "../types";
 import RouteCalculatorInputValidator from "./RouteCalculatorInputValidator";
@@ -41,7 +41,7 @@ test("Start stop does not exist", () => {
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_START_STOP_INPUTED);
 
   expect(startStopState.hasErrors).toBe(true);
   expect(destinationStopState.hasErrors).toBe(false);
@@ -61,7 +61,7 @@ test("Destination stop does not exist", () => {
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_END_STOP_INPUTED);
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(true);
@@ -80,8 +80,8 @@ test("Destination or start stop don't exist", () => {
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(2);
-  expect(response!.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
-  expect(response!.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_START_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_END_STOP_INPUTED);
 
   expect(startStopState.hasErrors).toBe(true);
   expect(destinationStopState.hasErrors).toBe(true);
@@ -101,7 +101,7 @@ test("Start and destination stops are the same", () => {
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
+  expect(response!.errorMessages).toContain(ERROR_ALREADY_AT_DESTINATION);
 
   //They aren't strictly wrong so both are false...? Reconsider this
   expect(startStopState.hasErrors).toBe(false);
@@ -122,7 +122,7 @@ test("Start and destination stops are the same even if they have different casin
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(1);
-  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
+  expect(response!.errorMessages).toContain(ERROR_ALREADY_AT_DESTINATION);
 
   //They aren't strictly wrong so both are false...? Reconsider this
   expect(startStopState.hasErrors).toBe(false);
@@ -142,9 +142,9 @@ test("Start and destination stops are the same and they do not exist", () => {
   expect(response).toBeDefined();
   expect(response!.errorMessages).toBeDefined();
   expect(response!.errorMessages.length).toBe(3);
-  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
-  expect(response!.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
-  expect(response!.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_ALREADY_AT_DESTINATION);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_START_STOP_INPUTED);
+  expect(response!.errorMessages).toContain(ERROR_UNKNOWN_END_STOP_INPUTED);
 
   expect(startStopState.hasErrors).toBe(true);
   expect(destinationStopState.hasErrors).toBe(true);

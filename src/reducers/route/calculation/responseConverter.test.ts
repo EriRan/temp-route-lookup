@@ -1,15 +1,15 @@
 import { convertCalculation } from "./responseConverter";
 
-import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
 import { RouteNode } from "./types";
 import { Road } from "../../../data/mapper/types";
+import { ERROR_ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
 
 test("Route not found error", () => {
   const nodes: RouteNode[] = [];
   const startStop = "A";
   const response = convertCalculation(startStop, nodes);
   expect(response).toBeDefined();
-  expect(response.errorMessages).toContain(ROUTE_NOT_FOUND);
+  expect(response.errorMessages).toContain(ERROR_ROUTE_NOT_FOUND);
 });
 
 test("Valid route", () => {

@@ -1,7 +1,7 @@
 import { Road } from "../../../data/mapper/types";
 import {
-  ERROR_DURING_ROUTE_RESPONSE_CONVERSION,
-  ROUTE_NOT_FOUND,
+  ERROR_SEVERE_DURING_ROUTE_RESPONSE_CONVERSION,
+  ERROR_ROUTE_NOT_FOUND,
 } from "./ErrorMessageConstant";
 import {
   CalculationResponse,
@@ -18,11 +18,11 @@ export function convertCalculation(
   nodes: RouteNode[]
 ): CalculationResponse {
   if (nodes.length === 0) {
-    return createErrorResponse(ROUTE_NOT_FOUND);
+    return createErrorResponse(ERROR_ROUTE_NOT_FOUND);
   }
   const route = buildRoute(startStop, nodes);
   if (!route.length) {
-    return createErrorResponse(ERROR_DURING_ROUTE_RESPONSE_CONVERSION);
+    return createErrorResponse(ERROR_SEVERE_DURING_ROUTE_RESPONSE_CONVERSION);
   }
   return {
     totalDuration: nodes[nodes.length - 1].nodeDuration,

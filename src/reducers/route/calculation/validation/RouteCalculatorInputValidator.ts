@@ -1,8 +1,8 @@
 import { StopState } from "../../types";
 import {
-  ALREADY_AT_DESTINATION,
-  UNKNOWN_END_STOP_INPUTED,
-  UNKNOWN_START_STOP_INPUTED,
+  ERROR_ALREADY_AT_DESTINATION,
+  ERROR_UNKNOWN_END_STOP_INPUTED,
+  ERROR_UNKNOWN_START_STOP_INPUTED,
 } from "../ErrorMessageConstant";
 import { createErrorResponse } from "../responseConverter";
 import { CalculationResponse, RouteNode } from "../types";
@@ -23,11 +23,11 @@ class RouteCalculatorInputValidator {
     
     if (startStopName && !allNodesMap.get(startStopName)) {
       startStop.hasErrors = true;
-      errorResponse.errorMessages.push(UNKNOWN_START_STOP_INPUTED);
+      errorResponse.errorMessages.push(ERROR_UNKNOWN_START_STOP_INPUTED);
     }
     if (destinationStopName && !allNodesMap.get(destinationStopName)) {
       destinationStop.hasErrors = true;
-      errorResponse.errorMessages.push(UNKNOWN_END_STOP_INPUTED);
+      errorResponse.errorMessages.push(ERROR_UNKNOWN_END_STOP_INPUTED);
     }
     if (
       startStopName &&
@@ -35,7 +35,7 @@ class RouteCalculatorInputValidator {
       startStopName === destinationStopName
     ) {
       //Strictly speaking this is not an input error, so hasErrors remains at false
-      errorResponse.errorMessages.push(ALREADY_AT_DESTINATION);
+      errorResponse.errorMessages.push(ERROR_ALREADY_AT_DESTINATION);
     }
 
     if (!errorResponse.errorMessages.length) {
