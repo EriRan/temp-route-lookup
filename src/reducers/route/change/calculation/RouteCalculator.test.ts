@@ -38,9 +38,9 @@ test("Optimal route is deduced", () => {
   expect(destinationStopState.hasErrors).toBe(false);
 
   validateResponse(response!, 11, 3);
-  expect(response!.route!.get("A-B")!.line).toBe("Vihreä");
-  expect(response!.route!.get("B-D")!.line).toBe("Vihreä");
-  expect(response!.route!.get("D-R")!.line).toBe("Punainen");
+  expect(response!.route!.find(segment => segment.id === "A-B")!.line).toBe("Vihreä");
+  expect(response!.route!.find(segment => segment.id === "B-D")!.line).toBe("Vihreä");
+  expect(response!.route!.find(segment => segment.id === "D-R")!.line).toBe("Punainen");
 });
 
 /**
@@ -148,7 +148,7 @@ function validateResponse(
   expect(response.totalDuration).toBeDefined();
   expect(response.totalDuration).toBe(totalDuration);
   expect(response.route).toBeDefined();
-  expect(response.route!.size).toBe(routeSize);
+  expect(response.route!.length).toBe(routeSize);
 }
 
 function createStopState(name: string | null): StopState {

@@ -1,4 +1,4 @@
-import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 import { compressResponse } from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 
@@ -55,8 +55,9 @@ describe("routeResponseCompressor", () => {
     fromName: string,
     toName: string,
     line: string
-  ): ResponseDirection {
+  ): ResponseSegment {
     return {
+      id: fromName + "-" + toName,
       from: fromName,
       to: toName,
       line: line,

@@ -52,8 +52,8 @@ class RoadContainer extends React.Component<Props, {}> {
       return null;
     }
     if (this.hasRouteBeenCalculated(calculatedRoute)) {
-      const calculatedRouteNode = calculatedRoute!.route.get(
-        road.from.name + "-" + road.to.name
+      const calculatedRouteNode = calculatedRoute!.route.find(
+        segment => segment.id === road.from.name + "-" + road.to.name
       );
       return (
         <RoadLine
@@ -87,7 +87,7 @@ class RoadContainer extends React.Component<Props, {}> {
       calculatedRoute &&
       calculatedRoute.totalDuration &&
       calculatedRoute.totalDuration > 0 &&
-      calculatedRoute.route.size
+      calculatedRoute.route.length
     );
   }
 }

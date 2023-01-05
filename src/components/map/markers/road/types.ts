@@ -1,11 +1,11 @@
 import { Road } from "../../../../data/mapper/types";
-import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 import { BusStopLocation } from "../../types";
 
 export type RoadLineProps = {
   roadData: Road;
   calculationDone: boolean;
-  calculatedRouteNode?: ResponseDirection;
+  calculatedRouteNode?: ResponseSegment;
   startPointLocation?: BusStopLocation;
   endPointLocation?: BusStopLocation;
   includesLines?: Array<String>;

@@ -11,8 +11,8 @@ import { RootState } from "../../../../reducers";
 
 /**
  * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead
- * @param props 
- * @returns 
+ * @param props
+ * @returns
  */
 const RouteResult = (props: Props) => {
   const { t } = useTranslation();
@@ -27,19 +27,19 @@ const RouteResult = (props: Props) => {
         <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
       );
     }
-    if (!calculatedRoute.route.size) {
+    if (!calculatedRoute.route.length) {
       return <div />;
     }
 
-    const compressedRouteData = compressResponse(
-      Array.from(calculatedRoute.route.values())
-    ).map((stopRoute) => {
-      return (
-        <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
+    const compressedRouteData = compressResponse(calculatedRoute.route).map(
+      (stopRoute) => {
+        return (
+          <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
             {renderRouteDescription(stopRoute)}
-        </Typography>
-      );
-    });
+          </Typography>
+        );
+      }
+    );
     return (
       <div>
         {compressedRouteData}
@@ -52,11 +52,19 @@ const RouteResult = (props: Props) => {
   }
 
   function renderRouteDescription(stopRoute: CompressedRoute) {
-    return stopRoute.from + "→" + stopRoute.to + " " + t("ROUTE_RESULT_WITH_LINE") + " " + stopRoute.line
+    return (
+      stopRoute.from +
+      "→" +
+      stopRoute.to +
+      " " +
+      t("ROUTE_RESULT_WITH_LINE") +
+      " " +
+      stopRoute.line
+    );
   }
 
   function renderTotalDuration(totalDuration: number | null) {
-    return t("ROUTE_RESULT_TOTAL_DURATION") + ":" + totalDuration
+    return t("ROUTE_RESULT_TOTAL_DURATION") + ":" + totalDuration;
   }
 };
 

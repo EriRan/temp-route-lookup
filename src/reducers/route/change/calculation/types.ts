@@ -18,7 +18,7 @@ export type UsedLineRouteNode = {
 
 export type CalculationResponse = {
   totalDuration: number | null;
-  route: Map<string, ResponseDirection>;
+  route: Array<ResponseSegment>;
   errorMessages: Array<string>;
 };
 
@@ -26,10 +26,9 @@ export type RouteKey = string; //Todo: Have this as a full object instead to mak
 
 /**
  * One stretch of the calculated journey. Points from one stop to another using one line.
- *
- * Todo: The name could be better. Give this some more thought
  */
-export type ResponseDirection = {
+export type ResponseSegment = {
+  id: string // Combination of start point and end point of the segment.
   from: string;
   to: string;
   line: string | null;

@@ -7,7 +7,7 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { BLUE_LINE, RED_LINE, GREEN_LINE, YELLOW_LINE } from "./KnownLines";
-import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 
 describe("roadStyleProvider", () => {
   test("Road with no lines and no calculation done", () => {
@@ -52,7 +52,8 @@ describe("roadStyleProvider", () => {
   test("Has lines, route is calculated but not for current route node", () => {
     const calculationDone = true;
     const includesLines = [RED_LINE, BLUE_LINE];
-    const calculatedRouteNode: ResponseDirection = {
+    const calculatedRouteNode: ResponseSegment = {
+      id: "A-B",
       from: "A",
       to: "B",
       line: GREEN_LINE,
@@ -76,7 +77,8 @@ describe("roadStyleProvider", () => {
   test("Has lines, route is calculated but not for current route node with yellow special case", () => {
     const calculationDone = true;
     const includesLines = [YELLOW_LINE];
-    const calculatedRouteNode: ResponseDirection = {
+    const calculatedRouteNode: ResponseSegment = {
+      id: "A-B",
       from: "A",
       to: "B",
       line: RED_LINE,
@@ -99,7 +101,8 @@ describe("roadStyleProvider", () => {
   test("Has lines, route is calculated for current node", () => {
     const calculationDone = true;
     const includesLines = [RED_LINE, BLUE_LINE];
-    const calculatedRouteNode: ResponseDirection = {
+    const calculatedRouteNode: ResponseSegment = {
+      id: "A-B",
       from: "A",
       to: "B",
       line: RED_LINE,

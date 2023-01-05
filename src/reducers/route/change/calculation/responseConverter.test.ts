@@ -25,13 +25,13 @@ test("Valid route", () => {
   expect(response.errorMessages).toBeDefined();
   expect(response.errorMessages.length).toBe(0);
   expect(response.totalDuration).toBe(12);
-  expect(response.route).toBeInstanceOf(Map);
+  expect(response.route).toBeInstanceOf(Array);
 
   //Validate keys created from paths between stops exist
-  expect(response.route!.get("A-B")).toBeDefined();
-  expect(response.route!.get("B-C")).toBeDefined();
-  expect(response.route!.get("C-D")).toBeDefined();
-  expect(response.route!.get("D-E")).toBeDefined();
+  expect(response.route!.find(segment => segment.id === "A-B")).toBeDefined();
+  expect(response.route!.find(segment => segment.id === "B-C")).toBeDefined();
+  expect(response.route!.find(segment => segment.id === "C-D")).toBeDefined();
+  expect(response.route!.find(segment => segment.id === "D-E")).toBeDefined();
 });
 
 /**

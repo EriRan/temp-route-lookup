@@ -5,10 +5,10 @@ import RouteResult from "./RouteResult";
 import * as routeResponseCompressor from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 import store, { RootState } from "../../../../reducers";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 
 // TODO: ignored tests fail because we cannot modify read only state that getState() returns. Figure out another way to do this
 describe("RouteResult", () => {
-
   let testStore: Store<RootState, AnyAction>;
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe("RouteResult", () => {
   xtest("Renders empty div when calculated route has no route", () => {
     testStore.getState().route.calculatedRoute = {
       totalDuration: 1,
-      route: new Map(),
+      route: [],
       errorMessages: [],
     };
     const component = renderer.create(
@@ -42,8 +42,14 @@ describe("RouteResult", () => {
   });
 
   xtest("Renders route when calculatedRoute has content", () => {
-    const route = new Map();
-    route.set("asd", "asd");
+    const route: ResponseSegment[] = [];
+    route.push({
+      id: "A-B",
+      from: "A",
+      to: "B",
+      line: "Keltainen",
+      duration: 1,
+    });
     testStore.getState().route.calculatedRoute = {
       totalDuration: 1,
       route: route,

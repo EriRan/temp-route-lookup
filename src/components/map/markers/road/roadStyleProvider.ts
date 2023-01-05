@@ -6,7 +6,7 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { BLUE_LINE, GREEN_LINE, RED_LINE, YELLOW_LINE } from "./KnownLines";
-import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 import { RoadStyle } from "./types";
 
 /**
@@ -22,7 +22,7 @@ import { RoadStyle } from "./types";
 export function provideStyles(
   calculationDone: boolean,
   includesLines?: string[],
-  calculatedRouteNode?: ResponseDirection
+  calculatedRouteNode?: ResponseSegment
 ): Array<RoadStyle> {
   if (!Array.isArray(includesLines)) {
     console.error(
@@ -38,7 +38,7 @@ export function provideStyles(
   function deduceFromLines(
     calculationDone: boolean,
     includesLines: string[],
-    calculatedRouteNode?: ResponseDirection
+    calculatedRouteNode?: ResponseSegment
   ) {
     const arrayResponse = new Array<RoadStyle>();
     includesLines.forEach((lineName) => {
@@ -52,7 +52,7 @@ export function provideStyles(
   function deduceOneLineStyle(
     calculationDone: boolean,
     lineName: string,
-    calculatedRouteNode?: ResponseDirection
+    calculatedRouteNode?: ResponseSegment
   ) {
     return returnColorDependingOnLine(
       lineName,
@@ -82,7 +82,7 @@ export function provideStyles(
   function deduceCorrectOpacity(
     calculationDone: boolean,
     lineName: string,
-    calculatedRouteNode?: ResponseDirection
+    calculatedRouteNode?: ResponseSegment
   ): number {
     if (
       !calculationDone ||

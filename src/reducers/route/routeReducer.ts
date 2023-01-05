@@ -17,18 +17,17 @@ const routeSlice = createSlice({
   initialState,
   reducers: {
     setStartStop(state, action: PayloadAction<Payload>) {
-      // TODO: Not 100% sure whether Immer works inside this function. Verify this
       state.startStop = action.payload;
-      calculateNewRoute(state);
+      state.calculatedRoute = calculateNewRoute(state);
     },
     setDestinationStop(state, action: PayloadAction<Payload>) {
-      // TODO: Not 100% sure whether Immer works inside this function. Verify this
       state.destinationStop = action.payload;
-      calculateNewRoute(state);
+      state.calculatedRoute = calculateNewRoute(state);
     },
     stopClicked(state, action: PayloadAction<Payload>) {
-      // TODO: Not 100% sure whether Immer works inside this function. Verify this
-      changeStartOrDestination(state, action.payload);
+      // TODO: Split start or destination set and calculation into their own flows
+      const calculationResult = changeStartOrDestination(state, action.payload);
+      state.calculatedRoute = calculationResult;
     },
   },
 });

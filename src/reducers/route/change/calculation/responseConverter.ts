@@ -1,9 +1,12 @@
 import { Road } from "../../../../data/mapper/types";
 
-import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
+import {
+  ERROR_DURING_ROUTE_RESPONSE_CONVERSION,
+  ROUTE_NOT_FOUND,
+} from "./ErrorMessageConstant";
 import {
   CalculationResponse,
-  ResponseDirection,
+  ResponseSegment,
   RouteKey,
   RouteNode,
 } from "./types";
@@ -18,20 +21,32 @@ export function convertCalculation(
   if (nodes.length === 0) {
     return createErrorResponse(ROUTE_NOT_FOUND);
   }
+  const route = buildRoute(startStop, nodes);
+  if (!route.length) {
+    return createErrorResponse(ERROR_DURING_ROUTE_RESPONSE_CONVERSION);
+  }
   return {
     totalDuration: nodes[nodes.length - 1].nodeDuration,
-    route: buildRoute(startStop, nodes),
+    route: route,
     errorMessages: [],
   };
 
-  function buildRoute(startStop: string, nodes: RouteNode[]) {
-    const route = new Map();
+  function buildRoute(
+    startStop: string,
+    nodes: RouteNode[]
+  ): ResponseSegment[] {
+    const route: ResponseSegment[] = [];
     for (let i = 0; i < nodes.length; i++) {
       let currentNode = nodes[i];
       if (i === 0) {
-        route.set(
-          createStartStopKey(startStop, currentNode),
+        const createdKey = createStartStopKey(startStop, currentNode);
+        if (!createdKey) {
+          // Conversion failed due to no stop names available
+          return [];
+        }
+        route.push(
           createOneDirection(
+            createdKey,
             startStop,
             currentNode.stopData.name,
             currentNode.selectedLine,
@@ -40,9 +55,14 @@ export function convertCalculation(
         );
       } else {
         let previousNode = nodes[i - 1];
-        route.set(
-          createKey(previousNode, currentNode),
+        const createdKey = createKey(previousNode, currentNode);
+        if (!createdKey) {
+          // Conversion failed due to no stop names available
+          return [];
+        }
+        route.push(
           createOneDirection(
+            createdKey,
             previousNode.stopData.name,
             currentNode.stopData.name,
             currentNode.selectedLine,
@@ -87,11 +107,12 @@ export function convertCalculation(
   }
 
   function createOneDirection(
+    id: string,
     from: string,
     to: string,
     line: string | null, //Is not normally null except when the values provided are broken
     duration: number | null
-  ): ResponseDirection {
+  ): ResponseSegment {
     if (!line) {
       console.error(
         "Encountered null line when creating one direction for " +
@@ -101,6 +122,7 @@ export function convertCalculation(
       );
     }
     return {
+      id: id,
       from: from,
       to: to,
       line: line,
@@ -114,13 +136,13 @@ export function createErrorResponse(
   if (!errorMessage) {
     return {
       totalDuration: null,
-      route: new Map(),
+      route: [],
       errorMessages: [],
     };
   }
   return {
     totalDuration: null,
-    route: new Map(),
+    route: [],
     errorMessages: new Array<string>(errorMessage),
   };
 }

@@ -3,7 +3,7 @@ import { changeStartOrDestination } from "./stopsStateChangeDeducer";
 
 test("Payload equal to start stop sets start to null", () => {
   const state = createCurrentState("A", "B");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("A", false)
   );
@@ -13,11 +13,12 @@ test("Payload equal to start stop sets start to null", () => {
   expect(state.startStop.name).toBeNull();
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
+  expect(calculatedResult).toBeNull();
 });
 
 test("Payload equal to start stop considered equal even if casings arent the same", () => {
   const state = createCurrentState("A", "B");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("a", false)
   );
@@ -27,11 +28,12 @@ test("Payload equal to start stop considered equal even if casings arent the sam
   expect(state.startStop.name).toBeNull();
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
+  expect(calculatedResult).toBeNull();
 });
 
 test("Payload equal to destination stop sets destination to null", () => {
   const state = createCurrentState("A", "B");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("B", false)
   );
@@ -41,11 +43,12 @@ test("Payload equal to destination stop sets destination to null", () => {
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBeNull();
+  expect(calculatedResult).toBeNull();
 });
 
 test("Payload equal to destination stop considered equal even if casings arent the same", () => {
   const state = createCurrentState("A", "b");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("B", false)
   );
@@ -55,11 +58,12 @@ test("Payload equal to destination stop considered equal even if casings arent t
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBeNull();
+  expect(calculatedResult).toBeNull();
 });
 
 test("Do nothing if payload has an error", () => {
   const state = createCurrentState("A", "B");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("B", true)
   );
@@ -69,13 +73,14 @@ test("Do nothing if payload has an error", () => {
   expect(state.startStop!.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
+  expect(calculatedResult).toBeNull();
 });
 
 test("Set new destination if both start and destination in state and new destination is not equal to either", () => {
   //Would be nice to mock the calculation function somehow so that it doesn't get called for real.
   //We would then save a few milliseconds.
   const state = createCurrentState("A", "C");
-  changeStartOrDestination(
+  const calculatedResult = changeStartOrDestination(
     state,
     createPayload("B", false)
   );
@@ -85,9 +90,9 @@ test("Set new destination if both start and destination in state and new destina
   expect(state.startStop.name).toBe("A");
   expect(state.destinationStop).toBeDefined();
   expect(state.destinationStop.name).toBe("B");
-  expect(state.calculatedRoute).toBeTruthy(); // Not null and not undefined
-  expect(state.calculatedRoute!.route).toBeDefined();
-  expect(state.calculatedRoute!.totalDuration).toBeDefined();
+  expect(calculatedResult).toBeTruthy(); // Not null and not undefined
+  expect(calculatedResult!.route).toBeDefined();
+  expect(calculatedResult!.totalDuration).toBeDefined();
 });
 
 function createCurrentState(

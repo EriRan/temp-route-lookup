@@ -1,4 +1,4 @@
-import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { ResponseSegment } from "../../../../reducers/route/change/calculation/types";
 import { UNKNOWN_LINE_TEXT } from "./CompressedRouteConstant";
 import { CompressedRoute } from "./types";
 
@@ -6,7 +6,7 @@ import { CompressedRoute } from "./types";
  * Compress results of the route calculation to smaller size by making stops point to the stop at which we must change line or the calculated route ends there.
  */
 export function compressResponse(
-  routes: Array<ResponseDirection>
+  routes: Array<ResponseSegment>
 ): Array<CompressedRoute> {
   if (!routes) {
     return [];
@@ -15,7 +15,7 @@ export function compressResponse(
   let currentLine: string | null = null;
   let currentLineStartStop: string | null = null;
   for (let i = 0; i < routes.length; i++) {
-    let iteratedRoute: ResponseDirection = routes[i];
+    let iteratedRoute: ResponseSegment = routes[i];
     let isLast = isLastRoute(i, routes);
     if (!currentLineStartStop) {
       currentLine = iteratedRoute.line;
@@ -38,7 +38,7 @@ export function compressResponse(
   return compressedResponse;
 
   function addLastRoutes(
-    iteratedRoute: ResponseDirection,
+    iteratedRoute: ResponseSegment,
     currentLineStartStop: string,
     currentLine: string | null
   ) {
@@ -68,7 +68,7 @@ export function compressResponse(
     }
   }
 
-  function isLastRoute(i: number, routes: Array<ResponseDirection>) {
+  function isLastRoute(i: number, routes: Array<ResponseSegment>) {
     return i === routes.length - 1;
   }
 
