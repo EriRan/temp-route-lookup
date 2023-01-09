@@ -1,5 +1,5 @@
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
-import { ROUTE_RESULT_UNKNOWN_LINE } from "./CompressedRouteConstant";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../constant/TranslationKeyConstant";
 import { compressResponse } from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 

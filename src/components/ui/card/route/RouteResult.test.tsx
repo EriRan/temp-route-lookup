@@ -4,7 +4,7 @@ import { CompressedRoute } from "./types";
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 import { renderWithProviders } from "test-utils";
 import { screen } from "@testing-library/react";
-import { ROUTE_RESULT_UNKNOWN_LINE } from "./CompressedRouteConstant";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../constant/TranslationKeyConstant";
 
 describe("RouteResult", () => {
 
