@@ -16,6 +16,9 @@ export type RouteInputEvent = {
   };
 };
 
+/**
+ * Route from one stop to another using a line. In case there is an error, error will hold the translation key for the error message
+ */
 export type CompressedRoute = {
   from: string;
   to: string;
