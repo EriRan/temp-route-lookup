@@ -1,4 +1,8 @@
-import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  PreloadedState,
+} from "@reduxjs/toolkit";
 import languageReducer from "./language/languageReducer";
 import routeReducer from "./route/routeReducer";
 
@@ -8,8 +12,11 @@ const rootReducer = combineReducers({
   language: languageReducer,
 });
 
-// Use Redux Toolkit to setup Redux
-// preloadedState is for injecting a state during tests
+/**
+ * Use Redux Toolkit to setup Redux
+ * @param preloadedState overwrite initial state with a custom one. Needed by component tests
+ * @returns Redux store ready to use by providers
+ */
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: {
@@ -20,7 +27,6 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   });
 };
 
-
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = AppStore["dispatch"];
