@@ -59,12 +59,24 @@ const RouteResult = (props: Props) => {
       " " +
       t("ROUTE_RESULT_WITH_LINE") +
       " " +
-      stopRoute.line
+      getLineName(stopRoute)
     );
   }
 
   function renderTotalDuration(totalDuration: number | null) {
     return t("ROUTE_RESULT_TOTAL_DURATION") + ":" + totalDuration;
+  }
+
+  /**
+   * Return the provided line unless the line name 
+   * @param line 
+   * @returns 
+   */
+  function getLineName(stopRoute: CompressedRoute) {
+    if (stopRoute.error) {
+      return t(stopRoute.error);
+    }
+    return stopRoute.line;
   }
 };
 

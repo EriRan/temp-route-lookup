@@ -1,1 +1,1 @@
-export const UNKNOWN_LINE_TEXT = "Tuntematon";
+export const ROUTE_RESULT_UNKNOWN_LINE = "ROUTE_RESULT_UNKNOWN_LINE";

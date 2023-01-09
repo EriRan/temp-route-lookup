@@ -1,5 +1,5 @@
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
-import { UNKNOWN_LINE_TEXT } from "./CompressedRouteConstant";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "./CompressedRouteConstant";
 import { compressResponse } from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 
@@ -21,10 +21,14 @@ describe("routeResponseCompressor", () => {
 
   test("Unknown line", () => {
     const compressedResponse = compressResponse([
-      createOneRoute("A", "B", null)
+      createOneRoute("A", "B", null),
     ]);
     validateResponse(compressedResponse, 1);
-    validateSingleRoute(compressedResponse[0], "A", "B", UNKNOWN_LINE_TEXT);
+    const singleRoute = compressedResponse[0];
+    expect(singleRoute.from).toBe("A");
+    expect(singleRoute.to).toBe("B");
+    expect(singleRoute.line).toBe("");
+    expect(singleRoute.error).toBe(ROUTE_RESULT_UNKNOWN_LINE);
   });
 
   test("Multiple lines", () => {
@@ -50,6 +54,7 @@ describe("routeResponseCompressor", () => {
     expect(singleRoute.from).toBe(expectedFrom);
     expect(singleRoute.to).toBe(expectedTo);
     expect(singleRoute.line).toBe(expectedLine);
+    expect(singleRoute.error).toBeUndefined();
   }
 
   function validateResponse(

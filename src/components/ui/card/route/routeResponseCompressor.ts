@@ -1,5 +1,5 @@
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
-import { UNKNOWN_LINE_TEXT } from "./CompressedRouteConstant";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "./CompressedRouteConstant";
 import { CompressedRoute } from "./types";
 
 /**
@@ -88,7 +88,8 @@ export function compressResponse(
       return {
         from: currentLineStart,
         to: currentLineEnd,
-        line: UNKNOWN_LINE_TEXT,
+        line: "",
+        error: ROUTE_RESULT_UNKNOWN_LINE
       };
     }
     return {

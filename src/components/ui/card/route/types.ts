@@ -20,4 +20,5 @@ export type CompressedRoute = {
   from: string;
   to: string;
   line: string;
+  error?: string;
 };
