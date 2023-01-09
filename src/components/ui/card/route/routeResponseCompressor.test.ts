@@ -1,4 +1,5 @@
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
+import { UNKNOWN_LINE_TEXT } from "./CompressedRouteConstant";
 import { compressResponse } from "./routeResponseCompressor";
 import { CompressedRoute } from "./types";
 
@@ -16,6 +17,14 @@ describe("routeResponseCompressor", () => {
     ]);
     validateResponse(compressedResponse, 1);
     validateSingleRoute(compressedResponse[0], "A", "C", "line1");
+  });
+
+  test("Unknown line", () => {
+    const compressedResponse = compressResponse([
+      createOneRoute("A", "B", null)
+    ]);
+    validateResponse(compressedResponse, 1);
+    validateSingleRoute(compressedResponse[0], "A", "B", UNKNOWN_LINE_TEXT);
   });
 
   test("Multiple lines", () => {
@@ -54,7 +63,7 @@ describe("routeResponseCompressor", () => {
   function createOneRoute(
     fromName: string,
     toName: string,
-    line: string
+    line: string | null
   ): ResponseSegment {
     return {
       id: fromName + "-" + toName,
