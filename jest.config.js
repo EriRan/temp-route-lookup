@@ -66,9 +66,11 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+   moduleDirectories: [
+     "node_modules",
+     "test", // Test util methods so that we can avoid long import statements. https://testing-library.com/docs/react-testing-library/setup/#configuring-jest-with-test-utils
+     __dirname
+   ],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
@@ -128,7 +130,9 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: [
+    "<rootDir>/test/setupTests.ts"
+  ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

@@ -32,10 +32,10 @@ const RouteResult = (props: Props) => {
     }
 
     const compressedRouteData = compressResponse(calculatedRoute.route).map(
-      (stopRoute) => {
+      (compressedStop) => {
         return (
-          <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            {renderRouteDescription(stopRoute)}
+          <Typography key={`result-stop-${compressedStop.from}-${compressedStop.to}`}>
+            {renderRouteDescription(compressedStop)}
           </Typography>
         );
       }
