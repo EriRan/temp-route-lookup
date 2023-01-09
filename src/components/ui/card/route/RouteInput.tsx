@@ -4,6 +4,7 @@ import { TextField } from "@material-ui/core";
 import { RouteInputEvent, RouteInputProps } from "./types";
 import { Stop } from "../../../../data/mapper/types";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../../../reducers/hooks";
 
 /**
  * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing
@@ -12,6 +13,7 @@ import { useTranslation } from "react-i18next";
  */
 const RouteInput = (props: RouteInputProps) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   return (
     <TextField
       className="center-input"
@@ -45,15 +47,21 @@ const RouteInput = (props: RouteInputProps) => {
     //Some input validation at first
     if (!event.target) {
       console.error("Missing target from event");
-      props.onChangeFunction({
-        name: "",
-        hasErrors: isInputInvalid("", props.stopMap),
+      dispatch({
+        type: props.onChangeFunction.name,
+        payload: {
+          name: "",
+          hasErrors: isInputInvalid("", props.stopMap),
+        },
       });
     }
     if (!event.target.value) {
-      props.onChangeFunction({
-        name: "",
-        hasErrors: isInputInvalid("", props.stopMap),
+      dispatch({
+        type: props.onChangeFunction.name,
+        payload: {
+          name: "",
+          hasErrors: isInputInvalid("", props.stopMap),
+        },
       });
     }
     //Material UI https://material-ui.com/es/guides/typescript/#handling-value-and-event-handlers
@@ -61,11 +69,13 @@ const RouteInput = (props: RouteInputProps) => {
       console.error("Non string input received");
       return;
     }
-
     const value = event.target.value;
-    props.onChangeFunction({
-      name: value,
-      hasErrors: isInputInvalid(value, props.stopMap),
+    dispatch({
+      type: props.onChangeFunction.type,
+      payload: {
+        name: value,
+        hasErrors: isInputInvalid(value, props.stopMap),
+      },
     });
   }
 
