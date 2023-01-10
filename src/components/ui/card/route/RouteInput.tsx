@@ -5,7 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../../reducers/hooks";
 
 /**
- * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing
+ * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing. Is not aware whether it is a input for start or destination, which is why we must pass a stopState to it, which can
+ * contain errors of a start or destination stop
  * @param props
  * @returns
  */
@@ -29,8 +30,8 @@ const RouteInput = (props: RouteInputProps) => {
   );
 
   function getCurrentValue() {
-    if (props.inputStopData && props.inputStopData!.name) {
-      return props.inputStopData!.name;
+    if (props.inputStopData && props.inputStopData.name) {
+      return props.inputStopData.name;
     }
     return "";
   }
@@ -77,10 +78,10 @@ const RouteInput = (props: RouteInputProps) => {
   }
 
   function hasError(): boolean {
-    if (!props.inputStopData || !props.inputStopData?.hasErrors) {
+    if (!props.inputStopData || !props.inputStopData.hasErrors) {
       return false;
     }
-    return props.inputStopData!.hasErrors!;
+    return props.inputStopData.hasErrors!;
   }
 
   function isInputInvalid(input: string, stopMap: Map<string, Stop>) {
