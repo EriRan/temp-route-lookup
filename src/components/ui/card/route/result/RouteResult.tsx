@@ -5,9 +5,9 @@ import { Divider, Typography } from "@material-ui/core";
 import { compressResponse } from "./routeResponseCompressor";
 import RouteResultErrors from "./RouteResultErrors";
 import { useTranslation } from "react-i18next";
-import { CompressedRoute } from "./types";
-import { RootState } from "../../../../reducers";
-import { CalculationResponse } from "../../../../reducers/route/calculation/types";
+import { RootState } from "../../../../../reducers";
+import { CalculationResponse } from "../../../../../reducers/route/calculation/types";
+import { CompressedRoute } from "../types";
 
 /**
  * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead

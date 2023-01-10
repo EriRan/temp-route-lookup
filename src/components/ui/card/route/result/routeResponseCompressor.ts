@@ -1,6 +1,6 @@
-import { ResponseSegment } from "../../../../reducers/route/calculation/types";
-import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../constant/TranslationKeyConstant";
-import { CompressedRoute } from "./types";
+import { ResponseSegment } from "../../../../../reducers/route/calculation/types";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../../constant/TranslationKeyConstant";
+import { CompressedRoute } from "../types";
 
 /**
  * Compress results of the route calculation to smaller size by making stops point to the stop at which we must change line or the calculated route ends there.
@@ -89,7 +89,7 @@ export function compressResponse(
         from: currentLineStart,
         to: currentLineEnd,
         line: "",
-        error: ROUTE_RESULT_UNKNOWN_LINE
+        error: ROUTE_RESULT_UNKNOWN_LINE,
       };
     }
     return {

@@ -1,12 +1,9 @@
-import RouteInput from "./RouteInput";
 import { Typography, Grid } from "@material-ui/core";
-import { Stop } from "../../../../data/mapper/types";
 import { Translation } from "react-i18next";
-import {
-  setDestinationStop,
-  setStartStop,
-} from "../../../../reducers/route/routeReducer";
-import { useAppSelector } from "../../../../reducers/hooks";
+import { Stop } from "../../../../../data/mapper/types";
+import { useAppSelector } from "../../../../../reducers/hooks";
+import { setStartStop, setDestinationStop } from "../../../../../reducers/route/routeReducer";
+import RouteInput from "./input/RouteInput";
 
 const RouteForm = (props: Props) => {
   const startStop = useAppSelector((state) => state.route.startStop);

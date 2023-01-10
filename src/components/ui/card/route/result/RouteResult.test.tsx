@@ -1,10 +1,10 @@
 import RouteResult from "./RouteResult";
 import * as routeResponseCompressor from "./routeResponseCompressor";
-import { CompressedRoute } from "./types";
-import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 import { renderWithProviders } from "test-utils";
 import { screen } from "@testing-library/react";
-import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../constant/TranslationKeyConstant";
+import { ResponseSegment } from "../../../../../reducers/route/calculation/types";
+import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../../constant/TranslationKeyConstant";
+import { CompressedRoute } from "../types";
 
 describe("RouteResult", () => {
 

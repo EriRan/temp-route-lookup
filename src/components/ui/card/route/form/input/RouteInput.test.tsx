@@ -1,9 +1,10 @@
 import { renderWithProviders } from "test-utils";
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import RouteInput from "./RouteInput";
-import { setStartStop } from "../../../../reducers/route/routeReducer";
-import { Stop } from "../../../../data/mapper/types";
-import { StopState } from "../../../../reducers/route/types";
+import { setStartStop } from "../../../../../../reducers/route/routeReducer";
+import { Stop } from "../../../../../../data/mapper/types";
+import { StopState } from "../../../../../../reducers/route/types";
+import userEvent from "@testing-library/user-event";
 
 describe("RouteInput", () => {
   test("Label and stopName visible", () => {
@@ -62,7 +63,6 @@ describe("RouteInput", () => {
     expect(inputTextField).toBeInvalid();
   });
 
-  // TODO: user inputs into the text field test, user inputs into the text field but the stop is not available in the stop map
-
+  
 
 });
