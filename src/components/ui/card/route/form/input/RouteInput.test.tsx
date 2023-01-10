@@ -5,10 +5,10 @@ import { setStartStop } from "../../../../../../reducers/route/routeReducer";
 import { Stop } from "../../../../../../data/mapper/types";
 import { StopState } from "../../../../../../reducers/route/types";
 import userEvent from "@testing-library/user-event";
+import { RouteInputType } from "./RouteInputContant";
 
 describe("RouteInput", () => {
-  test("Label and stopName visible", () => {
-    const testLabel = "testLabel";
+  test("Start stop: Label and stopName visible", () => {
     const stopMap = new Map();
     const stopName = "TestStop";
     const relatedStop: Stop = {
@@ -21,22 +21,33 @@ describe("RouteInput", () => {
     stopMap.set(relatedStop.name, relatedStop);
 
     renderWithProviders(
-      <RouteInput
-        label={testLabel}
-        onChangeFunction={setStartStop}
-        stopMap={stopMap}
-        inputStopData={inputStopData}
-      />
+      <RouteInput type={RouteInputType.START} stopMap={stopMap} />,
+      {
+        preloadedState: {
+          route: {
+            startStop: inputStopData,
+            destinationStop: {
+              name: null,
+            },
+            calculatedRoute: {
+              totalDuration: null,
+              route: [],
+              errorMessages: [],
+            },
+          },
+        },
+      }
     );
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
     // Material UI uses label texts twice
-    expect(screen.queryAllByText(testLabel)).toHaveLength(2);
+    expect(
+      screen.queryAllByText("ROUTE_SEARCH_START_POINT_PLACEHOLDER")
+    ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeValid();
   });
 
-  test("Error in stop state", () => {
-    const testLabel = "testLabel";
+  test("Start stop: Error in stop state", () => {
     const stopMap = new Map();
     const stopName = "wrongStop";
     const relatedStop: Stop = {
@@ -45,24 +56,33 @@ describe("RouteInput", () => {
     };
     const inputStopData: StopState = {
       name: stopName,
-      hasErrors: true
+      hasErrors: true,
     };
     stopMap.set(relatedStop.name, relatedStop);
 
     renderWithProviders(
-      <RouteInput
-        label={testLabel}
-        onChangeFunction={setStartStop}
-        stopMap={stopMap}
-        inputStopData={inputStopData}
-      />
+      <RouteInput type={RouteInputType.START} stopMap={stopMap} />,
+      {
+        preloadedState: {
+          route: {
+            startStop: inputStopData,
+            destinationStop: {
+              name: null,
+            },
+            calculatedRoute: {
+              totalDuration: null,
+              route: [],
+              errorMessages: [],
+            },
+          },
+        },
+      }
     );
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
-    expect(screen.queryAllByText(testLabel)).toHaveLength(2);
+    expect(
+      screen.queryAllByText("ROUTE_SEARCH_START_POINT_PLACEHOLDER")
+    ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeInvalid();
   });
-
-  
-
 });

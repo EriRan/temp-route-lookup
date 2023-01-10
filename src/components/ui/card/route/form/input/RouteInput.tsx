@@ -1,8 +1,13 @@
 import { TextField } from "@material-ui/core";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
 import { Stop } from "../../../../../../data/mapper/types";
-import { useAppDispatch } from "../../../../../../reducers/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../../reducers/hooks";
+import { Payload } from "../../../../../../reducers/language/types";
+import { setDestinationStop, setStartStop } from "../../../../../../reducers/route/routeReducer";
+import { StopState } from "../../../../../../reducers/route/types";
 import { RouteInputProps, RouteInputEvent } from "../../types";
+import { RouteInputType } from "./RouteInputContant";
 
 /**
  * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing. Is not aware whether it is a input for start or destination, which is why we must pass a stopState to it, which can
@@ -13,11 +18,12 @@ import { RouteInputProps, RouteInputEvent } from "../../types";
 const RouteInput = (props: RouteInputProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const stopState = selectStopState(props.type);
   return (
     <TextField
       className="center-input"
-      label={t(props.label)}
-      value={props.inputStopData.name ? props.inputStopData.name : ""}
+      label={deduceLabel(props.type)}
+      value={stopState.name ? stopState.name : ""}
       variant="outlined"
       margin="dense"
       color="primary"
@@ -25,9 +31,48 @@ const RouteInput = (props: RouteInputProps) => {
       //Once the state change is applied here, text input will get the error status
       //from the state
       onChange={handleChange.bind(this)}
-      error={hasError()}
+      error={hasError(stopState)}
     />
   );
+
+  function deduceLabel(type: RouteInputType): string {
+    switch (type) {
+      case RouteInputType.START:
+        return t("ROUTE_SEARCH_START_POINT_PLACEHOLDER");
+      case RouteInputType.DESTINATION:
+        return t("ROUTE_SEARCH_END_POINT_PLACEHOLDER");
+      default:
+        console.error("Unhandled RouteInputType: " + type);
+        return "ERROR";
+    }
+  }
+
+  function selectStopState(type: RouteInputType): StopState {
+    switch (type) {
+      case RouteInputType.START:
+        return useAppSelector((state) => state.route.startStop)
+      case RouteInputType.DESTINATION:
+        return useAppSelector((state) => state.route.destinationStop)
+      default:
+        console.error("Unhandled RouteInputType: " + type);
+        return {
+          name: "",
+          hasErrors: true
+        };
+    }
+  }
+
+  function deduceDispatchType(type: RouteInputType): string {
+    switch (type) {
+      case RouteInputType.START:
+        return setStartStop.type;
+      case RouteInputType.DESTINATION:
+        return setDestinationStop.type;
+      default:
+        console.error("Unhandled RouteInputType: " + type);
+        return ""
+    }
+  }
 
   /**
    * Called when we type into a bus stop name text field
@@ -39,7 +84,7 @@ const RouteInput = (props: RouteInputProps) => {
     if (!event.target) {
       console.error("Missing target from event");
       dispatch({
-        type: props.onChangeFunction.type,
+        type: deduceDispatchType(props.type),
         payload: {
           name: "",
           hasErrors: isInputInvalid("", props.stopMap),
@@ -48,7 +93,7 @@ const RouteInput = (props: RouteInputProps) => {
       return;
     } else if (!event.target.value) {
       dispatch({
-        type: props.onChangeFunction.type,
+        type: deduceDispatchType(props.type),
         payload: {
           name: event.target.value,
           hasErrors: isInputInvalid("", props.stopMap),
@@ -63,7 +108,7 @@ const RouteInput = (props: RouteInputProps) => {
     }
     const value = event.target.value;
     dispatch({
-      type: props.onChangeFunction.type,
+      type: deduceDispatchType(props.type),
       payload: {
         name: value,
         hasErrors: isInputInvalid(value, props.stopMap),
@@ -71,11 +116,11 @@ const RouteInput = (props: RouteInputProps) => {
     });
   }
 
-  function hasError(): boolean {
-    if (!props.inputStopData || !props.inputStopData.hasErrors) {
+  function hasError(stopState: StopState): boolean {
+    if (!stopState.hasErrors) {
       return false;
     }
-    return props.inputStopData.hasErrors!;
+    return stopState.hasErrors!;
   }
 
   function isInputInvalid(input: string, stopMap: Map<string, Stop>) {

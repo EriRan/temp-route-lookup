@@ -1,12 +1,9 @@
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { Stop } from "../../../../data/mapper/types";
-import { Payload, StopState } from "../../../../reducers/route/types";
+import { RouteInputType } from "./form/input/RouteInputContant";
 
 export type RouteInputProps = {
-  label: string;
-  onChangeFunction: ActionCreatorWithPayload<Payload, string>;
+  type: RouteInputType;
   stopMap: Map<string, Stop>;
-  inputStopData: StopState; // StopState of either start or destination stop
 };
 
 export type RouteInputEvent = {
