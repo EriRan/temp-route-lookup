@@ -17,7 +17,7 @@ const RouteInput = (props: RouteInputProps) => {
     <TextField
       className="center-input"
       label={t(props.label)}
-      value={getCurrentValue()}
+      value={props.inputStopData.name ? props.inputStopData.name : ""}
       variant="outlined"
       margin="dense"
       color="primary"
@@ -29,13 +29,6 @@ const RouteInput = (props: RouteInputProps) => {
     />
   );
 
-  function getCurrentValue() {
-    if (props.inputStopData && props.inputStopData.name) {
-      return props.inputStopData.name;
-    }
-    return "";
-  }
-
   /**
    * Called when we type into a bus stop name text field
    * @param event
@@ -46,24 +39,25 @@ const RouteInput = (props: RouteInputProps) => {
     if (!event.target) {
       console.error("Missing target from event");
       dispatch({
-        type: props.onChangeFunction.name,
+        type: props.onChangeFunction.type,
         payload: {
           name: "",
           hasErrors: isInputInvalid("", props.stopMap),
         },
       });
-    }
-    if (!event.target.value) {
+      return;
+    } else if (!event.target.value) {
       dispatch({
-        type: props.onChangeFunction.name,
+        type: props.onChangeFunction.type,
         payload: {
-          name: "",
+          name: event.target.value,
           hasErrors: isInputInvalid("", props.stopMap),
         },
       });
+      return;
     }
     //Material UI https://material-ui.com/es/guides/typescript/#handling-value-and-event-handlers
-    if (typeof event.target.value !== "string") {
+    else if (typeof event.target.value !== "string") {
       console.error("Non string input received");
       return;
     }

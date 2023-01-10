@@ -6,12 +6,12 @@ export type RouteInputProps = {
   label: string;
   onChangeFunction: ActionCreatorWithPayload<Payload, string>;
   stopMap: Map<string, Stop>;
-  inputStopData: StopState | null; // StopState of either start or destination stop
+  inputStopData: StopState; // StopState of either start or destination stop
 };
 
 export type RouteInputEvent = {
-  target: {
-    value: unknown;
+  target?: {
+    value?: unknown;
   };
 };
 
