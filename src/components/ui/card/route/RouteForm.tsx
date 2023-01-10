@@ -19,7 +19,6 @@ const RouteForm = (props: Props) => {
       </Typography>
       <RouteInput
         label="ROUTE_SEARCH_START_POINT_PLACEHOLDER"
-        autoFocus={true}
         onChangeFunction={setStartStop}
         stopMap={props.stopMap}
         inputStopData={startStop}

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TextField } from "@material-ui/core";
 import { RouteInputEvent, RouteInputProps } from "./types";
 import { Stop } from "../../../../data/mapper/types";
@@ -18,7 +16,6 @@ const RouteInput = (props: RouteInputProps) => {
     <TextField
       className="center-input"
       label={t(props.label)}
-      autoFocus={props.autoFocus}
       value={getCurrentValue()}
       variant="outlined"
       margin="dense"

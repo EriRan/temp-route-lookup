@@ -7,7 +7,6 @@ export type RouteInputProps = {
   onChangeFunction: ActionCreatorWithPayload<Payload, string>;
   stopMap: Map<string, Stop>;
   inputStopData: StopState | null;
-  autoFocus?: boolean;
 };
 
 export type RouteInputEvent = {
