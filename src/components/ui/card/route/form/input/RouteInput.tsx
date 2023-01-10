@@ -1,10 +1,14 @@
 import { TextField } from "@material-ui/core";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
 import { Stop } from "../../../../../../data/mapper/types";
-import { useAppDispatch, useAppSelector } from "../../../../../../reducers/hooks";
-import { Payload } from "../../../../../../reducers/language/types";
-import { setDestinationStop, setStartStop } from "../../../../../../reducers/route/routeReducer";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../../reducers/hooks";
+import {
+  setDestinationStop,
+  setStartStop,
+} from "../../../../../../reducers/route/routeReducer";
 import { StopState } from "../../../../../../reducers/route/types";
 import { RouteInputProps, RouteInputEvent } from "../../types";
 import { RouteInputType } from "./RouteInputContant";
@@ -50,29 +54,18 @@ const RouteInput = (props: RouteInputProps) => {
   function selectStopState(type: RouteInputType): StopState {
     switch (type) {
       case RouteInputType.START:
-        return useAppSelector((state) => state.route.startStop)
+        return useAppSelector((state) => state.route.startStop);
       case RouteInputType.DESTINATION:
-        return useAppSelector((state) => state.route.destinationStop)
+        return useAppSelector((state) => state.route.destinationStop);
       default:
         console.error("Unhandled RouteInputType: " + type);
         return {
           name: "",
-          hasErrors: true
+          hasErrors: true,
         };
     }
   }
 
-  function deduceDispatchType(type: RouteInputType): string {
-    switch (type) {
-      case RouteInputType.START:
-        return setStartStop.type;
-      case RouteInputType.DESTINATION:
-        return setDestinationStop.type;
-      default:
-        console.error("Unhandled RouteInputType: " + type);
-        return ""
-    }
-  }
 
   /**
    * Called when we type into a bus stop name text field
@@ -116,11 +109,23 @@ const RouteInput = (props: RouteInputProps) => {
     });
   }
 
+  function deduceDispatchType(type: RouteInputType): string {
+    switch (type) {
+      case RouteInputType.START:
+        return setStartStop.type;
+      case RouteInputType.DESTINATION:
+        return setDestinationStop.type;
+      default:
+        console.error("Unhandled RouteInputType: " + type);
+        return "";
+    }
+  }
+
   function hasError(stopState: StopState): boolean {
     if (!stopState.hasErrors) {
       return false;
     }
-    return stopState.hasErrors!;
+    return stopState.hasErrors;
   }
 
   function isInputInvalid(input: string, stopMap: Map<string, Stop>) {
