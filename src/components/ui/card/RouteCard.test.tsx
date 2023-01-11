@@ -2,6 +2,15 @@ import { renderWithProviders } from "test-utils";
 import RouteCard from "./RouteCard";
 import { screen } from "@testing-library/react";
 import { ResponseSegment } from "../../../reducers/route/calculation/types";
+import {
+  ROUTE_RESULT_TOTAL_DURATION,
+  ROUTE_RESULT_WITH_LINE,
+  ROUTE_SEARCH_END_POINT_HEADER,
+  ROUTE_SEARCH_END_POINT_PLACEHOLDER,
+  ROUTE_SEARCH_HEADER,
+  ROUTE_SEARCH_START_POINT_HEADER,
+  ROUTE_SEARCH_START_POINT_PLACEHOLDER,
+} from "../../constant/TranslationKeyConstant";
 
 /**
  * Higher level test, so do just quick verification that some elements exist inside this element. Leave more detailed testing to component's own tests
@@ -17,24 +26,20 @@ describe("RouteCard", () => {
       />
     );
 
-    expect(screen.getByText(/ROUTE_SEARCH_HEADER/)).toBeInTheDocument();
+    expect(screen.getByText(ROUTE_SEARCH_HEADER)).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_SEARCH_START_POINT_HEADER/)
+      screen.getByText(ROUTE_SEARCH_START_POINT_HEADER)
     ).toBeInTheDocument();
+    expect(screen.getByText(ROUTE_SEARCH_END_POINT_HEADER)).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_SEARCH_END_POINT_HEADER/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByText(/ROUTE_SEARCH_START_POINT_PLACEHOLDER/).length
+      screen.getAllByText(ROUTE_SEARCH_START_POINT_PLACEHOLDER).length
     ).toBe(2);
+    expect(screen.getAllByText(ROUTE_SEARCH_END_POINT_PLACEHOLDER).length).toBe(
+      2
+    );
+    expect(screen.queryByText(ROUTE_RESULT_WITH_LINE)).not.toBeInTheDocument();
     expect(
-      screen.getAllByText(/ROUTE_SEARCH_END_POINT_PLACEHOLDER/).length
-    ).toBe(2);
-    expect(
-      screen.queryByText(/ROUTE_RESULT_WITH_LINE/)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(/ROUTE_RESULT_TOTAL_DURATION/)
+      screen.queryByText(ROUTE_RESULT_TOTAL_DURATION)
     ).not.toBeInTheDocument();
   });
 
@@ -74,24 +79,22 @@ describe("RouteCard", () => {
       }
     );
 
-    expect(screen.getByText(/ROUTE_SEARCH_HEADER/)).toBeInTheDocument();
+    expect(screen.getByText(ROUTE_SEARCH_HEADER)).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_SEARCH_START_POINT_HEADER/)
+      screen.getByText(ROUTE_SEARCH_START_POINT_HEADER)
     ).toBeInTheDocument();
+    expect(screen.getByText(ROUTE_SEARCH_END_POINT_HEADER)).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_SEARCH_END_POINT_HEADER/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByText(/ROUTE_SEARCH_START_POINT_PLACEHOLDER/).length
+      screen.getAllByText(ROUTE_SEARCH_START_POINT_PLACEHOLDER).length
     ).toBe(2);
+    expect(screen.getAllByText(ROUTE_SEARCH_END_POINT_PLACEHOLDER).length).toBe(
+      2
+    );
     expect(
-      screen.getAllByText(/ROUTE_SEARCH_END_POINT_PLACEHOLDER/).length
-    ).toBe(2);
-    expect(
-      screen.queryByText(/ROUTE_RESULT_WITH_LINE/)
+      screen.queryByText(new RegExp(ROUTE_RESULT_WITH_LINE))
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(/ROUTE_RESULT_TOTAL_DURATION/)
+      screen.queryByText(new RegExp(ROUTE_RESULT_TOTAL_DURATION))
     ).toBeInTheDocument();
   });
 });

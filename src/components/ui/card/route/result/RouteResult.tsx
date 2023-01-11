@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { RootState } from "../../../../../reducers";
 import { CalculationResponse } from "../../../../../reducers/route/calculation/types";
 import { CompressedRoute } from "../types";
+import { ROUTE_RESULT_WITH_LINE, ROUTE_RESULT_TOTAL_DURATION } from "../../../../constant/TranslationKeyConstant";
 
 /**
  * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead
@@ -57,14 +58,14 @@ const RouteResult = (props: Props) => {
       "→" +
       stopRoute.to +
       " " +
-      t("ROUTE_RESULT_WITH_LINE") +
+      t(ROUTE_RESULT_WITH_LINE) +
       " " +
       getLineName(stopRoute)
     );
   }
 
   function renderTotalDuration(totalDuration: number | null) {
-    return t("ROUTE_RESULT_TOTAL_DURATION") + ":" + totalDuration;
+    return t(ROUTE_RESULT_TOTAL_DURATION) + ":" + totalDuration;
   }
 
   /**

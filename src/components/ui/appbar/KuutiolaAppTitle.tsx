@@ -1,6 +1,7 @@
 import { Typography, withStyles } from "@material-ui/core";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { APP_TITLE } from "../../constant/TranslationKeyConstant";
 import { KuutiolaAppBarProps } from "./types";
 
 const styles = {
@@ -15,7 +16,7 @@ const KuutiolaAppTitle: FunctionComponent<KuutiolaAppBarProps> = ({
   const { t } = useTranslation();
   return (
     <Typography variant="h5" align="center" className={classes.centeredTitle}>
-      {t("APP_TITLE")}
+      {t(APP_TITLE)}
     </Typography>
   );
 };

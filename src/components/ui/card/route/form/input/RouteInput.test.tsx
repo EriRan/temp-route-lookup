@@ -5,6 +5,7 @@ import { Stop } from "../../../../../../data/mapper/types";
 import { StopState } from "../../../../../../reducers/route/types";
 import userEvent from "@testing-library/user-event";
 import { RouteInputType } from "./RouteInputConstant";
+import { ROUTE_SEARCH_END_POINT_PLACEHOLDER, ROUTE_SEARCH_START_POINT_PLACEHOLDER } from "../../../../../constant/TranslationKeyConstant";
 
 describe("RouteInput", () => {
   test("Start stop: Label and stopName visible", () => {
@@ -40,7 +41,7 @@ describe("RouteInput", () => {
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
     // Material UI uses label texts twice
     expect(
-      screen.queryAllByText("ROUTE_SEARCH_START_POINT_PLACEHOLDER")
+      screen.queryAllByText(ROUTE_SEARCH_START_POINT_PLACEHOLDER)
     ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeValid();
@@ -79,7 +80,7 @@ describe("RouteInput", () => {
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
     // Material UI uses label texts twice
     expect(
-      screen.queryAllByText("ROUTE_SEARCH_END_POINT_PLACEHOLDER")
+      screen.queryAllByText(ROUTE_SEARCH_END_POINT_PLACEHOLDER)
     ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeValid();
@@ -118,7 +119,7 @@ describe("RouteInput", () => {
     );
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
     expect(
-      screen.queryAllByText("ROUTE_SEARCH_START_POINT_PLACEHOLDER")
+      screen.queryAllByText(ROUTE_SEARCH_START_POINT_PLACEHOLDER)
     ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeInvalid();
@@ -157,7 +158,7 @@ describe("RouteInput", () => {
     );
     expect(screen.queryByDisplayValue(stopName)).toBeInTheDocument();
     expect(
-      screen.queryAllByText("ROUTE_SEARCH_END_POINT_PLACEHOLDER")
+      screen.queryAllByText(ROUTE_SEARCH_END_POINT_PLACEHOLDER)
     ).toHaveLength(2);
     const inputTextField = screen.getByDisplayValue(stopName);
     expect(inputTextField).toBeInvalid();

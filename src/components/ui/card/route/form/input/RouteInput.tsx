@@ -10,6 +10,7 @@ import {
   setStartStop,
 } from "../../../../../../reducers/route/routeReducer";
 import { StopState } from "../../../../../../reducers/route/types";
+import { ROUTE_SEARCH_START_POINT_PLACEHOLDER, ROUTE_SEARCH_END_POINT_PLACEHOLDER } from "../../../../../constant/TranslationKeyConstant";
 import { RouteInputProps, RouteInputEvent } from "../../types";
 import { RouteInputType } from "./RouteInputConstant";
 
@@ -42,9 +43,9 @@ const RouteInput = (props: RouteInputProps) => {
   function deduceLabel(type: RouteInputType): string {
     switch (type) {
       case RouteInputType.START:
-        return t("ROUTE_SEARCH_START_POINT_PLACEHOLDER");
+        return t(ROUTE_SEARCH_START_POINT_PLACEHOLDER);
       case RouteInputType.DESTINATION:
-        return t("ROUTE_SEARCH_END_POINT_PLACEHOLDER");
+        return t(ROUTE_SEARCH_END_POINT_PLACEHOLDER);
       default:
         console.error("Unhandled RouteInputType: " + type);
         return "ERROR";

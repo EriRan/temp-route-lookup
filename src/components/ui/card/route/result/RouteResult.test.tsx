@@ -3,7 +3,7 @@ import * as routeResponseCompressor from "./routeResponseCompressor";
 import { renderWithProviders } from "test-utils";
 import { screen } from "@testing-library/react";
 import { ResponseSegment } from "../../../../../reducers/route/calculation/types";
-import { ROUTE_RESULT_UNKNOWN_LINE } from "../../../../constant/TranslationKeyConstant";
+import { ROUTE_RESULT_TOTAL_DURATION, ROUTE_RESULT_UNKNOWN_LINE, ROUTE_RESULT_WITH_LINE } from "../../../../constant/TranslationKeyConstant";
 import { CompressedRoute } from "../types";
 
 describe("RouteResult", () => {
@@ -17,10 +17,10 @@ describe("RouteResult", () => {
     renderWithProviders(<RouteResult />);
     // No changes to the initial state which does not have a calculated route
     expect(
-      screen.queryByText(/ROUTE_RESULT_WITH_LINE/)
+      screen.queryByText(ROUTE_RESULT_WITH_LINE)
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/ROUTE_RESULT_TOTAL_DURATION/)
+      screen.queryByText(ROUTE_RESULT_TOTAL_DURATION)
     ).not.toBeInTheDocument();
   });
 
@@ -44,10 +44,10 @@ describe("RouteResult", () => {
     });
 
     expect(
-      screen.queryByText(/ROUTE_RESULT_WITH_LINE/)
+      screen.queryByText(ROUTE_RESULT_WITH_LINE)
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/ROUTE_RESULT_TOTAL_DURATION/)
+      screen.queryByText(ROUTE_RESULT_TOTAL_DURATION)
     ).not.toBeInTheDocument();
   });
 
@@ -88,11 +88,12 @@ describe("RouteResult", () => {
       },
     });
 
+    
     expect(
-      screen.getByText(/A→B ROUTE_RESULT_WITH_LINE Green/i)
+      screen.getByText(new RegExp(`A→B ${ROUTE_RESULT_WITH_LINE} Green`))
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_RESULT_TOTAL_DURATION:1/i)
+      screen.getByText(new RegExp(`${ROUTE_RESULT_TOTAL_DURATION}:1`))
     ).toBeInTheDocument();
   });
 
@@ -134,11 +135,12 @@ describe("RouteResult", () => {
       },
     });
 
+    
     expect(
-      screen.getByText(/A→B ROUTE_RESULT_WITH_LINE ROUTE_RESULT_UNKNOWN_LINE/i)
+      screen.getByText(new RegExp(`A→B ${ROUTE_RESULT_WITH_LINE} ${ROUTE_RESULT_UNKNOWN_LINE}`))
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/ROUTE_RESULT_TOTAL_DURATION:1/i)
+      screen.getByText(new RegExp(`${ROUTE_RESULT_TOTAL_DURATION}:1`))
     ).toBeInTheDocument();
   });
 });
