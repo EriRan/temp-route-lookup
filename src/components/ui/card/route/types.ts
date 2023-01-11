@@ -1,5 +1,5 @@
 import { Stop } from "../../../../data/mapper/types";
-import { RouteInputType } from "./form/input/RouteInputContant";
+import { RouteInputType } from "./form/input/RouteInputConstant";
 
 export type RouteInputProps = {
   type: RouteInputType;

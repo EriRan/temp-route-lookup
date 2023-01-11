@@ -4,7 +4,7 @@ import RouteInput from "./RouteInput";
 import { Stop } from "../../../../../../data/mapper/types";
 import { StopState } from "../../../../../../reducers/route/types";
 import userEvent from "@testing-library/user-event";
-import { RouteInputType } from "./RouteInputContant";
+import { RouteInputType } from "./RouteInputConstant";
 
 describe("RouteInput", () => {
   test("Start stop: Label and stopName visible", () => {

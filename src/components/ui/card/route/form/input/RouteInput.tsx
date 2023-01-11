@@ -11,7 +11,7 @@ import {
 } from "../../../../../../reducers/route/routeReducer";
 import { StopState } from "../../../../../../reducers/route/types";
 import { RouteInputProps, RouteInputEvent } from "../../types";
-import { RouteInputType } from "./RouteInputContant";
+import { RouteInputType } from "./RouteInputConstant";
 
 /**
  * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing. Is not aware whether it is a input for start or destination, which is why we must pass a stopState to it, which can
