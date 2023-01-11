@@ -1,5 +1,3 @@
-import React from "react";
-
 import { AccordionSummary, Typography } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useTranslation } from "react-i18next";
