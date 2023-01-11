@@ -51,9 +51,9 @@ export default function LanguageSelector() {
   return (
     <div>
       <Button
-        id="basic-button"
+        id="language-selector-open"
         aria-controls={
-          languageState.isLanguageDropdownOpen ? "basic-menu" : undefined
+          languageState.isLanguageDropdownOpen ? "language-selector-menu" : undefined
         }
         aria-haspopup="true"
         aria-expanded={languageState.isLanguageDropdownOpen ? "true" : "false"}
@@ -62,12 +62,12 @@ export default function LanguageSelector() {
         {convertLanguageFlagEmoji(languageState.language)}
       </Button>
       <Menu
-        id="basic-menu"
+        id="language-selector-menu"
         anchorEl={anchorEl}
         open={languageState.isLanguageDropdownOpen}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "language-selector-open",
         }}
       >
         {languageSelectorItems}
