@@ -1,7 +1,10 @@
 import { MenuItem } from "@material-ui/core";
-import { forwardRef, FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
-import { closeLanguageDropdown, languageChange } from "../../../../../reducers/language/languageReducer";
+import {
+  closeLanguageDropdown,
+  languageChange,
+} from "../../../../../reducers/language/languageReducer";
 import convertLanguageFlagEmoji from "../languageToFlagEmojiConverter";
 
 type Props = {
@@ -9,13 +12,13 @@ type Props = {
   isSelected: boolean;
 };
 
-const LanguageSelectorItem: FunctionComponent<Props> = forwardRef((props: Props, _ref) => {
+const LanguageSelectorItem: FunctionComponent<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   const handleLanguageSelectionChange = (language: string) => {
     // Don't bother making a redux call if we are selecting already selected language
     if (!props.isSelected) {
-      dispatch(languageChange({language: language}));
+      dispatch(languageChange({ language: language }));
     }
     dispatch(closeLanguageDropdown());
   };
@@ -28,6 +31,6 @@ const LanguageSelectorItem: FunctionComponent<Props> = forwardRef((props: Props,
       {convertLanguageFlagEmoji(props.language)}
     </MenuItem>
   );
-});
+};
 
 export default LanguageSelectorItem;
