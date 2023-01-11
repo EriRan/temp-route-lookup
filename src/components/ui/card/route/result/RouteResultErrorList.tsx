@@ -17,11 +17,10 @@ const RouteResultErrorList = (props: Props) => {
   return <List dense={true}>{createItems()}</List>;
 
   function createItems(): JSX.Element[] {
-    let errorIndex = 1;
-    return props.errorMessages.map((errorMessage) => {
+    return props.errorMessages.map((errorMessage, index) => {
       const message = t(errorMessage);
       return (
-        <ListItem key={`input-error-${errorIndex++}`}>
+        <ListItem key={`input-error-${index}`}>
           <ListItemText primary={message} />
         </ListItem>
       );
