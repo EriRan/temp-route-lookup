@@ -5,7 +5,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import { KuutiolaAppBarProps } from "./types";
 import KuutiolaAppBarSubtitle from "./KuutiolaAppBarSubtitle";
 import KuutiolaAppTitle from "./KuutiolaAppTitle";
-import LanguageSelector from "./languageSelector/LanguageSelector";
+import LanguageSelector from "./language/LanguageSelector";
 
 const styles = {
   centeredTitle: {
