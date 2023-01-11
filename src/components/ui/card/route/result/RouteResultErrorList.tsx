@@ -11,17 +11,17 @@ import { useTranslation } from "react-i18next";
 const RouteResultErrorList = (props: Props) => {
   const { t } = useTranslation();
 
-  if (!props.errorMessages.length) {
+  if (!props.errorMessageKeys.length) {
     return <div />;
   }
   return <List dense={true}>{createItems()}</List>;
 
   function createItems(): JSX.Element[] {
-    return props.errorMessages.map((errorMessage, index) => {
-      const message = t(errorMessage);
+    return props.errorMessageKeys.map((errorMessageKey, index) => {
+      const translatedMessage = t(errorMessageKey);
       return (
-        <ListItem key={`input-error-${index}`}>
-          <ListItemText primary={message} />
+        <ListItem key={`${index}-${errorMessageKey}`}>
+          <ListItemText primary={translatedMessage} />
         </ListItem>
       );
     });
@@ -29,7 +29,7 @@ const RouteResultErrorList = (props: Props) => {
 };
 
 type Props = {
-  errorMessages: Array<string>;
+  errorMessageKeys: Array<string>;
 };
 
 export default RouteResultErrorList;

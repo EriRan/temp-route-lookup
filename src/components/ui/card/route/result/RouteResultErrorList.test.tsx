@@ -5,7 +5,7 @@ import { screen } from "@testing-library/react";
 describe("RouteResultErrorList", () => {
   test("Single error", () => {
     renderWithProviders(
-      <RouteResultErrorList errorMessages={["ERROR_MESSAGE_ONE"]} />
+      <RouteResultErrorList errorMessageKeys={["ERROR_MESSAGE_ONE"]} />
     );
 
     expect(screen.getAllByRole("listitem").length).toBe(1);
@@ -14,7 +14,7 @@ describe("RouteResultErrorList", () => {
 
   test("Multiple errors", () => {
     renderWithProviders(
-      <RouteResultErrorList errorMessages={["ERROR_MESSAGE_ONE", "ERROR_MESSAGE_TWO", "ERROR_MESSAGE_THREE"]} />
+      <RouteResultErrorList errorMessageKeys={["ERROR_MESSAGE_ONE", "ERROR_MESSAGE_TWO", "ERROR_MESSAGE_THREE"]} />
     );
 
     expect(screen.getAllByRole("listitem").length).toBe(3);
@@ -25,7 +25,7 @@ describe("RouteResultErrorList", () => {
 
   test("No errors", () => {
     renderWithProviders(
-      <RouteResultErrorList errorMessages={[]} />
+      <RouteResultErrorList errorMessageKeys={[]} />
     );
 
     expect(screen.queryAllByRole("listitem").length).toBe(0);

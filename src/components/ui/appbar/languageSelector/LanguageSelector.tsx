@@ -43,7 +43,7 @@ export default function LanguageSelector() {
     i18n.services.resourceStore.data
   ).map((availableLanguage) => (
     <LanguageSelectorItem
-      key={`language-selector-${availableLanguage}`}
+      key={availableLanguage}
       language={availableLanguage}
       isSelected={languageState.language === availableLanguage}
     />

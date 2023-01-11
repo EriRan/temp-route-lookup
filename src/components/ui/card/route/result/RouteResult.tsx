@@ -25,7 +25,7 @@ const RouteResult = (props: Props) => {
   function renderRoute(calculatedRoute: CalculationResponse) {
     if (calculatedRoute.errorMessages.length) {
       return (
-        <RouteResultErrorList errorMessages={calculatedRoute.errorMessages} />
+        <RouteResultErrorList errorMessageKeys={calculatedRoute.errorMessages} />
       );
     }
     if (!calculatedRoute.route.length) {
