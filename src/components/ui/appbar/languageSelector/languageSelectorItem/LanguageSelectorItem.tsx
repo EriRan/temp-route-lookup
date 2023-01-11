@@ -12,11 +12,14 @@ type Props = {
   isSelected: boolean;
 };
 
+/**
+ * Single language selection. Clicking it causes language to be switched, unless that language is already in use.
+ */
 const LanguageSelectorItem: FunctionComponent<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   const handleLanguageSelectionChange = (language: string) => {
-    // Don't bother making a redux call if we are selecting already selected language
+    // Change language only if this language is not yet selected
     if (!props.isSelected) {
       dispatch(languageChange({ language: language }));
     }
