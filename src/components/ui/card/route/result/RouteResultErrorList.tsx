@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
  * @param props
  * @returns
  */
-const RouteResultErrors = (props: Props) => {
+const RouteResultErrorList = (props: Props) => {
   const { t } = useTranslation();
 
   if (!props.errorMessages.length) {
@@ -33,4 +33,4 @@ type Props = {
   errorMessages: Array<string>;
 };
 
-export default RouteResultErrors;
+export default RouteResultErrorList;

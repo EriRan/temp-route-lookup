@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { Divider, Typography } from "@material-ui/core";
 
 import { compressResponse } from "./routeResponseCompressor";
-import RouteResultErrors from "./RouteResultErrors";
+import RouteResultErrorList from "./RouteResultErrorList";
 import { useTranslation } from "react-i18next";
 import { RootState } from "../../../../../reducers";
 import { CalculationResponse } from "../../../../../reducers/route/calculation/types";
@@ -24,7 +24,7 @@ const RouteResult = (props: Props) => {
   function renderRoute(calculatedRoute: CalculationResponse) {
     if (calculatedRoute.errorMessages.length) {
       return (
-        <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
+        <RouteResultErrorList errorMessages={calculatedRoute.errorMessages} />
       );
     }
     if (!calculatedRoute.route.length) {
