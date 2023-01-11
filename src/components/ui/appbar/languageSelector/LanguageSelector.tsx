@@ -7,7 +7,7 @@ import {
   closeLanguageDropdown,
   openLanguageDropdown,
 } from "../../../../reducers/language/languageReducer";
-import LanguageSelectorItem from "./languageSelectorItem/LanguageSelectorItem";
+import LanguageSelectorItem from "./item/LanguageSelectorItem";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
 
 /**
