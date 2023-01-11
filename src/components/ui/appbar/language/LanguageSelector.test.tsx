@@ -2,9 +2,13 @@ import { renderWithProviders } from "test-utils";
 import LanguageSelector from "./LanguageSelector";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import * as i18n from "../../../../i18n";
 
 describe("LanguageSelector", () => {
+  const getAvailableLanguagesSpy = jest.spyOn(i18n, "getAvailableLanguages");
+
   test("Unopened menu displayes language flag of state language", () => {
+    getAvailableLanguagesSpy.mockReturnValue(["fi", "en"]);
     renderWithProviders(<LanguageSelector />, {
       preloadedState: {
         language: {
@@ -14,11 +18,10 @@ describe("LanguageSelector", () => {
       },
     });
     expect(screen.getByText("🇺🇸")).toBeInTheDocument();
-    // TODO: How to mock i18n so that I can add different languages from i18n configs?
-    // I don't want to care about i18n settings
   });
 
   test("Opened menu displayes languages in i18n", async () => {
+    getAvailableLanguagesSpy.mockReturnValue(["fi", "en"]);
     const user = userEvent.setup();
     const renderResponse = renderWithProviders(<LanguageSelector />, {
       preloadedState: {
@@ -40,13 +43,18 @@ describe("LanguageSelector", () => {
 
     // Language should have not changed in the state but the dropdown should show up as open in the state
     expect(renderResponse.store.getState().language.language).toBe("en");
-    expect(renderResponse.store.getState().language.isLanguageDropdownOpen).toBeTruthy();
+    expect(
+      renderResponse.store.getState().language.isLanguageDropdownOpen
+    ).toBeTruthy();
 
     // Language open is under popover, so it is not visible
-    expect(screen.queryByRole("button", { name: "🇺🇸" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "🇺🇸" })
+    ).not.toBeInTheDocument();
   });
 
   test("Opened and then closed does not display the languages", async () => {
+    getAvailableLanguagesSpy.mockReturnValue(["fi", "en"]);
     const user = userEvent.setup();
     renderWithProviders(<LanguageSelector />, {
       preloadedState: {
@@ -70,6 +78,7 @@ describe("LanguageSelector", () => {
   });
 
   test("Change language by clicking selector item", async () => {
+    getAvailableLanguagesSpy.mockReturnValue(["fi", "en"]);
     const user = userEvent.setup();
     const renderResponse = renderWithProviders(<LanguageSelector />, {
       preloadedState: {
@@ -86,6 +95,8 @@ describe("LanguageSelector", () => {
     await user.click(fiLanguageSelector);
 
     expect(renderResponse.store.getState().language.language).toBe("fi");
-    expect(renderResponse.store.getState().language.isLanguageDropdownOpen).toBeFalsy();
+    expect(
+      renderResponse.store.getState().language.isLanguageDropdownOpen
+    ).toBeFalsy();
   });
 });
