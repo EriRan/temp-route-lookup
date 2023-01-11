@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Openable menu that contains inputs for a route search and the results. Always in a fixed position
+ */
 const RouteCard: FunctionComponent<UiContainerProps> = ({ transportData }) => {
   const classes = useStyles();
   return (
