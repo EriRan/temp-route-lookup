@@ -1,7 +1,7 @@
 import { Button, Menu } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import i18n from "../../../../i18n";
+import { getAvailableLanguages } from "../../../../i18n";
 import { RootState } from "../../../../reducers";
 import {
   closeLanguageDropdown,
@@ -39,21 +39,23 @@ export default function LanguageSelector() {
   };
 
   // Get all available languages and create selector items for each language
-  const languageSelectorItems = Object.keys(
-    i18n.services.resourceStore.data
-  ).map((availableLanguage) => (
-    <LanguageSelectorItem
-      key={availableLanguage}
-      language={availableLanguage}
-      isSelected={languageState.language === availableLanguage}
-    />
-  ));
+  const languageSelectorItems = getAvailableLanguages().map(
+    (availableLanguage) => (
+      <LanguageSelectorItem
+        key={availableLanguage}
+        language={availableLanguage}
+        isSelected={languageState.language === availableLanguage}
+      />
+    )
+  );
   return (
     <div>
       <Button
         id="language-selector-open"
         aria-controls={
-          languageState.isLanguageDropdownOpen ? "language-selector-menu" : undefined
+          languageState.isLanguageDropdownOpen
+            ? "language-selector-menu"
+            : undefined
         }
         aria-haspopup="true"
         aria-expanded={languageState.isLanguageDropdownOpen ? "true" : "false"}
