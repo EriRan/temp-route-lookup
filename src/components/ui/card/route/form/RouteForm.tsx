@@ -6,22 +6,25 @@ import { RouteInputType } from "./input/RouteInputConstant";
 
 const RouteForm = (props: Props) => {
   return (
-    <Grid container alignItems="center" direction="row">
-      <Typography color="primary">
-        <Translation>{(t) => t("ROUTE_SEARCH_START_POINT_HEADER")}</Translation>
-      </Typography>
-      <RouteInput
-        type={RouteInputType.START}
-        stopMap={props.stopMap}
-      />
-
-      <Typography color="primary">
-        <Translation>{(t) => t("ROUTE_SEARCH_END_POINT_HEADER")}</Translation>
-      </Typography>
-      <RouteInput
-        type={RouteInputType.DESTINATION}
-        stopMap={props.stopMap}
-      />
+    <Grid container direction="column">
+      <Grid item>
+        <Typography color="primary">
+          <Translation>
+            {(t) => t("ROUTE_SEARCH_START_POINT_HEADER")}
+          </Translation>
+        </Typography>
+      </Grid>
+      <Grid item>
+        <RouteInput type={RouteInputType.START} stopMap={props.stopMap} />
+      </Grid>
+      <Grid item>
+        <Typography color="primary">
+          <Translation>{(t) => t("ROUTE_SEARCH_END_POINT_HEADER")}</Translation>
+        </Typography>
+      </Grid>
+      <Grid item>
+        <RouteInput type={RouteInputType.DESTINATION} stopMap={props.stopMap} />
+      </Grid>
     </Grid>
   );
 };
