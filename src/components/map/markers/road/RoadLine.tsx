@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 
 import RoadLineDuration from "./RoadLineDuration";
 import { provideStyles } from "./roadStyleProvider";
@@ -11,22 +11,20 @@ import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 /**
  * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops
  */
-class RoadLine extends React.Component<RoadLineProps, {}> {
-  render() {
-    return (
-      <g className="road-line">
-        {this.renderLinesAndDuration(
-          this.props.roadData,
-          this.props.calculationDone,
-          this.props.calculatedRouteNode,
-          this.props.startPointLocation,
-          this.props.endPointLocation
-        )}
-      </g>
-    );
-  }
+const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
+  return (
+    <g className="road-line">
+      {renderLinesAndDuration(
+        props.roadData,
+        props.calculationDone,
+        props.calculatedRouteNode,
+        props.startPointLocation,
+        props.endPointLocation
+      )}
+    </g>
+  );
 
-  renderLinesAndDuration(
+  function renderLinesAndDuration(
     roadData: Road,
     calculationDone: boolean,
     calculatedRouteNode?: ResponseSegment,
@@ -49,7 +47,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
     const objectsToRender = Array<JSX.Element>();
     for (let i = 0; i < styleObjects.length; i++) {
       objectsToRender.push(
-        this.renderOneLine(
+        renderOneLine(
           startPointLocation!,
           endPointLocation!,
           roadData,
@@ -60,14 +58,14 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
     }
     if (!calculationDone || calculatedRouteNode) {
       objectsToRender.push(
-        this.renderDuration(startPointLocation, endPointLocation, roadData)
+        renderDuration(startPointLocation, endPointLocation, roadData)
       );
     }
 
     return objectsToRender;
   }
 
-  renderDuration(
+  function renderDuration(
     startPointLocation: BusStopLocation,
     endPointLocation: BusStopLocation,
     roadData: Road
@@ -88,21 +86,21 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
    * The direction where the next line is placed to depends on which direction the line is going: If the line is horizontal,
    * we must draw the next one below it and not next to it so the lines do not overlap.
    */
-  renderOneLine(
+  function renderOneLine(
     startPointLocation: BusStopLocation,
     endPointLocation: BusStopLocation,
     roadData: Road,
     styleObject: RoadStyle,
     index: number
   ): JSX.Element {
-    if (this.isLineHorizontal(startPointLocation.x, endPointLocation.x)) {
+    if (isLineHorizontal(startPointLocation.x, endPointLocation.x)) {
       return (
         <line
           key={`line-${roadData.from.name}-${roadData.to.name}-${styleObject.color}`}
           x1={startPointLocation.x}
-          y1={startPointLocation.y + this.distanceFromOtherLine(index)}
+          y1={startPointLocation.y + distanceFromOtherLine(index)}
           x2={endPointLocation.x}
-          y2={endPointLocation.y + this.distanceFromOtherLine(index)}
+          y2={endPointLocation.y + distanceFromOtherLine(index)}
           stroke={styleObject.color}
           opacity={styleObject.opacity}
         />
@@ -111,9 +109,9 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
     return (
       <line
         key={`line-${roadData.from.name}-${roadData.to.name}-${styleObject.color}`}
-        x1={startPointLocation.x + this.distanceFromOtherLine(index)}
+        x1={startPointLocation.x + distanceFromOtherLine(index)}
         y1={startPointLocation.y}
-        x2={endPointLocation.x + this.distanceFromOtherLine(index)}
+        x2={endPointLocation.x + distanceFromOtherLine(index)}
         y2={endPointLocation.y}
         stroke={styleObject.color}
         opacity={styleObject.opacity}
@@ -121,7 +119,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
     );
   }
 
-  distanceFromOtherLine(index: number) {
+  function distanceFromOtherLine(index: number) {
     return index * LINE_GAP;
   }
 
@@ -137,9 +135,9 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
    * @param xTwo the second x coordinate
    * @returns
    */
-  isLineHorizontal(xOne: number, xTwo: number) {
+  function isLineHorizontal(xOne: number, xTwo: number) {
     return xOne === xTwo;
   }
-}
+};
 
 export default RoadLine;
