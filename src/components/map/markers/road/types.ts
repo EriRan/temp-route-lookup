@@ -6,8 +6,8 @@ export type RoadLineProps = {
   roadData: Road;
   calculationDone: boolean;
   calculatedRouteNode?: ResponseSegment;
-  startPointLocation?: BusStopLocation;
-  endPointLocation?: BusStopLocation;
+  startPointLocation: BusStopLocation;
+  endPointLocation: BusStopLocation;
   includesLines?: Array<String>;
 };
 
