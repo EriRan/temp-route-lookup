@@ -34,7 +34,7 @@ class RoadContainer extends React.Component<Props, {}> {
     const startPointLocation = busStopLocationMap.get(road.from.name);
     const endPointLocation = busStopLocationMap.get(road.to.name);
     if (!startPointLocation) {
-      console.log(
+      console.error(
         "Start point location was undefined or null. Unable to render a road from ",
         road.from.name,
         " to ",
@@ -43,7 +43,7 @@ class RoadContainer extends React.Component<Props, {}> {
       return null;
     }
     if (!endPointLocation) {
-      console.log(
+      console.error(
         "End point location was undefined or null. Unable to render a road from ",
         road.from.name,
         " to ",
