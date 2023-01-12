@@ -9,12 +9,13 @@ import { getNodeEnvironment } from "../../constant/EnvironmentVariable";
  * Secondary title that is displayed if using a development build
  */
 const KuutiolaAppBarSubtitle: FunctionComponent<{}> = () => {
+  if (getNodeEnvironment() !== "development") {
+    return <div />;
+  }
   const { t } = useTranslation();
   return (
     <Typography variant="h6" align="center" color="secondary">
-      {getNodeEnvironment() === "development"
-        ? t(LOCAL_DEVELOPMENT_VERSION)
-        : ""}
+      {t(LOCAL_DEVELOPMENT_VERSION)}
     </Typography>
   );
 };
