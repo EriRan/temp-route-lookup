@@ -6,7 +6,7 @@
 
 # Introduction
 
-This project is a webapp that was originally created for Solidabis' code challenge of April 2020. Their code challenges can be found from here: https://koodihaaste.solidabis.com/. Goal of the challenge was to create a route search web application where the user could select two stops and receive the fastest possible route between them using the available bus lines. I've continued the application even after the challenge with various improvements. If you want to see how the code was at the time of the submission, check one of the tags.
+This project is a webapp that was originally created for Solidabis' code challenge of April 2020. Their code challenges can be found from here: https://koodihaaste.solidabis.com/. Goal of the challenge was to create a route search web application where the user could select two stops and receive the fastest possible route between them using the available bus lines. I've continued the application even after the challenge with various improvements. If you want to see how the code was at the time of the submission, check release called "Submitted".
 
 This app is running live here: https://route-lookup.netlify.app/
 
@@ -17,13 +17,13 @@ This application uses the provided route data json to first render the bus stops
 ### Technologies used
 
 - React and React-Redux
-  - Core of the application
+  - Core of the application. Redux Toolkit in use to make writing Redux logic easier
 - Typescript
-  - Adds typing to Javascript and makes it easier to write bug free code
+  - Adds typing to Javascript and makes it easier to detect bugs
 - Webpack
   - Compresses the codebase into a smaller space and transpiles them to run on older browsers
 - Jest
-  - Testing
+  - Unit and integration tests. 
 - Material UI
   - User Interface components
 - Lodash
