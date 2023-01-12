@@ -12,14 +12,22 @@ import { ResponseSegment } from "../../../../reducers/route/calculation/types";
  * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops
  */
 const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
+  if (!props.startPointLocation) {
+    console.error("Encountered missing start point location!");
+    return <g />;
+  }
+  if (!props.endPointLocation) {
+    console.error("Encountered missing end point location!");
+    return <g />;
+  }
   return (
     <g className="road-line">
       {renderLinesAndDuration(
         props.roadData,
         props.calculationDone,
-        props.calculatedRouteNode,
         props.startPointLocation,
-        props.endPointLocation
+        props.endPointLocation,
+        props.calculatedRouteNode,
       )}
     </g>
   );
@@ -27,23 +35,17 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
   function renderLinesAndDuration(
     roadData: Road,
     calculationDone: boolean,
+    startPointLocation: BusStopLocation,
+    endPointLocation: BusStopLocation,
     calculatedRouteNode?: ResponseSegment,
-    startPointLocation?: BusStopLocation,
-    endPointLocation?: BusStopLocation
   ) {
-    if (!startPointLocation) {
-      console.error("Encountered missing start point location!");
-      return [];
-    }
-    if (!endPointLocation) {
-      console.error("Encountered missing end point location!");
-      return [];
-    }
+    
     const styleObjects = provideStyles(
       calculationDone,
       roadData.includesLines,
       calculatedRouteNode
     );
+    // Render lines
     const objectsToRender = Array<JSX.Element>();
     for (let i = 0; i < styleObjects.length; i++) {
       objectsToRender.push(
