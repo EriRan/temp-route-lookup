@@ -59,20 +59,6 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
     return objectsToRender;
   }
 
-  function renderDuration(
-    startPointLocation: BusStopLocation,
-    endPointLocation: BusStopLocation,
-    roadData: Road
-  ) {
-    return (
-      <RoadLineDuration
-        key={`duration-${roadData.from.name}-${roadData.to.name}`}
-        startPointLocation={startPointLocation}
-        endPointLocation={endPointLocation}
-        duration={roadData.duration}
-      />
-    );
-  }
 
   /**
    * If there are multiple lines, draw each one LINE_GAP amount from each other.
@@ -109,6 +95,21 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
         y2={endPointLocation.y}
         stroke={styleObject.color}
         opacity={styleObject.opacity}
+      />
+    );
+  }
+
+  function renderDuration(
+    startPointLocation: BusStopLocation,
+    endPointLocation: BusStopLocation,
+    roadData: Road
+  ) {
+    return (
+      <RoadLineDuration
+        key={`duration-${roadData.from.name}-${roadData.to.name}`}
+        startPointLocation={startPointLocation}
+        endPointLocation={endPointLocation}
+        duration={roadData.duration}
       />
     );
   }
