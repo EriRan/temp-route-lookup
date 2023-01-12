@@ -61,8 +61,8 @@ describe("RoadLineDuration", () => {
       </svg>
     );
     // I wonder if there is a better way to test this? Could not find a way where I could apply Typescript into the HTML elements and then use x and y
-    expect(renderResult.container.querySelector("[x='0']")).toBeDefined();
-    expect(renderResult.container.querySelector("[y='30']")).toBeDefined();
+    expect(renderResult.container.querySelector("[x='0']")).toBeTruthy();
+    expect(renderResult.container.querySelector("[y='30']")).toBeTruthy();
   });
 
   test("Vertical midpoint", () => {
@@ -81,9 +81,9 @@ describe("RoadLineDuration", () => {
         />
       </svg>
     );
-    // I wonder if there is a better way to test this? Could not find a way where I could apply Typescript into the HTML elements and then use x and y
-    expect(renderResult.container.querySelector("[x='30']")).toBeDefined();
-    expect(renderResult.container.querySelector("[y='0']")).toBeDefined();
+    screen.debug();
+    expect(renderResult.container.querySelector("[x='25']")).toBeTruthy();
+    expect(renderResult.container.querySelector("[y='5']")).toBeTruthy();
   });
 
   test("Diagonal midpoint", () => {
@@ -102,8 +102,7 @@ describe("RoadLineDuration", () => {
         />
       </svg>
     );
-    // I wonder if there is a better way to test this? Could not find a way where I could apply Typescript into the HTML elements and then use x and y
-    expect(renderResult.container.querySelector("[x='25']")).toBeDefined();
-    expect(renderResult.container.querySelector("[y='30']")).toBeDefined();
+    expect(renderResult.container.querySelector("[x='25']")).toBeTruthy();
+    expect(renderResult.container.querySelector("[y='30']")).toBeTruthy();
   });
 });
