@@ -9,13 +9,13 @@ const RoadLineDuration: FunctionComponent<RoadDurationProps> = (props) => {
     console.error(
       "Start point location missing! Unable to render road duration!"
     );
-    return null;
+    return <g />;
   }
   if (!endPointLocation) {
     console.error(
       "End point location missing! Unable to render road duration!"
     );
-    return null;
+    return <g />;
   }
   if (startPointLocation.x === endPointLocation.x) {
     return renderTextInMiddleHorizontal(
