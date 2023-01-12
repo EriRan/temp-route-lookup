@@ -46,7 +46,7 @@ const renderTextInMiddleHorizontal = (
   return (
     <text
       x={startPointLocation.x}
-      y={calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
+      y={calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5} // +5 to account for the pixel count of the rendered number. This value was found purely by trial and error
     >
       {duration}
     </text>
