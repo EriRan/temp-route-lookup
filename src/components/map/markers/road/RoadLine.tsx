@@ -19,7 +19,7 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
         props.calculationDone,
         props.startPointLocation,
         props.endPointLocation,
-        props.calculatedRouteNode,
+        props.calculatedRouteNode
       )}
     </g>
   );
@@ -29,9 +29,8 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
     calculationDone: boolean,
     startPointLocation: BusStopLocation,
     endPointLocation: BusStopLocation,
-    calculatedRouteNode?: ResponseSegment,
+    calculatedRouteNode?: ResponseSegment
   ) {
-    
     const styleObjects = provideStyles(
       calculationDone,
       roadData.includesLines,
@@ -59,7 +58,6 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
     return objectsToRender;
   }
 
-
   /**
    * If there are multiple lines, draw each one LINE_GAP amount from each other.
    *
@@ -73,7 +71,7 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
     styleObject: RoadStyle,
     index: number
   ): JSX.Element {
-    if (isLineHorizontal(startPointLocation.x, endPointLocation.x)) {
+    if (isLineVertical(startPointLocation.x, endPointLocation.x)) {
       return (
         <line
           key={`line-${roadData.from.name}-${roadData.to.name}-${styleObject.color}`}
@@ -122,16 +120,15 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
    * Deduce whether the two provided x coordinates would form a horizontal line, if a line was drawn between those two x coordinates.
    * See below ASCII image for illustration
    *
-   * *******
-   * *******
-   * *x---x*
-   * *******
-   * *******
+   * ***x***
+   * ***|***
+   * ***|***
+   * ***x***
    * @param xOne the first x coordinate
    * @param xTwo the second x coordinate
    * @returns
    */
-  function isLineHorizontal(xOne: number, xTwo: number) {
+  function isLineVertical(xOne: number, xTwo: number) {
     return xOne === xTwo;
   }
 };
