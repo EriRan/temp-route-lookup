@@ -122,10 +122,11 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
    * Deduce whether the two provided x coordinates would form a horizontal line, if a line was drawn between those two x coordinates.
    * See below ASCII image for illustration
    *
-   * ***x***
-   * ***|***
-   * ***|***
-   * ***x***
+   * *******
+   * *******
+   * *x---x*
+   * *******
+   * *******
    * @param xOne the first x coordinate
    * @param xTwo the second x coordinate
    * @returns
