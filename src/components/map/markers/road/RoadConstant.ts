@@ -1,3 +1,6 @@
+/**
+ * How large gap of pixels to have between roads that go between two same stops
+ */
 export const LINE_GAP = 5;
 
 export const UNUSED_ROAD_OPACITY = 0.2;
