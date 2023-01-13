@@ -5,7 +5,10 @@ import RoadContainer from "./road/RoadContainer";
 import { BusTrafficContainerProps } from "./types";
 import { BusStopLocation } from "../types";
 
-class BusTrafficContainer extends React.Component<BusTrafficContainerProps, {}> {
+class BusTrafficContainer extends React.Component<
+  BusTrafficContainerProps,
+  {}
+> {
   render() {
     return (
       <g className="bus-traffic-container">{this.renderTrafficNetwork()}</g>
@@ -20,7 +23,9 @@ class BusTrafficContainer extends React.Component<BusTrafficContainerProps, {}> 
       <g className="bus-traffic-container">
         <RoadContainer
           busStopLocationMap={this.props.busStopLocationMap}
-          roads={Array.from(this.props.stopMap.values()).flatMap(stop => stop.roads)}
+          roads={Array.from(this.props.stopMap.values()).flatMap(
+            (stop) => stop.roads
+          )}
         />
         {this.renderBusStops(this.props.busStopLocationMap)}
       </g>
@@ -30,17 +35,18 @@ class BusTrafficContainer extends React.Component<BusTrafficContainerProps, {}> 
   private renderBusStops(busStopLocationMap: Map<string, BusStopLocation>) {
     return (
       <g className="bus-stop-container">
-        {Array.from(busStopLocationMap.entries()).map((entry) => {
-          return (
-            //entry[0] == name of the bus stop, entry[1] == coordinates of the bus stop
-            <BusStop
-              key={`stop-${entry[0]}`}
-              name={entry[0]}
-              x={entry[1].x}
-              y={entry[1].y}
-            />
-          );
-        })}
+        {Array.from(busStopLocationMap.entries()).map(
+          ([name, busStopLocation]) => {
+            return (
+              <BusStop
+                key={`stop-${name}`}
+                name={name}
+                x={busStopLocation.x}
+                y={busStopLocation.y}
+              />
+            );
+          }
+        )}
       </g>
     );
   }
