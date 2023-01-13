@@ -3,7 +3,6 @@ import BusTrafficContainer from "./BusTrafficContainer";
 import { screen } from "@testing-library/react";
 import { BUS_STOP_TITLE, BUS_TRAFFIC_CONTAINER_LOADING, ROAD_LINE_TITLE } from "../../constant/TranslationKeyConstant";
 import { BusStopLocation } from "../types";
-import { Stop } from "../../../data/mapper/types";
 
 describe("BusTrafficContainer", () => {
   test("Loading text rendered if values not provided", () => {
@@ -20,7 +19,6 @@ describe("BusTrafficContainer", () => {
     const busStopLocationMap = new Map<string, BusStopLocation>();
     busStopLocationMap.set(busStopOneName, { x: 0, y: 0 });
     busStopLocationMap.set(busStopTwoName, { x: 50, y: 0 });
-    const stopMap = new Map<string, Stop>();
     const roads = [
       {
         from: { name: busStopOneName, roads: [] },
