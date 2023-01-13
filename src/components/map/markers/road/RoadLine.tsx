@@ -8,10 +8,7 @@ import { BusStopLocation } from "../../types";
 import { Road } from "../../../../data/mapper/types";
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
 import { useTranslation } from "react-i18next";
-import {
-  ROAD_LINE_TITLE_END,
-  ROAD_LINE_TITLE_START,
-} from "../../../constant/TranslationKeyConstant";
+import { ROAD_LINE_TITLE } from "../../../constant/TranslationKeyConstant";
 
 /**
  * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops
@@ -123,15 +120,10 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
   }
 
   function getLineTitleText(roadData: Road) {
-    return (
-      t(ROAD_LINE_TITLE_START) +
-      " " +
-      roadData.from.name +
-      "," +
-      roadData.to.name +
-      " " +
-      t(ROAD_LINE_TITLE_END)
-    );
+    return t(ROAD_LINE_TITLE, {
+      nameOne: roadData.from.name,
+      nameTwo: roadData.to.name,
+    });
   }
 
   function distanceFromOtherLine(index: number) {
