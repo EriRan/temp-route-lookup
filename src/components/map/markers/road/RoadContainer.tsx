@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import RoadLine from "./RoadLine";
 import { BusStopLocation } from "../../types";
-import { Road, Stop } from "../../../../data/mapper/types";
+import { Road } from "../../../../data/mapper/types";
 import { CalculationResponse } from "../../../../reducers/route/calculation/types";
 import { useAppSelector } from "../../../../reducers/hooks";
 
