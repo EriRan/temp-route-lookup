@@ -4,13 +4,16 @@ import BusStop from "./stop/BusStop";
 import RoadContainer from "./road/RoadContainer";
 import { BusTrafficContainerProps } from "./types";
 import { BusStopLocation } from "../types";
+import { useTranslation } from "react-i18next";
+import { BUS_TRAFFIC_CONTAINER_LOADING } from "../../constant/TranslationKeyConstant";
 
 const BusTrafficContainer: FunctionComponent<BusTrafficContainerProps> = (
   props
 ) => {
+  const { t } = useTranslation();
   const renderTrafficNetwork = () => {
     if (!props.busStopLocationMap) {
-      return "Loading bus stops...";
+      return t(BUS_TRAFFIC_CONTAINER_LOADING);
     }
     return (
       <g className="bus-traffic-container">
