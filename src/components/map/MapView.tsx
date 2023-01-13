@@ -3,7 +3,6 @@ import * as React from "react";
 import BusTrafficContainer from "./markers/BusTrafficContainer";
 import { provideBusStopLocations } from "./markers/stop/location/busStopLocationProvider";
 import { MAP_PADDING } from "./MapViewConstant";
-import "./MapView.css";
 import { MapProps } from "./types";
 
 class MapView extends React.Component<MapProps, {}> {
