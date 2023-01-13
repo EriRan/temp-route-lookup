@@ -20,7 +20,7 @@ class BusTrafficContainer extends React.Component<BusTrafficContainerProps, {}> 
       <g className="bus-traffic-container">
         <RoadContainer
           busStopLocationMap={this.props.busStopLocationMap}
-          stopMap={this.props.stopMap}
+          roads={Array.from(this.props.stopMap.values()).flatMap(stop => stop.roads)}
         />
         {this.renderBusStops(this.props.busStopLocationMap)}
       </g>

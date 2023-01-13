@@ -5,14 +5,18 @@ import { Road, Stop } from "../../../../data/mapper/types";
 import { CalculationResponse } from "../../../../reducers/route/calculation/types";
 import { useAppSelector } from "../../../../reducers/hooks";
 
+/**
+ * Contains all roads on the map
+ * @param props
+ * @returns
+ */
 const RoadContainer: FunctionComponent<Props> = (props) => {
   const calculatedRoute = useAppSelector((state) => {
     return state.route.calculatedRoute;
   });
   return (
     <g>
-      {Array.from(props.stopMap.values())
-        .flatMap((stop) => stop.roads)
+      {props.roads
         .filter((road) => {
           return road.isReverse === false;
         })
@@ -76,7 +80,7 @@ const RoadContainer: FunctionComponent<Props> = (props) => {
 
 type Props = {
   busStopLocationMap: Map<string, BusStopLocation>;
-  stopMap: Map<string, Stop>;
+  roads: Road[];
 };
 
 export default RoadContainer;
