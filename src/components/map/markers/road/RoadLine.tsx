@@ -7,11 +7,17 @@ import { RoadLineProps, RoadStyle } from "./types";
 import { BusStopLocation } from "../../types";
 import { Road } from "../../../../data/mapper/types";
 import { ResponseSegment } from "../../../../reducers/route/calculation/types";
+import { useTranslation } from "react-i18next";
+import {
+  ROAD_LINE_TITLE_END,
+  ROAD_LINE_TITLE_START,
+} from "../../../constant/TranslationKeyConstant";
 
 /**
  * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops
  */
 const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
+  const { t } = useTranslation();
   return (
     <g className="road-line">
       {renderLinesAndDuration(
@@ -81,7 +87,9 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
           y2={endPointLocation.y + distanceFromOtherLine(index)}
           stroke={styleObject.color}
           opacity={styleObject.opacity}
-        />
+        >
+          <title>{getLineTitleText(roadData)}</title>
+        </line>
       );
     }
     return (
@@ -93,7 +101,9 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
         y2={endPointLocation.y}
         stroke={styleObject.color}
         opacity={styleObject.opacity}
-      />
+      >
+        <title>{getLineTitleText(roadData)}</title>
+      </line>
     );
   }
 
@@ -109,6 +119,18 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
         endPointLocation={endPointLocation}
         duration={roadData.duration}
       />
+    );
+  }
+
+  function getLineTitleText(roadData: Road) {
+    return (
+      t(ROAD_LINE_TITLE_START) +
+      " " +
+      roadData.from.name +
+      "," +
+      roadData.to.name +
+      " " +
+      t(ROAD_LINE_TITLE_END)
     );
   }
 
@@ -129,7 +151,10 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
    * @param endPoint the second y coordinate
    * @returns
    */
-  function isLineHorizontal(startPoint: BusStopLocation, endPoint: BusStopLocation) {
+  function isLineHorizontal(
+    startPoint: BusStopLocation,
+    endPoint: BusStopLocation
+  ) {
     return startPoint.y === endPoint.y;
   }
 };
