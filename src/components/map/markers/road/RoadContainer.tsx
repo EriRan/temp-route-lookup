@@ -1,32 +1,29 @@
-import React from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { FunctionComponent } from "react";
 import RoadLine from "./RoadLine";
 import { BusStopLocation } from "../../types";
 import { Road, Stop } from "../../../../data/mapper/types";
 import { RootState } from "../../../../reducers";
 import { CalculationResponse } from "../../../../reducers/route/calculation/types";
+import { useAppSelector } from "../../../../reducers/hooks";
 
-class RoadContainer extends React.Component<Props, {}> {
-  render() {
-    return (
-      <g>
-        {Array.from(this.props.stopMap.values())
-          .flatMap((stop) => stop.roads)
-          .filter((road) => {
-            return road.isReverse === false;
-          })
-          .map((road) => {
-            return this.renderRoad(
-              road,
-              this.props.busStopLocationMap,
-              this.props.calculatedRoute
-            );
-          })}
-      </g>
-    );
-  }
+const RoadContainer: FunctionComponent<Props> = (props) => {
+  const calculatedRoute = useAppSelector((state: RootState) => {
+    return state.route.calculatedRoute;
+  });
+  return (
+    <g>
+      {Array.from(props.stopMap.values())
+        .flatMap((stop) => stop.roads)
+        .filter((road) => {
+          return road.isReverse === false;
+        })
+        .map((road) => {
+          return renderRoad(road, props.busStopLocationMap, calculatedRoute);
+        })}
+    </g>
+  );
 
-  private renderRoad(
+  function renderRoad(
     road: Road,
     busStopLocationMap: Map<string, BusStopLocation>,
     calculatedRoute: CalculationResponse | null
@@ -53,7 +50,7 @@ class RoadContainer extends React.Component<Props, {}> {
     }
     if (calculatedRoute && calculatedRoute.route.length > 0) {
       const calculatedRouteNode = calculatedRoute.route.find(
-        segment => segment.id === road.from.name + "-" + road.to.name
+        (segment) => segment.id === road.from.name + "-" + road.to.name
       );
       return (
         <RoadLine
@@ -78,21 +75,11 @@ class RoadContainer extends React.Component<Props, {}> {
       />
     );
   }
-}
-
-const mapStateToProps = (state: RootState) => {
-  return {
-    calculatedRoute: state.route.calculatedRoute,
-  };
 };
 
-const connector = connect(mapStateToProps, {});
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type Props = PropsFromRedux & {
+type Props = {
   busStopLocationMap: Map<string, BusStopLocation>;
   stopMap: Map<string, Stop>;
 };
 
-export default connector(RoadContainer);
+export default RoadContainer;
