@@ -58,7 +58,6 @@ const RoadContainer: FunctionComponent<Props> = (props) => {
           roadData={road}
           startPointLocation={startPointLocation}
           endPointLocation={endPointLocation}
-          includesLines={road.includesLines}
           calculationDone={true}
           calculatedRouteNode={calculatedRouteNode}
         />
@@ -70,7 +69,6 @@ const RoadContainer: FunctionComponent<Props> = (props) => {
         roadData={road}
         startPointLocation={startPointLocation}
         endPointLocation={endPointLocation}
-        includesLines={road.includesLines}
         calculationDone={false}
       />
     );
