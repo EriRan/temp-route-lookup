@@ -1,8 +1,9 @@
 import { Button, Menu } from "@material-ui/core";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getAvailableLanguages } from "../../../../i18n";
 import { RootState } from "../../../../reducers";
+import { useAppSelector } from "../../../../reducers/hooks";
 import {
   closeLanguageDropdown,
   openLanguageDropdown,
@@ -21,7 +22,7 @@ export default function LanguageSelector() {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-  const languageState = useSelector((state: RootState) => {
+  const languageState = useAppSelector((state) => {
     return {
       isLanguageDropdownOpen: state.language.isLanguageDropdownOpen,
       language: state.language.language,
