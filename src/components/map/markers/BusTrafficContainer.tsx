@@ -12,7 +12,7 @@ const BusTrafficContainer: FunctionComponent<BusTrafficContainerProps> = (
 ) => {
   const { t } = useTranslation();
   const renderTrafficNetwork = () => {
-    if (!props.busStopLocationMap) {
+    if (!props.busStopLocationMap.size) {
       return t(BUS_TRAFFIC_CONTAINER_LOADING);
     }
     return (
