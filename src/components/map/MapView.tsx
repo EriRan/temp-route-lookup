@@ -12,6 +12,9 @@ class MapView extends React.Component<MapProps, {}> {
     const busStopLocations = provideBusStopLocations(
       this.props.stopMap.values().next().value
     );
+    const roads = Array.from(this.props.stopMap.values()).flatMap(
+      (stop) => stop.roads
+    );
     return (
       <div className="map-background">
         <svg
@@ -19,7 +22,7 @@ class MapView extends React.Component<MapProps, {}> {
           height={busStopLocations.yMax + MAP_PADDING}
         >
           <BusTrafficContainer
-            stopMap={this.props.stopMap}
+            roads={roads}
             busStopLocationMap={busStopLocations.busStopLocationMap}
           />
         </svg>

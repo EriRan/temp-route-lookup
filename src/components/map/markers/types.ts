@@ -1,7 +1,7 @@
-import { Stop } from "../../../data/mapper/types";
-import { BusStopLocation, MapProps } from "../types";
+import { Road } from "../../../data/mapper/types";
+import { BusStopLocation } from "../types";
 
-export interface BusTrafficContainerProps extends MapProps {
+export interface BusTrafficContainerProps {
   busStopLocationMap: Map<string, BusStopLocation>;
-  stopMap: Map<string, Stop>
+  roads: Road[]
 }

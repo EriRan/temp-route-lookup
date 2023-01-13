@@ -8,7 +8,7 @@ import { Stop } from "../../../data/mapper/types";
 describe("BusTrafficContainer", () => {
   test("Loading text rendered if values not provided", () => {
     renderSvgWithProviders(
-      <BusTrafficContainer busStopLocationMap={new Map()} stopMap={new Map()} />
+      <BusTrafficContainer busStopLocationMap={new Map()} roads={[]} />
     );
 
     expect(screen.getByText(BUS_TRAFFIC_CONTAINER_LOADING)).toBeInTheDocument();
@@ -21,22 +21,19 @@ describe("BusTrafficContainer", () => {
     busStopLocationMap.set(busStopOneName, { x: 0, y: 0 });
     busStopLocationMap.set(busStopTwoName, { x: 50, y: 0 });
     const stopMap = new Map<string, Stop>();
-    stopMap.set(busStopOneName, {
-      name: busStopOneName,
-      roads: [
-        {
-          from: { name: busStopOneName, roads: [] },
-          to: { name: busStopTwoName, roads: [] },
-          duration: 5,
-          isReverse: false,
-          includesLines: ["green"],
-        },
-      ],
-    });
+    const roads = [
+      {
+        from: { name: busStopOneName, roads: [] },
+        to: { name: busStopTwoName, roads: [] },
+        duration: 5,
+        isReverse: false,
+        includesLines: ["green"],
+      },
+    ]
     renderSvgWithProviders(
       <BusTrafficContainer
         busStopLocationMap={busStopLocationMap}
-        stopMap={stopMap}
+        roads={roads}
       />
     );
 

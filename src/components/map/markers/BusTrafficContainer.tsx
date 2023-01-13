@@ -12,18 +12,17 @@ const BusTrafficContainer: FunctionComponent<BusTrafficContainerProps> = (
 ) => {
   const { t } = useTranslation();
   const renderTrafficNetwork = () => {
-    if (!props.busStopLocationMap.size || !props.stopMap.size) {
+    if (!props.busStopLocationMap.size || !props.roads.length) {
       return t(BUS_TRAFFIC_CONTAINER_LOADING);
     }
     return (
       <g className="bus-traffic-container">
-        {renderBusStops(props.busStopLocationMap)}
+        
         <RoadContainer
           busStopLocationMap={props.busStopLocationMap}
-          roads={Array.from(props.stopMap.values()).flatMap(
-            (stop) => stop.roads
-          )}
+          roads={props.roads}
         />
+        {renderBusStops(props.busStopLocationMap)}
       </g>
     );
   };
