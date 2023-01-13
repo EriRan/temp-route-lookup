@@ -2,12 +2,11 @@ import { FunctionComponent } from "react";
 import RoadLine from "./RoadLine";
 import { BusStopLocation } from "../../types";
 import { Road, Stop } from "../../../../data/mapper/types";
-import { RootState } from "../../../../reducers";
 import { CalculationResponse } from "../../../../reducers/route/calculation/types";
 import { useAppSelector } from "../../../../reducers/hooks";
 
 const RoadContainer: FunctionComponent<Props> = (props) => {
-  const calculatedRoute = useAppSelector((state: RootState) => {
+  const calculatedRoute = useAppSelector((state) => {
     return state.route.calculatedRoute;
   });
   return (
@@ -29,7 +28,6 @@ const RoadContainer: FunctionComponent<Props> = (props) => {
     calculatedRoute: CalculationResponse | null
   ) {
     const startPointLocation = busStopLocationMap.get(road.from.name);
-    const endPointLocation = busStopLocationMap.get(road.to.name);
     if (!startPointLocation) {
       console.error(
         "Start point location was undefined or null. Unable to render a road from ",
@@ -39,6 +37,7 @@ const RoadContainer: FunctionComponent<Props> = (props) => {
       );
       return null;
     }
+    const endPointLocation = busStopLocationMap.get(road.to.name);
     if (!endPointLocation) {
       console.error(
         "End point location was undefined or null. Unable to render a road from ",
