@@ -1,7 +1,6 @@
 import { renderSvgWithProviders } from "test-utils";
 import { screen } from "@testing-library/react";
 import RoadContainer from "./RoadContainer";
-import { Stop } from "../../../../data/mapper/types";
 import { ROAD_LINE_TITLE } from "../../../constant/TranslationKeyConstant";
 import { BusStopLocation } from "../../types";
 
