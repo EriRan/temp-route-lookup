@@ -1,6 +1,6 @@
 import { Stop } from "../../data/mapper/types";
 
-export interface MapProps {
+export interface MapViewProps {
   stopMap: Map<string, Stop>;
 }
 
