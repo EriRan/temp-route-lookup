@@ -29,10 +29,6 @@ class MapView extends React.Component<MapProps, {}> {
       </div>
     );
   }
-
-  componentDidMount() {
-    window.scrollTo(500, 0);
-  }
 }
 
 export default MapView;
