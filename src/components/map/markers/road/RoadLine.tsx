@@ -71,7 +71,7 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
     styleObject: RoadStyle,
     index: number
   ): JSX.Element {
-    if (isLineVertical(startPointLocation.x, endPointLocation.x)) {
+    if (isLineHorizontal(startPointLocation, endPointLocation)) {
       return (
         <line
           key={`line-${roadData.from.name}-${roadData.to.name}-${styleObject.color}`}
@@ -120,16 +120,17 @@ const RoadLine: FunctionComponent<RoadLineProps> = (props) => {
    * Deduce whether the two provided x coordinates would form a horizontal line, if a line was drawn between those two x coordinates.
    * See below ASCII image for illustration
    *
-   * ***x***
-   * ***|***
-   * ***|***
-   * ***x***
-   * @param xOne the first x coordinate
-   * @param xTwo the second x coordinate
+   * *******
+   * *******
+   * *x---x*
+   * *******
+   * *******
+   * @param startPoint the first y coordinate
+   * @param endPoint the second y coordinate
    * @returns
    */
-  function isLineVertical(xOne: number, xTwo: number) {
-    return xOne === xTwo;
+  function isLineHorizontal(startPoint: BusStopLocation, endPoint: BusStopLocation) {
+    return startPoint.y === endPoint.y;
   }
 };
 
