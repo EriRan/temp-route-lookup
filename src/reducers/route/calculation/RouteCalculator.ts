@@ -34,13 +34,13 @@ class RouteCalculator {
     if (errorResponse) {
       return errorResponse;
     }
-    if (!hasUsableInput(startStop) || !hasUsableInput(destinationStop)) {
+    if (!startStop.name || !destinationStop.name) {
       return null;
     }
-    const startStopName = startStop.name!.toUpperCase();
-    const destinationStopName = destinationStop.name!.toUpperCase();
-    const settledNodeNames: Array<string> = [];
-    const unsettledNodeNames: Array<string> = [];
+    const startStopName = startStop.name.toUpperCase();
+    const destinationStopName = destinationStop.name.toUpperCase();
+    const settledNodeNames: string[] = [];
+    const unsettledNodeNames: string[] = [];
 
     //Already validated in the validator that startStopName is contained
     allNodesMap.get(startStopName)!.nodeDuration = 0;
@@ -154,10 +154,6 @@ function doAnyLinesRunOnRoad(road: Road) {
  */
 function removeNode(nodeNameToRemove: string, nodeNames: Array<string>) {
   nodeNames.splice(nodeNames.indexOf(nodeNameToRemove), 1);
-}
-
-function hasUsableInput(targetStop: StopState) {
-  return targetStop.name;
 }
 
 export default RouteCalculator;
