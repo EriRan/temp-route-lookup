@@ -7,7 +7,7 @@ import App from "./App";
 jest.mock("./ui/UiContainer", () => () => <div>UiContainer</div>);
 jest.mock("./map/MapView", () => () => <div>MapView</div>);
 // This is how to mock a single import from a larger package
-jest.mock("@material-ui/core", () => ({
+jest.mock("@mui/material", () => ({
   CssBaseline: () => <div>CssBaseline</div>
 }));
 

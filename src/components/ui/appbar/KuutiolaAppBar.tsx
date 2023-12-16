@@ -1,17 +1,11 @@
 import { FunctionComponent } from "react";
-import { withStyles } from "@material-ui/core/styles";
 
-import { AppBar, Toolbar } from "@material-ui/core";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/AppBar";
 import { KuutiolaAppBarProps } from "./types";
 import KuutiolaAppBarSubtitle from "./KuutiolaAppBarSubtitle";
 import KuutiolaAppTitle from "./KuutiolaAppTitle";
 import LanguageSelector from "./language/LanguageSelector";
-
-const styles = {
-  centeredTitle: {
-    margin: "0 auto",
-  },
-};
 
 const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = () => {
   return (
@@ -25,4 +19,4 @@ const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = () => {
   );
 };
 
-export default withStyles(styles)(KuutiolaAppBar);
+export default KuutiolaAppBar;

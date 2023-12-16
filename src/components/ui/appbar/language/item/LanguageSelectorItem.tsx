@@ -1,4 +1,3 @@
-import { MenuItem } from "@material-ui/core";
 import { forwardRef, FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -6,6 +5,7 @@ import {
   languageChange,
 } from "../../../../../reducers/language/languageReducer";
 import convertLanguageFlagEmoji from "../languageToFlagEmojiConverter";
+import MenuItem from "@mui/material/MenuItem";
 
 type Props = {
   language: string;

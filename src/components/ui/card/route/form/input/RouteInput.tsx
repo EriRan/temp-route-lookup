@@ -1,4 +1,3 @@
-import { TextField } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 import { Stop } from "../../../../../../data/mapper/types";
 import {
@@ -13,6 +12,7 @@ import { StopState } from "../../../../../../reducers/route/types";
 import { ROUTE_SEARCH_START_POINT_PLACEHOLDER, ROUTE_SEARCH_END_POINT_PLACEHOLDER } from "../../../../../constant/TranslationKeyConstant";
 import { RouteInputProps, RouteInputEvent } from "../../types";
 import { RouteInputType } from "./RouteInputConstant";
+import { TextField } from "@mui/material";
 
 /**
  * Renders a component where a name of a bus stop can be written to. Has a onChange function as parameter to react to typing. Is not aware whether it is a input for start or destination, which is why we must pass a stopState to it, which can

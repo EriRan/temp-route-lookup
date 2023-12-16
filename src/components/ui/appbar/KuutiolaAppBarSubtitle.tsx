@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
-
-import { Typography } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 import { LOCAL_DEVELOPMENT_VERSION } from "../../constant/TranslationKeyConstant";
 import { getNodeEnvironment } from "../../constant/EnvironmentVariable";
+import Typography from "@mui/material/Typography";
 
 /**
  * Secondary title that is displayed if using a development build

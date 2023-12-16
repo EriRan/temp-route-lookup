@@ -1,7 +1,4 @@
 import { connect, ConnectedProps } from "react-redux";
-
-import { Divider, Typography } from "@material-ui/core";
-
 import { compressResponse } from "./routeResponseCompressor";
 import RouteResultErrorList from "./RouteResultErrorList";
 import { useTranslation } from "react-i18next";
@@ -9,6 +6,7 @@ import { RootState } from "../../../../../reducers";
 import { CalculationResponse } from "../../../../../reducers/route/calculation/types";
 import { CompressedRoute } from "../types";
 import { ROUTE_RESULT_WITH_LINE, ROUTE_RESULT_TOTAL_DURATION } from "../../../../constant/TranslationKeyConstant";
+import { Typography, Divider } from "@mui/material";
 
 /**
  * Renders finished route calculation between two stops. If there are any errors in the calculations we render them instead

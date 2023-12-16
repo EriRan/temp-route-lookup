@@ -1,8 +1,6 @@
-import { Button, Menu } from "@material-ui/core";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getAvailableLanguages } from "../../../../i18n";
-import { RootState } from "../../../../reducers";
 import { useAppSelector } from "../../../../reducers/hooks";
 import {
   closeLanguageDropdown,
@@ -10,6 +8,7 @@ import {
 } from "../../../../reducers/language/languageReducer";
 import LanguageSelectorItem from "./item/LanguageSelectorItem";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
+import { Button, Menu } from "@mui/material";
 
 /**
  * Component that displays selectable languages when opened.

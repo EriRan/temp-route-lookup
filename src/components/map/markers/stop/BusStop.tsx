@@ -6,7 +6,6 @@ import {
 } from "./BusStopConstant";
 import "./BusStop.css";
 import { Payload, StopState } from "../../../../reducers/route/types";
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { stopClicked } from "../../../../reducers/route/routeReducer";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "../../../../reducers/hooks";
@@ -21,13 +20,6 @@ const BusStop: FunctionComponent<BusStopProps> = (props) => {
       destinationStop: state.route.destinationStop,
     };
   });
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        ...theme.typography.button,
-      },
-    })
-  );
   const { t } = useTranslation();
 
   const deduceStrokeColor = (
@@ -61,9 +53,6 @@ const BusStop: FunctionComponent<BusStopProps> = (props) => {
     return t(BUS_STOP_TITLE, {name: busStopName})
   }
 
-  //Create style class with font from Material UI. We want the default button text style from here
-  const classes = useStyles();
-
   return (
     <g onClick={() => handleClick(props.name, stopClicked)}>
       <circle
@@ -77,7 +66,7 @@ const BusStop: FunctionComponent<BusStopProps> = (props) => {
         )}
       ></circle>
       <title>{getBusStopTitleText(props.name)}</title>
-      <text x={props.x} y={props.y + 5} className={classes.root}>
+      <text x={props.x} y={props.y + 5}>
         {props.name}
       </text>
     </g>
