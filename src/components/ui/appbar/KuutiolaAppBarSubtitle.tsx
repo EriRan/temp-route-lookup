@@ -13,7 +13,7 @@ const KuutiolaAppBarSubtitle: FunctionComponent<{}> = () => {
   }
   const { t } = useTranslation();
   return (
-    <Typography variant="h6" align="center" color="secondary">
+    <Typography variant="h6" color="secondary">
       {t(LOCAL_DEVELOPMENT_VERSION)}
     </Typography>
   );
