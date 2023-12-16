@@ -8,7 +8,7 @@ import {
 } from "../../../../reducers/language/languageReducer";
 import LanguageSelectorItem from "./item/LanguageSelectorItem";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
-import { Button, Menu } from "@mui/material";
+import { Button, IconButton, Menu } from "@mui/material";
 
 /**
  * Component that displays selectable languages when opened.
@@ -60,6 +60,7 @@ export default function LanguageSelector() {
         aria-haspopup="true"
         aria-expanded={languageState.isLanguageDropdownOpen ? "true" : "false"}
         onClick={handleMenuOpen}
+        sx={{color: "black"}}
       >
         {convertLanguageFlagEmoji(languageState.language)}
       </Button>
