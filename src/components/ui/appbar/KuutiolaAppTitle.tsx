@@ -8,7 +8,7 @@ const KuutiolaAppTitle: FunctionComponent<KuutiolaAppBarProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <Typography variant="h5" align="center">
+    <Typography variant="h5" align="center" sx={{margin: "0 auto"}}>
       {t(APP_TITLE)}
     </Typography>
   );

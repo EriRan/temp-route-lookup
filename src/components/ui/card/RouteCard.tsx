@@ -4,15 +4,20 @@ import { UiContainerProps } from "../types";
 import RouteCardHeader from "./header/RouteCardHeader";
 import RouteForm from "./route/form/RouteForm";
 import RouteResult from "./route/result/RouteResult";
-import { Accordion, AccordionDetails, Card, Divider, Grid } from "@mui/material";
-
+import {
+  Accordion,
+  AccordionDetails,
+  Card,
+  Divider,
+  Grid,
+} from "@mui/material";
 
 /**
  * Openable menu that contains inputs for a route search and the results. Always in a fixed position
  */
 const RouteCard: FunctionComponent<UiContainerProps> = ({ transportData }) => {
   return (
-    <Card raised={true}>
+    <Card raised={true} sx={{ position: "fixed", zIndex: 1, top: "10%" }}>
       <Accordion>
         <RouteCardHeader />
         <Divider />
