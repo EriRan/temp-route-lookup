@@ -6,7 +6,7 @@ import {
 } from "./BusStopConstant";
 import "./BusStop.css";
 import { Payload, StopState } from "../../../../reducers/route/types";
-import { stopClicked } from "../../../../reducers/route/routeReducer";
+import { getStartAndDestination, stopClicked } from "../../../../reducers/route/routeReducer";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "../../../../reducers/hooks";
 import { useTranslation } from "react-i18next";
@@ -15,10 +15,7 @@ import { BUS_STOP_TITLE } from "../../../constant/TranslationKeyConstant";
 const BusStop: FunctionComponent<BusStopProps> = (props) => {
   const dispatch = useAppDispatch();
   const routeState = useAppSelector((state) => {
-    return {
-      startStop: state.route.startStop,
-      destinationStop: state.route.destinationStop,
-    };
+    return getStartAndDestination(state);
   });
   const { t } = useTranslation();
 

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { calculateNewRoute } from "./calculation/calculateNewRoute";
 import { changeStartOrDestinationStop } from "./change/changeStartOrDestinationStop";
 import { Payload, RouteStore } from "./types";
@@ -27,6 +27,13 @@ const routeSlice = createSlice({
     },
   },
 });
+
+export const getStartAndDestination = createSelector([state => state.route.startStop, state => state.route.destinationStop], (startStop, destinationStop) => {
+  return {
+    startStop: startStop,
+    destinationStop: destinationStop
+  }
+})
 
 export const { setStartStop, setDestinationStop, stopClicked } =
   routeSlice.actions;

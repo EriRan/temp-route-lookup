@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import i18n from "../../i18n";
 import { LanguageStore, Payload } from "./types";
+import { RootState } from "..";
 
 const initialState: LanguageStore = {
   language: "fi",
@@ -33,6 +34,15 @@ const languageSlice = createSlice({
     },
   },
 });
+
+type Return = (state: RootState) => string | undefined;
+
+export const getLanguageData = createSelector([state => state.language.language, state => state.language.isLanguageDropdownOpen], (language, isLanguageDropdownOpen) => {
+  return {
+    language: language,
+    isLanguageDropdownOpen: isLanguageDropdownOpen
+  }
+})
 
 function changeLanguage(language: string) {
   i18n.changeLanguage(language);

@@ -4,11 +4,12 @@ import { getAvailableLanguages } from "../../../../i18n";
 import { useAppSelector } from "../../../../reducers/hooks";
 import {
   closeLanguageDropdown,
+  getLanguageData,
   openLanguageDropdown,
 } from "../../../../reducers/language/languageReducer";
 import LanguageSelectorItem from "./item/LanguageSelectorItem";
 import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
-import { Button, IconButton, Menu } from "@mui/material";
+import { Button, Menu } from "@mui/material";
 
 /**
  * Component that displays selectable languages when opened.
@@ -22,10 +23,7 @@ export default function LanguageSelector() {
     null
   );
   const languageState = useAppSelector((state) => {
-    return {
-      isLanguageDropdownOpen: state.language.isLanguageDropdownOpen,
-      language: state.language.language,
-    };
+    return getLanguageData(state);
   });
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
