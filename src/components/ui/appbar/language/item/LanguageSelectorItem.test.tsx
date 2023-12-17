@@ -53,7 +53,7 @@ describe("LanguageSelectorItem", () => {
           language: {
             language: "en",
             isLanguageDropdownOpen: true
-          }
+          },
         },
       }
     );
